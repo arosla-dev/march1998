@@ -12,13 +12,14 @@ $cdtexture "./maps_8bit"
 $scale 1.0
 
 // whole body
-$body studio "glock_reference(gun)"
+$body body "glock_reference(gun)"
+$body body "glock_reference(beta_hands)"
 
-$bodygroup hands
-{
-	studio "glock_reference(beta_hands)"
-	studio "glock_reference(ivan_hands)"
-}
+//$bodygroup body
+//{
+//	studio "glock_reference(beta_hands)"
+//	studio "glock_reference(ivan_hands)"
+//}
 
 $bodygroup silencer
 {

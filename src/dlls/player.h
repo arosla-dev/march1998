@@ -199,13 +199,7 @@ public:
 	float				m_flNextRevive;
 	BOOL				m_fCanRevive;
 	BOOL				m_fParalyzed;
-	int					m_fHasCrossbowScope; //does we have crossbow scope?
-	int					m_fHasSilencer; //does we have silencer for glock?
 	int					m_fOxygen; // how many breaths are in the airtank?
-
-	// SUIT VARIATION
-	int					m_fAlphaSuit;
-	int					m_fDefaultSuit;
 
 	virtual void Spawn( void );
 	void Pain( void );

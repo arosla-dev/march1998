@@ -27,7 +27,7 @@ $eyeposition 0.000000 0.000000 0.000000
 //reference mesh(es)
 $body "body" "gauss_gunfihxer"
 
-$bodygroup "hands"
+$bodygroup "body"
 {
 studio "gauss_hand_beta"
 studio "gauss_hand_ivan"

@@ -59,7 +59,6 @@ LINK_ENTITY_TO_CLASS(weapon_9mmhandgun, CGlock);
 
 void CGlock::Spawn()
 {
-	m_pPlayer->m_fHasSilencer == FALSE;
 	pev->classname = MAKE_STRING("weapon_9mmhandgun"); // hack to allow for old names
 	Precache();
 	m_iId = WEAPON_GLOCK;
@@ -74,6 +73,7 @@ void CGlock::Spawn()
 void CGlock::Precache(void)
 {
 	PRECACHE_MODEL("models/v_glock.mdl");
+	PRECACHE_MODEL("models/v_glock_ivan.mdl");
 	PRECACHE_MODEL("models/w_9mmhandgun.mdl");
 	PRECACHE_MODEL("models/p_9mmhandgun.mdl");
 
@@ -112,14 +112,11 @@ int CGlock::GetItemInfo(ItemInfo* p)
 
 BOOL CGlock::Deploy()
 {
-	/*if (m_pPlayer->m_fAlphaSuit == TRUE)
-		pev->body = 2;
+	// P1llowguy - dirty ass shit method for ivan suit
+	if (m_pPlayer->m_rgItems[ITEM_IVANSUIT])
+		return DefaultDeploy("models/v_glock_ivan.mdl", "models/p_9mmhandgun.mdl", GLOCK_DRAW, "onehanded");
 	else
-		pev->body = 0;
-		*/
-
-	SetBodygroup(2,1);
-	return DefaultDeploy("models/v_glock.mdl", "models/p_9mmhandgun.mdl", GLOCK_DRAW, "onehanded");
+		return DefaultDeploy("models/v_glock.mdl", "models/p_9mmhandgun.mdl", GLOCK_DRAW, "onehanded");
 }
 
 void CGlock::Holster()
@@ -144,7 +141,7 @@ int CGlock::AddToPlayer(CBasePlayer* pPlayer)
 
 void CGlock::SecondaryAttack(void)
 {
-	if (m_pPlayer->m_fHasSilencer == TRUE)
+	if (m_pPlayer->m_rgItems[ITEM_SILENCER])
 	{
 		if (pev->body == 0)
 		{
@@ -171,7 +168,7 @@ void CGlock::SecondaryAttack(void)
 	{
 		GlockFire(0.1, 0.2, FALSE); // p1llowguy - if we don't have silencer, then we will shoot fast
 	}
-	
+
 }
 
 void CGlock::PrimaryAttack(void)
@@ -213,7 +210,7 @@ void CGlock::GlockFire(float flSpread, float flCycleTime, BOOL fUseAutoAim)
 	EjectBrass(pev->origin + m_pPlayer->pev->view_ofs + gpGlobals->v_up * -12 + gpGlobals->v_forward * 32 + gpGlobals->v_right * 6, vecShellVelocity, pev->angles.y, m_iShell, TE_BOUNCE_SHELL);
 
 	// silenced
-	if (pev->body == 1 && m_pPlayer->m_fHasSilencer == TRUE)
+	if (pev->body == 1 && m_pPlayer->m_rgItems[ITEM_SILENCER])
 	{
 		m_pPlayer->m_iWeaponVolume = QUIET_GUN_VOLUME;
 		m_pPlayer->m_iWeaponFlash = DIM_GUN_FLASH;
@@ -371,18 +368,3 @@ class CGlockAmmo : public CBasePlayerAmmo
 };
 LINK_ENTITY_TO_CLASS(ammo_glockclip, CGlockAmmo);
 LINK_ENTITY_TO_CLASS(ammo_9mmclip, CGlockAmmo);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

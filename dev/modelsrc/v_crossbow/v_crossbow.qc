@@ -8,19 +8,14 @@ $origin -4 .5 63.25 0 // *to move it back to center, the X-offset is -6
 
 // whole body
 $body body "crossbow_bow" reverse
-
-$bodygroup "hands"
-{
-studio "crossbow_hand_beta"
-studio "crossbow_hand_ivan"
-}
+$body body "crossbow_hand_beta"
 
 $bodygroup "scope"
 {
-studio "crossbow_scope"
 studio "crossbow_scope_bad"
-blank
+studio "crossbow_scope"
 }
+
 
 $sequence idle1 "crossbow_idle1(simple)" loop fps 30
 $sequence idle2 "crossbow_idle2(empty)" loop fps 30

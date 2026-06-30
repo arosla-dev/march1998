@@ -120,13 +120,7 @@ TYPEDESCRIPTION	CBasePlayer::m_playerSaveData[] =
 	//inventory
 	DEFINE_FIELD(CBasePlayer, m_fOxygen, FIELD_INTEGER), //magic nipples - INVENTORY need to keep value of airtank since it isn't renewable
 	DEFINE_FIELD(CBasePlayer, m_flNextRevive, FIELD_TIME),
-	DEFINE_FIELD(CBasePlayer, m_fHasCrossbowScope, FIELD_INTEGER),
-	DEFINE_FIELD(CBasePlayer, m_fHasSilencer, FIELD_INTEGER),
 	DEFINE_FIELD(CBasePlayer, m_iLongJumpBattery, FIELD_INTEGER),
-
-	//alpha suit
-	DEFINE_FIELD(CBasePlayer, m_fAlphaSuit, FIELD_INTEGER),
-	DEFINE_FIELD(CBasePlayer, m_fDefaultSuit, FIELD_INTEGER),
 
 	DEFINE_FIELD( CBasePlayer, m_pTank, FIELD_EHANDLE ),
 	DEFINE_FIELD( CBasePlayer, m_iHideHUD, FIELD_INTEGER ),
@@ -965,9 +959,6 @@ void CBasePlayer::RemoveAllItems( BOOL removeSuit )
 
 	for ( i = 0; i < MAX_AMMO_SLOTS;i++)
 		m_rgAmmo[i] = 0;
-
-	this->m_fHasCrossbowScope = FALSE;
-	this->m_fHasSilencer = FALSE;
 
 	UpdateClientData();
 	// send Selected Weapon Message to our client
@@ -3272,9 +3263,6 @@ void CBasePlayer::Spawn( void )
 	m_iClientBattery = -1;
 	m_fCanRevive = FALSE;
 
-	m_fDefaultSuit = FALSE;
-	m_fAlphaSuit = FALSE;
-
 	// reset all ammo values to 0
 	for ( int i = 0; i < MAX_AMMO_SLOTS; i++ )
 	{
@@ -3323,12 +3311,6 @@ void CBasePlayer :: Precache( void )
 	m_iClientBattery = -1;
 
 	m_fCanRevive = FALSE;
-
-	m_fDefaultSuit = FALSE;
-	m_fAlphaSuit = FALSE;
-
-	m_fHasCrossbowScope = FALSE;
-	m_fHasSilencer = FALSE;
 
 	SetBodygroup(0, 0);
 
@@ -3979,11 +3961,10 @@ void CBasePlayer::CheatImpulseCommands( int iImpulse )
 			GiveNamedItem("ammo_rpgclip");
 			GiveNamedItem("weapon_satchel");
 			GiveNamedItem("weapon_snark");
-			GiveNamedItem( "weapon_hornetgun" );
-			GiveNamedItem( "weapon_minigun" );
-
-			this->m_fHasCrossbowScope = TRUE;
-			this->m_fHasSilencer = TRUE;
+			GiveNamedItem("weapon_hornetgun");
+			GiveNamedItem("weapon_minigun");
+			GiveNamedItem("item_scope");
+			GiveNamedItem("item_silencer");
 #endif
 		gEvilImpulse101 = FALSE;
 		break;

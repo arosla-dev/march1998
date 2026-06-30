@@ -250,8 +250,6 @@ class CItemSuit : public CItem
 		else
 			EMIT_SOUND_SUIT(pPlayer->edict(), "!HEV_AAx");	// long version of suit logon
 
-		pPlayer->m_fDefaultSuit = TRUE;
-
 		pPlayer->m_rgItems[ITEM_SUIT] += 1;
 
 		pPlayer->pev->weapons |= (1<<WEAPON_SUIT);
@@ -283,8 +281,6 @@ class CItemAlphaSuit: public CItem
 			EMIT_SOUND_SUIT(pPlayer->edict(), "!HEV_A0");		// short version of suit logon,
 		else
 			EMIT_SOUND_SUIT(pPlayer->edict(), "!HEV_AAx");	// long version of suit logon
-
-		pPlayer->m_fAlphaSuit = TRUE;
 
 		pPlayer->m_rgItems[ITEM_IVANSUIT] += 1;
 
@@ -577,8 +573,12 @@ class CItemScope : public CItem
 	}
 	BOOL MyTouch(CBasePlayer* pPlayer)
 	{
-		pPlayer->m_fHasCrossbowScope = 1;
-		return TRUE;
+		if (pPlayer->m_rgItems[ITEM_CROSSBOWSCOPE] <= 0)
+		{
+			pPlayer->m_rgItems[ITEM_CROSSBOWSCOPE] += 1;
+			return TRUE;
+		}
+		return FALSE;
 	}
 };
 
@@ -599,8 +599,12 @@ class CItemSilencer : public CItem
 	}
 	BOOL MyTouch(CBasePlayer* pPlayer)
 	{
-		pPlayer->m_fHasSilencer = 1;
-		return TRUE;
+		if (pPlayer->m_rgItems[ITEM_SILENCER] <= 0)
+		{
+			pPlayer->m_rgItems[ITEM_SILENCER] += 1;
+			return TRUE;
+		}
+		return FALSE;
 	}
 };
 

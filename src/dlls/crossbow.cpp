@@ -76,7 +76,6 @@ LINK_ENTITY_TO_CLASS( weapon_crossbow, CCrossbow );
 
 void CCrossbow::Spawn( )
 {	
-	m_pPlayer->m_fHasCrossbowScope == FALSE;
 	Precache( );
 	m_iId = WEAPON_CROSSBOW;
 	SET_MODEL(ENT(pev), "models/w_crossbow.mdl");
@@ -104,6 +103,7 @@ void CCrossbow::Precache( void )
 {
 	PRECACHE_MODEL("models/w_crossbow.mdl");
 	PRECACHE_MODEL("models/v_crossbow.mdl");
+	PRECACHE_MODEL("models/v_crossbow_ivan.mdl");
 	PRECACHE_MODEL("models/p_crossbow.mdl");
 
 	PRECACHE_SOUND("weapons/xbow_fire1.wav");
@@ -132,19 +132,16 @@ int CCrossbow::GetItemInfo(ItemInfo *p)
 
 BOOL CCrossbow::Deploy( )
 {
+	if (m_pPlayer->m_rgItems[ITEM_CROSSBOWSCOPE])
+		pev->body = 1;
+	else
+		pev->body = 0;
+
+	// P1llowguy - dirty ass shit method for ivan suit
 	if (m_pPlayer->m_rgItems[ITEM_IVANSUIT])
-		SetBodygroup(0, 1);
+		return DefaultDeploy( "models/v_crossbow_ivan.mdl", "models/p_crossbow.mdl", CROSSBOW_DRAW1, "bow" );
 	else
-		SetBodygroup(0, 0);
-
-	if (m_pPlayer->m_fHasCrossbowScope == TRUE)
-		SetBodygroup(1, 1);
-	else
-		SetBodygroup(1, 0);
-
-	if (m_iClip)
 		return DefaultDeploy( "models/v_crossbow.mdl", "models/p_crossbow.mdl", CROSSBOW_DRAW1, "bow" );
-	return DefaultDeploy( "models/v_crossbow.mdl", "models/p_crossbow.mdl", CROSSBOW_DRAW2, "bow" );
 }
 
 void CCrossbow::Holster( )
@@ -338,7 +335,7 @@ void CCrossbow::SecondaryAttack()
 	}
 	else
 	{
-		if (m_pPlayer->m_fHasCrossbowScope == TRUE)
+		if (m_pPlayer->m_rgItems[ITEM_CROSSBOWSCOPE])
 			m_pPlayer->m_iFOV = 20;
 		else
 			m_pPlayer->m_iFOV = 60;
