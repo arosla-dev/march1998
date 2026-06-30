@@ -8,10 +8,18 @@ Main purpose - Just have fun with it and make something interesting with a gamep
 This isn't an attempt at a full beta version, more like something like "Signal Lost."\
 And also just make a mod that's completely open to the public, so anyone can see the development process.
 
-# compiling 
+# Compiling under msvc 2022
 If you want compile it, you need visual studio 2022 with build tools v143
 
-then:
+Then:
+1. Open march1998.sln *(File -> Open -> Project/Solution)*
+2. Compile/Build it *(Build -> Build Solution)*.
+3. update build tools to v143
+
+# Compiling under msvc 2019 (RECOMENDED!)
+If you dont like msvc 2022 or just don't have it, then download msvc 2019 with building tools v142
+
+Then:
 1. Open march1998.sln *(File -> Open -> Project/Solution)*
 2. Compile/Build it *(Build -> Build Solution)*.
 
