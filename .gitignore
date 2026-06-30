@@ -46,6 +46,7 @@
 [Vv]alve/levelshots
 [Vv]alve/save
 [Vv]alve/demoheader.*
+[Vv]alve/config.cfg
 *.bmp
 
 # Node graphs
@@ -89,4 +90,4 @@
 *.pdb
 *.bsc
 /J.A.C.K
-valve/config.cfg
+
