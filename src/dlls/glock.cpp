@@ -18,6 +18,8 @@
 #include "nodes.h"
 #include "player.h"
 
+#define SF_GLOCK_SILENCER	0x0001
+
 enum glock_e {
 	GLOCK_IDLE1 = 0,
 	GLOCK_IDLE2,
@@ -141,7 +143,7 @@ int CGlock::AddToPlayer(CBasePlayer* pPlayer)
 
 void CGlock::SecondaryAttack(void)
 {
-	if (m_pPlayer->m_rgItems[ITEM_SILENCER])
+	if (m_pPlayer->m_rgItems[ITEM_SILENCER] || pev->spawnflags & SF_GLOCK_SILENCER)
 	{
 		if (pev->body == 0)
 		{
@@ -210,7 +212,7 @@ void CGlock::GlockFire(float flSpread, float flCycleTime, BOOL fUseAutoAim)
 	EjectBrass(pev->origin + m_pPlayer->pev->view_ofs + gpGlobals->v_up * -12 + gpGlobals->v_forward * 32 + gpGlobals->v_right * 6, vecShellVelocity, pev->angles.y, m_iShell, TE_BOUNCE_SHELL);
 
 	// silenced
-	if (pev->body == 1 && m_pPlayer->m_rgItems[ITEM_SILENCER])
+	if (pev->body == 1 && m_pPlayer->m_rgItems[ITEM_SILENCER] || pev->spawnflags & SF_GLOCK_SILENCER)
 	{
 		m_pPlayer->m_iWeaponVolume = QUIET_GUN_VOLUME;
 		m_pPlayer->m_iWeaponFlash = DIM_GUN_FLASH;

@@ -105,6 +105,8 @@ public:
 	int Init( void );
 	int VidInit( void );
 	int Draw(float flTime);
+	void DrawIvanHud(void);
+	int DrawDefaultHud(float flTime);
 	void Think(void);
 	void Reset(void);
 	int DrawWList(float flTime);
@@ -670,6 +672,9 @@ public:
 
 	int _cdecl m_fAlphaSuit;
 	int _cdecl m_fDefaultSuit;
+
+	WEAPON* _cdecl gpActiveSel;	// NULL means off, 1 means just the menu bar, otherwise
+								// this points to the active weapon menu item
 
 	// ENVIROMENT
 	void _cdecl MsgFunc_SetSky(const char* pszName, int iSize, void* pbuf);		//LRC

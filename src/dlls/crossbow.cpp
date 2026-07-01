@@ -27,7 +27,7 @@
 
 #define BOLT_AIR_VELOCITY	2000
 #define BOLT_WATER_VELOCITY	1000
-#define SF_CROSSBOW_BADSCROPE	0x0001
+#define SF_CROSSBOW_SCOPE	0x0001
 
 // UNDONE: Save/restore this?  Don't forget to set classname and LINK_ENTITY_TO_CLASS()
 // 
@@ -132,7 +132,7 @@ int CCrossbow::GetItemInfo(ItemInfo *p)
 
 BOOL CCrossbow::Deploy( )
 {
-	if (m_pPlayer->m_rgItems[ITEM_CROSSBOWSCOPE])
+	if (m_pPlayer->m_rgItems[ITEM_CROSSBOWSCOPE] || pev->spawnflags & SF_CROSSBOW_SCOPE)
 		pev->body = 1;
 	else
 		pev->body = 0;
@@ -335,7 +335,7 @@ void CCrossbow::SecondaryAttack()
 	}
 	else
 	{
-		if (m_pPlayer->m_rgItems[ITEM_CROSSBOWSCOPE])
+		if (m_pPlayer->m_rgItems[ITEM_CROSSBOWSCOPE] || pev->spawnflags & SF_CROSSBOW_SCOPE)
 			m_pPlayer->m_iFOV = 20;
 		else
 			m_pPlayer->m_iFOV = 60;

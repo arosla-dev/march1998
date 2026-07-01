@@ -81,15 +81,18 @@ int CHudBattery::Draw(float flTime)
 		return 1;
 
 	if (gHUD.m_fAlphaSuit == TRUE)
-	{;
-		wrect_t alrc = gHUD.GetSpriteRect(gHUD.GetSpriteIndex("alpha_batbar"));
-		alrc.right = 20; //because of how wrects work you need to start with the offset from hud.txt
-		alrc.right += m_iBat * 240 / 100;
+	{
+		if (!gHUD.gpActiveSel)
+		{
+			wrect_t alrc = gHUD.GetSpriteRect(gHUD.GetSpriteIndex("alpha_batbar"));
+			alrc.right = 20; //because of how wrects work you need to start with the offset from hud.txt
+			alrc.right += m_iBat * 240 / 100;
 
-		SPR_Set(gHUD.GetSprite(gHUD.GetSpriteIndex("alpha_batbar")), 255, 255, 255);
-		SPR_DrawHoles(0, ScreenWidth - 262, ScreenHeight - 55, &alrc);
+			SPR_Set(gHUD.GetSprite(gHUD.GetSpriteIndex("alpha_batbar")), 255, 255, 255);
+			SPR_DrawHoles(0, ScreenWidth - 262, ScreenHeight - 55, &alrc);
 
-		gHUD.DrawSHudNumber(ScreenWidth - 86, ScreenHeight - 42, DHN_3DIGITS | DHN_DRAWZERO, m_iBat, 15, 111, 231);
+			gHUD.DrawSHudNumber(ScreenWidth - 86, ScreenHeight - 42, DHN_3DIGITS | DHN_DRAWZERO, m_iBat, 15, 111, 231);
+		}
 	}
 	else
 	{

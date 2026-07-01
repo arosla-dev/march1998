@@ -200,8 +200,7 @@ void CSnapBug::LeapTouch(CBaseEntity* pOther)
 		TraceResult tr;
 		Vector vecEnd;
 
-		if (g_iSkillLevel != SKILL_EASY)
-			pOther->TakeDamage(pev, pev, GetDamageAmount(), DMG_SLASH);
+		pOther->TakeDamage(pev, pev, GetDamageAmount(), DMG_PARALYZE);
 
 		vecEnd = pOther->pev->origin;
 		UTIL_TraceHull(pev->origin, vecEnd, dont_ignore_monsters, human_hull, edict(), &tr);

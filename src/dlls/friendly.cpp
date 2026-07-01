@@ -140,6 +140,8 @@ public:
 
 	void IdleSound(void);
 	void AlertSound(void);
+	void PainSound(void);
+	void StepSound(void);
 
 	BOOL CheckMeleeAttack1(float flDot, float flDist);
 	BOOL CheckRangeAttack1(float flDot, float flDist);
@@ -245,6 +247,8 @@ void CFriendly::Precache()
 	PRECACHE_SOUND("friendly/fr_attack1.wav");
 	PRECACHE_SOUND("friendly/fr_idle1.wav");
 	PRECACHE_SOUND("friendly/fr_idle2.wav");
+	PRECACHE_SOUND("friendly/fr_step");
+	PRECACHE_SOUND("friendly/fr_pain");
 
 	int i;
 
@@ -266,6 +270,16 @@ void CFriendly::IdleSound(void)
 void CFriendly::AlertSound(void)
 {
 	EMIT_SOUND(ENT(pev), CHAN_VOICE, "friendly/fr_alert1.wav", 1, ATTN_NORM);
+}
+
+void CFriendly::PainSound(void)
+{
+	EMIT_SOUND(ENT(pev), CHAN_VOICE, "friendly/fr_pain.wav", 1, ATTN_NORM);
+}
+
+void CFriendly::StepSound(void)
+{
+	EMIT_SOUND(ENT(pev), CHAN_VOICE, "friendly/fr_step.wav", 1, ATTN_NORM);
 }
 
 //=========================================================
@@ -432,6 +446,10 @@ int CFriendly::TakeDamage(entvars_t* pevInflictor, entvars_t* pevAttacker, float
 	if (bitsDamageType == DMG_PARALYZE)
 		flDamage = 0;
 
+	// HACK HACK -- until we fix this.
+	if (IsAlive())
+		PainSound();
+
 	return CBaseMonster::TakeDamage(pevInflictor, pevAttacker, flDamage, bitsDamageType);
 }
 
@@ -577,6 +595,8 @@ Schedule_t* CFriendly::GetSchedule(void)
 		{
 			AlertSound();
 		}
+
+
 
 		if (!HasConditions(bits_COND_SEE_ENEMY))
 		{

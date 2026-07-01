@@ -342,10 +342,13 @@ CL_InitTempents
 
 ================
 */
+convar_t* cl_m98_sparks;
 void CL_InitTempEnts( void )
 {
 	cl_tempents = Mem_Calloc( cls.mempool, sizeof( TEMPENTITY ) * GI->max_tents );
 	CL_ClearTempEnts();
+
+	cl_m98_sparks = Cvar_Get("cl_m98_sparks", "1", FCVAR_ARCHIVE | FCVAR_USERINFO | FCVAR_CLIENTDLL, "0 - alpha 1 - e3");
 
 	// load tempent sprites (glowshell, muzzleflashes etc)
 	CL_LoadClientSprites ();
@@ -2160,7 +2163,16 @@ void CL_ParseTempEntity( sizebuf_t *msg )
 		pos[0] = MSG_ReadCoord( &buf );
 		pos[1] = MSG_ReadCoord( &buf );
 		pos[2] = MSG_ReadCoord( &buf );
-		R_SparkShower(pos);
+		if (cl_m98_sparks->value != 1) // darkkrysteq: todo, change this out for its own cvar instead
+			R_AlphaSparkShower(pos);
+		else
+			R_SparkShower(pos);
+		break;
+	case TE_SPARK_ALPHA:
+		pos[0] = MSG_ReadCoord(&buf);
+		pos[1] = MSG_ReadCoord(&buf);
+		pos[2] = MSG_ReadCoord(&buf);
+		R_AlphaSparkShower(pos);
 		break;
 	case TE_LAVASPLASH:
 		pos[0] = MSG_ReadCoord( &buf );

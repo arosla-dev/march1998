@@ -3226,6 +3226,8 @@ void CBasePlayer::Spawn( void )
 	m_iFlashBattery = 99;
 	m_flFlashLightTime = 1; // force first message
 
+	m_fCanRevive = TRUE;
+
 	m_flLongJumpTime = 1;
 	m_iLongJumpBattery = -1;
 
@@ -3261,7 +3263,6 @@ void CBasePlayer::Spawn( void )
 	m_fWeapon = FALSE;
 	m_pClientActiveItem = NULL;
 	m_iClientBattery = -1;
-	m_fCanRevive = FALSE;
 
 	// reset all ammo values to 0
 	for ( int i = 0; i < MAX_AMMO_SLOTS; i++ )
@@ -3310,7 +3311,7 @@ void CBasePlayer :: Precache( void )
 
 	m_iClientBattery = -1;
 
-	m_fCanRevive = FALSE;
+	m_fCanRevive = TRUE;
 
 	SetBodygroup(0, 0);
 

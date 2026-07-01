@@ -584,6 +584,9 @@
 //	coord coord coord (starting pos)
 //	coord coord coord (ending pos)
 
+#define TE_SPARK_ALPHA	129 // 8 random tracers with gravity, ricochet sprite
+// coord coord coord (position) 
+
 #define MSG_BROADCAST		0	// unreliable to all
 #define MSG_ONE			1	// reliable to one (msg_entity)
 #define MSG_ALL			2	// reliable to all

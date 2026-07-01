@@ -1371,6 +1371,15 @@ void UTIL_Sparks( const Vector &position )
 	MESSAGE_END();
 }
 
+void UTIL_Sparks_Alpha(const Vector& position)
+{
+	MESSAGE_BEGIN(MSG_PVS, SVC_TEMPENTITY, position);
+	WRITE_BYTE(TE_SPARK_ALPHA);
+	WRITE_COORD(position.x);
+	WRITE_COORD(position.y);
+	WRITE_COORD(position.z);
+	MESSAGE_END();
+}
 
 void UTIL_Ricochet( const Vector &position, float scale )
 {

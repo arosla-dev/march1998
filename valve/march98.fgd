@@ -1744,7 +1744,15 @@
 @PointClass size(-16 -16 0, 16 16 36) base(Weapon, Targetx) studio("models/w_security.mdl") = item_security : "Security card" []
 @PointClass size(-16 -16 0, 16 16 36) base(Weapon, Targetx) studio("models/w_silencer.mdl") = item_silencer : "Glock with silencer" []
 @PointClass size(-16 -16 0, 16 16 36) base(Weapon, Targetx) studio("models/w_silencer.mdl") = item_scope : "Crossbow scope" []
-@PointClass size(-16 -16 0, 16 16 36) base(Weapon, Targetx) studio("models/w_suit.mdl") = item_suit : "HEV Suit" 
+@PointClass size(-16 -16 0, 16 16 36) base(Weapon, Targetx) studio("models/w_suit.mdl") = item_suit : "HEV Suit Mark 4" 
+[
+	spawnflags(Flags) =
+	[
+		1 : "Long Logon" : 0
+	]
+]
+
+@PointClass size(-16 -16 0, 16 16 36) base(Weapon, Targetx) studio("models/w_suit.mdl") body(1) = item_ivansuit : "HEV Suit Mark 3" 
 [
 	spawnflags(Flags) =
 	[
@@ -2846,7 +2854,13 @@
 //
 
 @PointClass base(Weapon, Targetx) studio("models/w_crowbar.mdl") = weapon_crowbar : "Crowbar" []
-@PointClass base(Weapon, Targetx) studio("models/w_9mmhandgun.mdl") = weapon_glock : "9mm Handgun" []
+@PointClass base(Weapon, Targetx) studio("models/w_9mmhandgun.mdl") = weapon_glock : "9mm Handgun" 
+[
+	spawnflags(flags) =
+	[
+		1: "Already with silencer?" : 0
+	]
+]
 @PointClass base(Weapon, Targetx) studio("models/w_357.mdl") = weapon_357 : "357 Handgun" []
 @PointClass base(Weapon, Targetx) studio("models/w_9mmar.mdl") = weapon_mp5 : "9mm Assault Rifle" []
 @PointClass base(Weapon, Targetx) studio("models/w_shotgun.mdl") = weapon_shotgun : "Shotgun" []
@@ -2865,6 +2879,10 @@
 	[
 		0 : "Normal (flat)"
 		1 : "Realistic (tilted)"
+	]
+	spawnflags(flags) =
+	[
+		1: "Already with scope?" : 0
 	]
 ]
 @PointClass base(Weapon, Targetx) studio("models/w_egon.mdl") = weapon_egon : "Egon Gun" []

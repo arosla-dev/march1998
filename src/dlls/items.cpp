@@ -541,7 +541,7 @@ class CItemAdrenaline : public CItem
 	}
 	BOOL MyTouch(CBasePlayer* pPlayer)
 	{
-		if (pPlayer->m_rgItems[ITEM_ADRENALINE] <= 0 && pPlayer->pev->weapons & (1 << WEAPON_SUIT))
+		if (pPlayer->m_rgItems[ITEM_ADRENALINE] <= 0)
 		{
 			switch (RANDOM_LONG(0, 1))
 			{

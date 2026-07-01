@@ -339,9 +339,6 @@
     <ClCompile Include="reddoc.cpp">
       <Filter>Source Files\Monsters</Filter>
     </ClCompile>
-    <ClCompile Include="friendly.cpp">
-      <Filter>Source Files\Monsters</Filter>
-    </ClCompile>
     <ClCompile Include="controlsphere.cpp">
       <Filter>Source Files\Monsters</Filter>
     </ClCompile>
@@ -398,6 +395,9 @@
     </ClCompile>
     <ClCompile Include="rope\CRopeSegment.cpp">
       <Filter>Source Files\Rope</Filter>
+    </ClCompile>
+    <ClCompile Include="friendly.cpp">
+      <Filter>Source Files\Monsters</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
