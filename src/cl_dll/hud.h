@@ -105,8 +105,6 @@ public:
 	int Init( void );
 	int VidInit( void );
 	int Draw(float flTime);
-	void DrawIvanHud(void);
-	int DrawDefaultHud(float flTime);
 	void Think(void);
 	void Reset(void);
 	int DrawWList(float flTime);
