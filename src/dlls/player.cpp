@@ -2358,7 +2358,7 @@ void CBasePlayer::CheckTimeBasedDamage()
 			{
 			case itbd_Paralyze:
 				bDuration = PARALYZE_DURATION;
-				g_engfuncs.pfnSetClientMaxspeed(edict(), 1);
+				g_engfuncs.pfnSetClientMaxspeed(edict(), 50);
 				break;
 			case itbd_NerveGas:
 				TakeDamage(pev, pev, NERVEGAS_DAMAGE, DMG_GENERIC);

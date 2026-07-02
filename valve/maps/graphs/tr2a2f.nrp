@@ -1167,7 +1167,7 @@ Node #  59:
   62  62
   67  67
   73  73
-  78  Entity on connection: func_tracktrain, name: z2train2  Model: *49  78
+  78  78
   79  79
  110 110
  111 111
@@ -1180,7 +1180,7 @@ Node #  60:
   62  62
   67  67
   73  73
-  78  Entity on connection: func_tracktrain, name: z2train2  Model: *49  78
+  78  78
   79  79
  110 110
  111 111
@@ -1195,7 +1195,7 @@ Node #  61:
   63  63
   67  67
   73  73
-  78  Entity on connection: func_tracktrain, name: z2train2  Model: *49  78
+  78  78
   79  79
  110 110
  111 111
@@ -1210,7 +1210,7 @@ Node #  62:
   65  65
   67  67
   73  73
-  78  Entity on connection: func_tracktrain, name: z2train2  Model: *49  78
+  78  78
   79  79
  110 110
  111 111
@@ -1266,7 +1266,7 @@ Node #  67:
   62  62
   73  73
   77  Entity on connection: func_tracktrain, name: z2train2  Model: *49  77
-  78  Entity on connection: func_tracktrain, name: z2train2  Model: *49  78
+  78  78
   79  79
  110 110
  111 111
@@ -1333,7 +1333,7 @@ Node #  73:
   61  61
   62  62
   67  67
-  78  Entity on connection: func_tracktrain, name: z2train2  Model: *49  78
+  78  78
   79  79
  110 110
  111 111
@@ -1372,6 +1372,18 @@ Node #  77:
 ----------------------------------------------------------------------------
 Node #  78:
 
+  59  59
+  60  60
+  61  61
+  62  62
+  67  67
+  73  73
+  74  Entity on connection: func_tracktrain, name: z2train2  Model: *49  74
+  75  Entity on connection: func_tracktrain, name: z2train2  Model: *49  75
+  77  Entity on connection: func_tracktrain, name: z2train2  Model: *49  77
+  79  79
+ 110 110
+ 111 111
 ----------------------------------------------------------------------------
 Node #  79:
 
@@ -1382,7 +1394,7 @@ Node #  79:
   67  67
   73  73
   77  Entity on connection: func_tracktrain, name: z2train2  Model: *49  77
-  78  Entity on connection: func_tracktrain, name: z2train2  Model: *49  78
+  78  78
  110 110
  111 111
 ----------------------------------------------------------------------------
@@ -1718,7 +1730,7 @@ Node # 110:
   62  62
   67  67
   73  73
-  78  Entity on connection: func_tracktrain, name: z2train2  Model: *49  78
+  78  78
   79  79
  111 111
 ----------------------------------------------------------------------------
@@ -1735,12 +1747,12 @@ Node # 111:
   62  62
   67  67
   73  73
-  78  Entity on connection: func_tracktrain, name: z2train2  Model: *49  78
+  78  78
   79  79
  110 110
 ----------------------------------------------------------------------------
 
- 725 Total Initial Connections -   17 Maximum connections for a single node.
+ 737 Total Initial Connections -   17 Maximum connections for a single node.
 ----------------------------------------------------------------------------
 
 
@@ -2504,6 +2516,30 @@ Rejected Node  74 - Unreachable by Any Hull
 -------------------------------------------------------------------------------
 Node   78:
 
+NODE_SMALL_HULL step 0
+Rejected Node  59 - Unreachable by Any Hull
+NODE_SMALL_HULL step 0
+Rejected Node 111 - Unreachable by Any Hull
+NODE_SMALL_HULL step 0
+Rejected Node 110 - Unreachable by Any Hull
+NODE_SMALL_HULL step 0
+Rejected Node  79 - Unreachable by Any Hull
+NODE_SMALL_HULL step 0
+Rejected Node  77 - Unreachable by Any Hull
+NODE_SMALL_HULL step 0
+Rejected Node  75 - Unreachable by Any Hull
+NODE_SMALL_HULL step 0
+Rejected Node  74 - Unreachable by Any Hull
+NODE_SMALL_HULL step 0
+Rejected Node  73 - Unreachable by Any Hull
+NODE_SMALL_HULL step 0
+Rejected Node  67 - Unreachable by Any Hull
+NODE_SMALL_HULL step 0
+Rejected Node  62 - Unreachable by Any Hull
+NODE_SMALL_HULL step 0
+Rejected Node  61 - Unreachable by Any Hull
+NODE_SMALL_HULL step 0
+Rejected Node  60 - Unreachable by Any Hull
 -------------------------------------------------------------------------------
 Node   79:
 

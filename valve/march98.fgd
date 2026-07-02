@@ -630,7 +630,8 @@
 @PointClass base(Weapon, Targetx) studio("models/w_shotshell.mdl") = ammo_buckshot_small : "Spawns three shells for the shotgun." : "shotgun.cpp" []
 @PointClass base(Weapon, Targetx) studio("models/w_357ammo.mdl") = ammo_357 : "Spawns ammo for the .357 Magnum." : "http://twhl.info/wiki.php?id=6" []
 @PointClass base(Weapon, Targetx) studio("models/w_rpgammo.mdl") = ammo_rpgclip : "Spawns rockets for the RPG." : "http://twhl.info/wiki.php?id=9" []
-@PointClass base(Weapon, Targetx) studio("models/w_isotopebox.mdl") = ammo_gaussclip : "Spawns ammo for the gauss and egon weapons." : "http://twhl.info/wiki.php?id=5" []
+@PointClass base(Weapon, Targetx) studio("models/w_gaussammo.mdl") = ammo_gaussclip : "Spawns ammo for the gauss and egon weapons." : "http://twhl.info/wiki.php?id=5" []
+@PointClass base(Weapon, Targetx) studio("models/w_isotopebox.mdl") = ammo_isotopebox : "Spawns ammo for the gauss and egon weapons." : "http://twhl.info/wiki.php?id=5" []
 @PointClass base(Weapon, Targetx) studio("models/w_crossbow_clip.mdl") = ammo_crossbow : "Spawns crossbow ammo." : "http://twhl.info/wiki.php?id=8" []
 
 @SolidClass base(Target) = button_target : "Target Button"

@@ -1031,13 +1031,6 @@ int CHudAmmo::Draw(float flTime)
 		SPR_Set(gHUD.GetSprite(hud_ammo), 255, 255, 255);
 		SPR_DrawHoles(0, ScreenWidth - 280, ScreenHeight - 327, &gHUD.GetSpriteRect(hud_ammo));
 
-		if (!(gHUD.m_iWeaponBits & (1 << (WEAPON_SUIT))))
-		{
-			x += iWidth * 4;
-			x = gHUD.DrawSHudNumber(x, y, DHN_DRAWZERO | DHN_3DIGITS, 255, r, g, b);
-			return 1;
-		}
-
 		WEAPON* pw = m_pWeapon; // shorthand
 
 		if (pw != NULL)
@@ -1047,30 +1040,26 @@ int CHudAmmo::Draw(float flTime)
 
 				if (pw->iClip >= 0)
 				{
-					x = gHUD.DrawSHudNumber(x, y - 5, iFlags | DHN_3DIGITS, pw->iClip, 0, 255, 0); //clip
-
-					SPR_Set(gHUD.GetSprite(gHUD.GetSpriteIndex("sslash")), r, g, b);
-					SPR_DrawAdditiveHud(0, x, y, &gHUD.GetSpriteRect(gHUD.GetSpriteIndex("sslash")));
-
-					x += iWidth;
+					x = gHUD.DrawSHudNumber(x + 26, y - 5, iFlags | DHN_2DIGITS, pw->iClip, 0, 255, 0); //clip
 					x = gHUD.DrawSHudNumber(x, y - 5, iFlags | DHN_3DIGITS, gWR.CountAmmo(pw->iAmmoType), 200, 0, 255); //primary
 				}
 				else
 				{
-					x = ScreenWidth - 79;//561;
-					y = ScreenHeight - 29;
-					x = gHUD.DrawSHudNumber(x, y - 5, iFlags | DHN_3DIGITS, gWR.CountAmmo(pw->iAmmoType), 200, 0, 255);
+					x = ScreenWidth - 85;//561;
+					y = ScreenHeight - 50;
+					x = gHUD.DrawSHudNumber(x, y, iFlags | DHN_3DIGITS, gWR.CountAmmo(pw->iAmmoType), 200, 0, 255);
 				}		
 			}
 			else //for crowbar
 			{
-				x += iWidth * 4;
-				x = gHUD.DrawSHudNumber(x, y - 5, iFlags | DHN_3DIGITS, 255, r, g, b);
+				x = ScreenWidth - 85;//561;
+				y = ScreenHeight - 50;
+				x = gHUD.DrawSHudNumber(x, y, iFlags | DHN_3DIGITS, gWR.CountAmmo(pw->iAmmoType), 200, 0, 255);
 			}
 			if (pw->iAmmo2Type > 0)
 			{
-				x = ScreenWidth - 79;//561;
-				y = ScreenHeight - 29;
+				x = ScreenWidth - 85;//561;
+				y = ScreenHeight - 35;
 				x = gHUD.DrawSHudNumber(x, y - 5, iFlags | DHN_3DIGITS, gWR.CountAmmo(pw->iAmmo2Type), 255, 0, 0);
 			}
 		}
