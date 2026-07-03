@@ -170,6 +170,7 @@
     <ClCompile Include="controlsphere.cpp" />
     <ClCompile Include="crossbow.cpp" />
     <ClCompile Include="crowbar.cpp" />
+    <ClCompile Include="crowbar_alpha.cpp" />
     <ClCompile Include="defaultai.cpp" />
     <ClCompile Include="diablo.cpp" />
     <ClCompile Include="doors.cpp" />

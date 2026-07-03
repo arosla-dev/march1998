@@ -63,9 +63,12 @@ int CHudTrain::Draw(float fTime)
 		int HealthWidth = gHUD.GetSpriteRect(gHUD.m_HUD_number_0).right - gHUD.GetSpriteRect(gHUD.m_HUD_number_0).left;
 		
 		x = HealthWidth * 8.4;//ScreenWidth/3 + SPR_Width(m_HLSPRITE,0)/4;
+		int x1 = HealthWidth * 13.5;//ScreenWidth/3 + SPR_Width(m_HLSPRITE,0)/4;
 
-		SPR_DrawAdditive( m_iPos - 1,  x, y, NULL);
-
+		if (gHUD.m_fAlphaSuit == TRUE)
+			SPR_DrawAdditive( m_iPos - 1,  x1, y, NULL);
+		else
+			SPR_DrawAdditive(m_iPos - 1, x, y, NULL);
 	}
 
 	return 1;

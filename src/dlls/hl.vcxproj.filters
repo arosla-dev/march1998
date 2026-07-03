@@ -399,6 +399,9 @@
     <ClCompile Include="friendly.cpp">
       <Filter>Source Files\Monsters</Filter>
     </ClCompile>
+    <ClCompile Include="crowbar_alpha.cpp">
+      <Filter>Source Files\Weapons</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="activitymap.h">
