@@ -1,4 +1,4 @@
-$modelname "beta\v_minigun.mdl"
+$modelname "v_minigun.mdl"
 $cd ".\"
 $cdtexture ".\maps_8bit"
 $scale 1.0
@@ -15,8 +15,8 @@ $body "body" "minigun"
 
 $bodygroup "hands"
 {
-    studio "minigun_hands_beta
-    studio "minigun_hands_ivan
+    studio "minigun_hev_hands"
+    studio "minigun_ivan_hands"
 }
 
 // 1 attachment(s)
