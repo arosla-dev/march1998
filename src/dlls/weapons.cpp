@@ -326,7 +326,6 @@ void W_Precache(void)
 
 	// crowbar
 	UTIL_PrecacheOtherWeapon( "weapon_crowbar" );
-	UTIL_PrecacheOtherWeapon( "weapon_crowbar_alpha" );
 
 	// glock
 	UTIL_PrecacheOtherWeapon( "weapon_9mmhandgun" );
@@ -396,6 +395,11 @@ void W_Precache(void)
 	// minigun
 	UTIL_PrecacheOtherWeapon("weapon_minigun");
 #endif
+
+	//p1llowguy - alpha weapons
+	UTIL_PrecacheOtherWeapon("weapon_crowbar_alpha");
+	UTIL_PrecacheOtherWeapon("weapon_glock_alpha");
+	UTIL_PrecacheOtherWeapon("weapon_mp5_alpha");
 
 #if !defined( OEM_BUILD ) && !defined( HLDEMO_BUILD )
 	if ( g_pGameRules->IsDeathmatch() )

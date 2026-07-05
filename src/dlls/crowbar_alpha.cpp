@@ -91,8 +91,8 @@ int CCrowbarAlpha::GetItemInfo(ItemInfo *p)
 	p->pszAmmo2 = NULL;
 	p->iMaxAmmo2 = -1;
 	p->iMaxClip = WEAPON_NOCLIP;
-	p->iSlot = 0; //0
-	p->iPosition = 2;
+	p->iSlot = 5; //0
+	p->iPosition = 0;
 	p->iId = WEAPON_CROWBAR_ALPHA;
 	p->iWeight = CROWBAR_WEIGHT;
 	return 1;

@@ -92,7 +92,11 @@ public:
 #define	WEAPON_SNARK			15
 #define	WEAPON_CHUB				16
 #define	WEAPON_MINIGUN			17
+
+//p1llowguy - alpha weapons
 #define WEAPON_CROWBAR_ALPHA	18
+#define WEAPON_GLOCK_ALPHA		19
+#define WEAPON_MP5_ALPHA		20
 
 #define WEAPON_ALLWEAPONS		(~(1<<WEAPON_SUIT))
 

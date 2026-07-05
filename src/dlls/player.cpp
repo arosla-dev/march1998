@@ -4044,6 +4044,16 @@ void CBasePlayer::CheatImpulseCommands( int iImpulse )
 				ALERT( at_console, "Texture: %s\n", pTextureName );
 		}
 		break;
+
+	case 108:
+		{
+		gEvilImpulse101 = TRUE;
+			GiveNamedItem("item_ivansuit");
+			GiveNamedItem("item_battery");
+			GiveNamedItem("weapon_crowbar_alpha");
+			GiveNamedItem("weapon_glock_alpha");
+			GiveNamedItem("weapon_mp5_alpha");
+		}
 	case	195:// show shortest paths for entire level to nearest node
 		{
 			Create("node_viewer_fly", pev->origin, pev->angles);

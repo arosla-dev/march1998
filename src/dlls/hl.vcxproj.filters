@@ -31,6 +31,9 @@
     <Filter Include="Source Files\Rope">
       <UniqueIdentifier>{9824f7d8-7608-4c53-829f-76cd8a08e4a1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Weapons\Alpha weapons">
+      <UniqueIdentifier>{d4a46651-a173-4b65-a7e3-ab316781435d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="animating.cpp">
@@ -400,7 +403,13 @@
       <Filter>Source Files\Monsters</Filter>
     </ClCompile>
     <ClCompile Include="crowbar_alpha.cpp">
-      <Filter>Source Files\Weapons</Filter>
+      <Filter>Source Files\Weapons\Alpha weapons</Filter>
+    </ClCompile>
+    <ClCompile Include="glock_alpha.cpp">
+      <Filter>Source Files\Weapons\Alpha weapons</Filter>
+    </ClCompile>
+    <ClCompile Include="mp5_alpha.cpp">
+      <Filter>Source Files\Weapons\Alpha weapons</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

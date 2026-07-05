@@ -2855,7 +2855,6 @@
 //
 
 @PointClass base(Weapon, Targetx) studio("models/w_crowbar.mdl") = weapon_crowbar : "Crowbar" []
-@PointClass base(Weapon, Targetx) studio("models/w_crowbar.mdl") = weapon_crowbar_alpha : "Alpha version of crowbar from 0.61, can be useful for mappers" []
 @PointClass base(Weapon, Targetx) studio("models/w_9mmhandgun.mdl") = weapon_glock : "9mm Handgun" 
 [
 	spawnflags(flags) =
@@ -3284,3 +3283,6 @@
   endingmodel(studio) : "Ending Model" : "models/rope16.mdl"
   bodymodel(studio) : "Body Model" : "models/rope16.mdl"
 ]
+@PointClass base(Weapon, Targetx) studio("models/w_crowbar.mdl") = weapon_crowbar_alpha : "Alpha version of crowbar from indeep, can be useful for mappers" []
+@PointClass base(Weapon, Targetx) studio("models/w_9mmhandgun.mdl") = weapon_glock_alpha : "Alpha version of glock from indeep, can be useful for mappers" []
+@PointClass base(Weapon, Targetx) studio("models/w_9mmar.mdl") = weapon_mp5_alpha : "Alpha version of mp5 from indeep, can be useful for mappers" []

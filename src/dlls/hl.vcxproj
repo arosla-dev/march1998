@@ -193,6 +193,7 @@
     <ClCompile Include="ggrenade.cpp" />
     <ClCompile Include="globals.cpp" />
     <ClCompile Include="glock.cpp" />
+    <ClCompile Include="glock_alpha.cpp" />
     <ClCompile Include="gman.cpp" />
     <ClCompile Include="handgrenade.cpp" />
     <ClCompile Include="hassassin.cpp" />
@@ -224,6 +225,7 @@
     <ClCompile Include="monsterstate.cpp" />
     <ClCompile Include="mortar.cpp" />
     <ClCompile Include="mp5.cpp" />
+    <ClCompile Include="mp5_alpha.cpp" />
     <ClCompile Include="multiplay_gamerules.cpp" />
     <ClCompile Include="nihilanth.cpp" />
     <ClCompile Include="nodes.cpp" />
