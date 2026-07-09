@@ -91,3 +91,7 @@
 *.bsc
 /J.A.C.K
 
+*.map
+*.max
+*.jmx
+/valve/maps/graphs
