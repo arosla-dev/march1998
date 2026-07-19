@@ -711,7 +711,7 @@ LinkVisibleNodes - Initial Connections
 Node #   0:
 
    1   1
-   2   2
+   2  Entity on connection: func_door, name: lvl3elevator  Model: *16   2
    3   3
    4   4
    5  Entity on connection: func_breakable, name:   Model: *40   5
@@ -734,7 +734,7 @@ Node #   1:
 ----------------------------------------------------------------------------
 Node #   2:
 
-   0   0
+   0  Entity on connection: func_door, name: lvl3elevator  Model: *16   0
 ----------------------------------------------------------------------------
 Node #   3:
 
