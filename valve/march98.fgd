@@ -3286,3 +3286,22 @@
 @PointClass base(Weapon, Targetx) studio("models/w_crowbar.mdl") = weapon_crowbar_alpha : "Alpha version of crowbar from indeep, can be useful for mappers" []
 @PointClass base(Weapon, Targetx) studio("models/w_9mmhandgun.mdl") = weapon_glock_alpha : "Alpha version of glock from indeep, can be useful for mappers" []
 @PointClass base(Weapon, Targetx) studio("models/w_9mmar.mdl") = weapon_mp5_alpha : "Alpha version of mp5 from indeep, can be useful for mappers" []
+
+//construction
+@PointClass base(RenderFields,Appearflags, Angles, Sequence) size(-16 -16 0, 16 16 72) studio("models/construction.mdl") sequence(35) = monster_construction_dead : "Dead Construction" 
+[
+	pose(Choices) : "Pose" : 0 =
+	[
+		0 : "On back"
+		1 : "On side"
+		2 : "On stomach"
+	]
+	sequence(Choices) : "Animation Sequence (editor)" : 35 =
+	[
+		35 : "lying_on_back"
+		36 : "lying_on_side"
+		37 : "lying_on_stomach"
+	]
+]
+
+@PointClass base(Monster,TalkMonster, Sequence) size(-16 -16 0, 16 16 72) studio("models/construction.mdl") = monster_construction : "Construction" []

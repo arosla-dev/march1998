@@ -1255,3 +1255,95 @@ Schedule_t* CConstruction::GetSchedule(void)
 
 	return CTalkMonster::GetSchedule();
 }
+
+//=========================================================
+// DEAD CONSTRUCTION PROP
+//=========================================================
+class CDeadConstruction : public CBaseMonster
+{
+public:
+	void Spawn(void);
+	int	Classify(void) { return	CLASS_PLAYER_ALLY; }
+	void BecomeDead(void);
+
+	void KeyValue(KeyValueData* pkvd);
+
+	int	m_iPose;// which sequence to display	-- temporary, don't need to save
+	static char* m_szPoses[3];
+};
+
+char* CDeadConstruction::m_szPoses[] = { "lying_on_back", "lying_on_side", "lying_on_stomach" };
+
+void CDeadConstruction::KeyValue(KeyValueData* pkvd)
+{
+	if (FStrEq(pkvd->szKeyName, "pose"))
+	{
+		m_iPose = atoi(pkvd->szValue);
+		pkvd->fHandled = TRUE;
+	}
+	else
+		CBaseMonster::KeyValue(pkvd);
+}
+
+LINK_ENTITY_TO_CLASS(monster_construction_dead, CDeadConstruction);
+
+void CDeadConstruction::BecomeDead(void)
+{
+	pev->takedamage = DAMAGE_YES;// don't let autoaim aim at corpses.
+
+	// give the corpse half of the monster's original maximum health. 
+	pev->health = pev->max_health / 2;
+	pev->max_health = 5; // max_health now becomes a counter for how many blood decals the corpse can place.
+}
+
+//=========================================================
+// ********** DeadBarney SPAWN **********
+//=========================================================
+void CDeadConstruction::Spawn()
+{
+	PRECACHE_MODEL("models/construction.mdl");
+	SET_MODEL(ENT(pev), "models/construction.mdl");
+
+	pev->effects = 0;
+	pev->yaw_speed = 8;
+	pev->sequence = 0;
+	m_bloodColor = BLOOD_COLOR_RED;
+
+	pev->sequence = LookupSequence(m_szPoses[m_iPose]);
+	if (pev->sequence == -1)
+	{
+		ALERT(at_console, "Dead construction with bad pose\n");
+	}
+	// Corpses have less health
+	pev->health = 8;//gSkillData.barneyHealth;
+
+	MonsterInitDead();
+
+	InitBoneControllers();
+
+	pev->solid = SOLID_BBOX;
+
+	pev->movetype = MOVETYPE_TOSS;// so he'll fall to ground
+
+	pev->frame = 0;
+	ResetSequenceInfo();
+	pev->framerate = 0;
+
+	// Copy health
+	pev->max_health = pev->health;
+	pev->deadflag = DEAD_DEAD;
+
+	pev->skin = 2; // use bloody skin
+
+	UTIL_SetSize(pev, g_vecZero, g_vecZero);
+	UTIL_SetOrigin(pev, pev->origin);
+	BecomeDead();
+	pev->takedamage = DAMAGE_YES;
+	pev->health = pev->max_health / 2;
+	pev->max_health = 5;
+
+	//	SetThink( &CBaseMonster::CorpseFallThink );
+	pev->nextthink = gpGlobals->time + 0.5;
+	if (pev->spawnflags & SF_MONSTER_NOT_SOLID)
+		pev->solid = SOLID_NOT;
+}
