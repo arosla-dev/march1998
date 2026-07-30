@@ -21,7 +21,7 @@ blank
 studio "glock_reference(silencer)"
 }
 
-$origin 0 0 64
+$origin 0 -4 62
 
 $sequence idle1 "glock_idle1" fps 15
 $sequence idle2 "glock_idle2" fps 15

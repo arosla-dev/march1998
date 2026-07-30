@@ -124,6 +124,7 @@ public:
 	int MsgFunc_OxygenV(const char* pszName, int iSize, void* pbuf);
 	int MsgFunc_AdrenalineV(const char* pszName, int iSize, void* pbuf);
 	int MsgFunc_FlashlightV(const char* pszName, int iSize, void* pbuf);
+	int MsgFunc_FlashBat(const char* pszName, int iSize, void* pbuf);
 	int MsgFunc_IvanSuitV(const char* pszName, int iSize, void* pbuf);
 	int MsgFunc_DefaultSuitV(const char* pszName, int iSize, void* pbuf);
 
@@ -150,6 +151,8 @@ public:
 	int m_flashOn; // does flashlight is activated?
 	int m_iAdrenaline; //does we have adrenaline
 	int m_iLongJumpBat; //how much we have long jump battery?
+	float m_flBat; //flashlight battery
+	int	  m_iBat;
 
 private:
 	float m_fFade;

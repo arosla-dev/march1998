@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <LocalDebuggerCommand>C:\SourceCode\March1998\valve.exe</LocalDebuggerCommand>
+    <LocalDebuggerCommand>C:\SourceCode\March1998\developer.exe</LocalDebuggerCommand>
     <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
     <LocalDebuggerWorkingDirectory>C:\SourceCode\March1998</LocalDebuggerWorkingDirectory>
     <LocalDebuggerCommandArguments>-developer 1</LocalDebuggerCommandArguments>

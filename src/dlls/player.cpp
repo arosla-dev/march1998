@@ -4647,22 +4647,33 @@ void CBasePlayer :: UpdateClientData( void )
 	MESSAGE_END();
 
 	// Update Flashlight
-	// Magic Nipples - armor flashlight
 	if ((m_flFlashLightTime) && (m_flFlashLightTime <= gpGlobals->time))
 	{
 		if (FlashlightIsOn())
 		{
-			if (pev->armorvalue)
+			if (m_iFlashBattery )
 			{
 				m_flFlashLightTime = FLASH_DRAIN_TIME + gpGlobals->time;
+				m_iFlashBattery--;
 
-				if (g_iSkillLevel == SKILL_HARD)
-					pev->armorvalue--;
-
-				if (pev->armorvalue <= 0)
+				if (!m_iFlashBattery)
 					FlashlightTurnOff();
 			}
 		}
+		else
+		{
+			if (m_iFlashBattery < 100)
+			{
+				m_flFlashLightTime = FLASH_CHARGE_TIME + gpGlobals->time;
+				m_iFlashBattery++;
+			}
+			else
+				m_flFlashLightTime = 0;
+		}
+
+		MESSAGE_BEGIN(MSG_ONE, gmsgFlashBattery, NULL, pev);
+		WRITE_BYTE(m_iFlashBattery);
+		MESSAGE_END();
 	}
 
 	// Update Longjump

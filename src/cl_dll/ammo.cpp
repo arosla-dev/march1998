@@ -244,6 +244,7 @@ DECLARE_MESSAGE(m_Ammo, RadiationV);
 DECLARE_MESSAGE(m_Ammo, OxygenV);
 DECLARE_MESSAGE(m_Ammo, FlashlightV);
 DECLARE_MESSAGE(m_Ammo, AdrenalineV);
+DECLARE_MESSAGE(m_Ammo, FlashBat)
 DECLARE_MESSAGE(m_Ammo, LonJumBat);
 DECLARE_MESSAGE(m_Ammo, IvanSuitV);
 DECLARE_MESSAGE(m_Ammo, DefaultSuitV);
@@ -286,6 +287,7 @@ int CHudAmmo::Init(void)
 	HOOK_MESSAGE(LonJumBat);
 	HOOK_MESSAGE(OxygenV);
 	HOOK_MESSAGE(FlashlightV);
+	HOOK_MESSAGE(FlashBat);
 	HOOK_MESSAGE(AdrenalineV);
 
 	// Suit variants
@@ -326,6 +328,7 @@ void CHudAmmo::Reset(void)
 	m_iRadiation = 0;
 	m_iLongJumpBat = 0;
 	m_iOxygen = 0;
+	m_fOxygen = 0;
 	m_flashOn = 0;
 	m_iAdrenaline = 0;
 	gHUD.m_fAlphaSuit = 0;
@@ -576,6 +579,19 @@ int CHudAmmo::MsgFunc_FlashlightV(const char* pszName, int iSize, void* pbuf)
 	BEGIN_READ(pbuf, iSize);
 	m_flashOn = READ_BYTE();
 	int x = READ_BYTE();
+	m_flBat = ((float)x) / 100.0;
+
+	return 1;
+}
+
+int CHudAmmo::MsgFunc_FlashBat(const char* pszName, int iSize, void* pbuf)
+{
+
+
+	BEGIN_READ(pbuf, iSize);
+	int x = READ_BYTE();
+	m_iBat = x;
+	m_flBat = ((float)x) / 100.0;
 
 	return 1;
 }
@@ -1512,6 +1528,7 @@ int CHudAmmo::DrawInventory(float flTime) //magic nipples - INVENTORY
 {
 	int r, g, b, a, y, x;
 	int apparatusIconWidth = 60;
+	wrect_t rc;
 
 	if (!gHUD.gpActiveSel)
 	{
@@ -1528,7 +1545,7 @@ int CHudAmmo::DrawInventory(float flTime) //magic nipples - INVENTORY
 
 	// OXYGEN
 	y = ((ScreenHeight / ScreenHeight) - (m_iHeight * .2));
-	if (m_iOxygen == 1)
+	if (m_fOxygen > 0)
 	{
 		SPR_Set(m_hSprite8, r, g, b);
 		SPR_DrawAdditive(0, x, y, m_prc2);
@@ -1539,26 +1556,7 @@ int CHudAmmo::DrawInventory(float flTime) //magic nipples - INVENTORY
 		SPR_DrawAdditive(0, x, y, m_prc2);
 	}
 
-	//p1llowguy - Make the airtank icow show how much oxygen is left in it.
-	/*
-	if (m_fOxygen < 15)
-	{
-		SPR_Set(m_hSprite3, r, g, b);
-		SPR_DrawAdditive(0, x, y, m_prc2);
-		if (m_fOxygen > 0)
-		{
-			int iOffset = 60 - (5 * m_fOxygen);
-			wrect_t rc;
-			rc = *m_prc2;
-			rc.top += iOffset;
-			//gEngfuncs.pfnConsolePrint( "Airtank offset\n" );
-			SPR_Set(m_hSprite8, r, g, b);
-			SPR_DrawAdditive(0, x, y + iOffset, &rc);
-		}
 
-		y += apparatusIconWidth + 8;
-	}
-	*/
 	// LONGJUMP
 	y = ((ScreenHeight / ScreenHeight) - (m_iHeight * 1.35));
 
@@ -1569,7 +1567,6 @@ int CHudAmmo::DrawInventory(float flTime) //magic nipples - INVENTORY
 		if (m_iLongJumpBat > 0)
 		{
 			int iOffset = 50 - (12 * m_iLongJumpBat);
-			wrect_t rc;
 			rc = *m_prc2;
 			rc.top += iOffset;
 			SPR_Set(m_hSprite9, r, g, b);
@@ -1578,9 +1575,7 @@ int CHudAmmo::DrawInventory(float flTime) //magic nipples - INVENTORY
 
 		y += apparatusIconWidth + 8;
 	}
-	/*
 	//P1llowguy - for some reason, when the longjump battery is full, the icon disappears, so I just made this code
-	*/
 	else if (m_iLongJumpBat > -1)
 	{
 		SPR_Set(m_hSprite9, r, g, b);
@@ -1674,16 +1669,38 @@ int CHudAmmo::DrawInventory(float flTime) //magic nipples - INVENTORY
 
 	// FLASHLIGHT
 	y = ((ScreenHeight / ScreenHeight) - (m_iHeight * 5.96));
+	int iOffset = 45 * (1.0 - m_flBat);
 
 	if (m_flashOn == 1)
 	{
+		if (m_flBat)
+		{
+			rc = *m_prc2;
+			rc.top += iOffset;
+
+			SPR_Set(gHUD.GetSprite(gHUD.GetSpriteIndex("flash_on")), r, g, b);
+			SPR_DrawAdditive(0, x, y + iOffset, &rc);
+		}
+
 		SPR_Set(gHUD.GetSprite(gHUD.GetSpriteIndex("flash_on")), r, g, b);
 		SPR_DrawAdditive(0, x, y, m_prc2);
+		y += apparatusIconWidth + 8;
 	}
 	else
 	{
+		if (m_flBat)
+		{
+			rc = *m_prc2;
+			rc.top += iOffset;
+
+			SPR_Set(gHUD.GetSprite(gHUD.GetSpriteIndex("flash_off")), r, g, b);
+			SPR_DrawAdditive(0, x, y + iOffset, &rc);
+			//	SPR_DrawAdditive( 0, x, y, &gHUD.GetSpriteRect(gHUD.GetSpriteIndex( "flash_off_lit" )) );
+		}
+
 		SPR_Set(gHUD.GetSprite(gHUD.GetSpriteIndex("flash_off")), r, g, b);
 		SPR_DrawAdditive(0, x, y, m_prc2);
+		y += apparatusIconWidth + 8;
 	}
 	return 1;
 }

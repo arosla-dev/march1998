@@ -4,6 +4,6 @@
     <LocalDebuggerCommandArguments>-developer 1</LocalDebuggerCommandArguments>
     <LocalDebuggerWorkingDirectory>C:\SourceCode\March1998</LocalDebuggerWorkingDirectory>
     <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
-    <LocalDebuggerCommand>C:\SourceCode\March1998\valve.exe</LocalDebuggerCommand>
+    <LocalDebuggerCommand>C:\SourceCode\March1998\developer.exe</LocalDebuggerCommand>
   </PropertyGroup>
 </Project>
