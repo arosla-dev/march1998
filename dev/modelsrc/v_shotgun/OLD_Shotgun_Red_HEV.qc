@@ -22,8 +22,10 @@ $bodygroup hands
 
 //$origin       SIDE-SIDE IN-OUT  UP-DOWN
 
-$origin 0 -3 61.499 3
-//$origin 0 0 64 //if you REALLY wanna true beyta,,,,,,,
+//$origin 0 -3 61.499 3
+$origin 0 0 64 
+
+$attachment 0 "Bip01 R Hand" 30 1 6 X 1
 
 $sequence sm_idle "small_idle" fps 9 loop
 $sequence shoot1 "shoot_reload" fps 20 { event 5001 0 "31" }

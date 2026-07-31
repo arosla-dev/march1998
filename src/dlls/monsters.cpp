@@ -3308,35 +3308,27 @@ void CBaseMonster::CorpseFallThink( void )
 }
 
 // Call after animation/pose is set up
-void CBaseMonster :: MonsterInitDead( void )
+void CBaseMonster::MonsterInitDead(void)
 {
 	InitBoneControllers();
 
-	pev->solid			= SOLID_BBOX;
-	pev->movetype		= MOVETYPE_TOSS;// so he'll fall to ground
+	pev->solid = SOLID_BBOX;
+	pev->movetype = MOVETYPE_TOSS;// so he'll fall to ground
 
 	pev->frame = 0;
-	ResetSequenceInfo( );
+	ResetSequenceInfo();
 	pev->framerate = 0;
-	
+
 	// Copy health
-	pev->max_health		= pev->health;
-	pev->deadflag		= DEAD_DEAD;
-	
-	UTIL_SetSize(pev, g_vecZero, g_vecZero );
-	UTIL_SetOrigin( pev, pev->origin );
+	pev->max_health = pev->health;
+	pev->deadflag = DEAD_DEAD;
+
+	UTIL_SetSize(pev, g_vecZero, g_vecZero);
+	UTIL_SetOrigin(pev, pev->origin);
 
 	// Setup health counters, etc.
-	//BecomeDead();
-
-	//magic nipples - BecomeDead(); is now gone because it made pre-dead entities move around.
-	pev->takedamage = DAMAGE_YES;// don't let autoaim aim at corpses.
-
-	// give the corpse half of the monster's original maximum health. 
-	pev->health = pev->max_health / 2;
-	pev->max_health = 5; // max_health now becomes a counter for how many blood decals the corpse can place.
-
-	SetThink( &CBaseMonster::CorpseFallThink );
+	BecomeDead();
+	SetThink(&CBaseMonster::CorpseFallThink);
 	pev->nextthink = gpGlobals->time + 0.5;
 }
 

@@ -16,7 +16,6 @@ $body studio "mp5sd(just_the_gun)"
 
 $bodygroup hands
 {   
-    studio "mp5sd_hands_scientist"
     studio "mp5sd_hands_beta"
     studio "mp5sd_hands_ivan"
 }

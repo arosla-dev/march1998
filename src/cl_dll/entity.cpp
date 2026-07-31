@@ -557,8 +557,7 @@ void DLLEXPORT HUD_StudioEvent( const struct mstudioevent_s *event, const struct
 {
 	switch( event->event )
 	{
-		//magic nipples - removed muzzleflash for guns
-	/*case 5001:
+	case 5001:
 		gEngfuncs.pEfxAPI->R_MuzzleFlash( (float *)&entity->attachment[0], atoi( event->options) );
 		break;
 	case 5011:
@@ -572,7 +571,7 @@ void DLLEXPORT HUD_StudioEvent( const struct mstudioevent_s *event, const struct
 		break;
 	case 5002:
 		gEngfuncs.pEfxAPI->R_SparkEffect( (float *)&entity->attachment[0], atoi( event->options), -100, 100 );
-		break;*/
+		break;
 	// Client side sound
 	case 5004:		
 		gEngfuncs.pfnPlaySoundByNameAtLocation( (char *)event->options, 1.0, (float *)&entity->attachment[0] );

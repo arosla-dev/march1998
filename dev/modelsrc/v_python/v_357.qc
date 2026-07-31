@@ -39,6 +39,7 @@ $bodygroup "hands"
     studio "python_dualhands(ivan_hands)"
 }
 
+$attachment 0 "gun master" 0 -14 6 Y -1
 
 // 7 hit box(es)
 $hbox 0 "Bip01 R Arm2" -0.620000 -2.510000 -2.060000 11.814240 2.420000 2.290000

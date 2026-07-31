@@ -1020,15 +1020,6 @@ BOOL CBasePlayerWeapon :: DefaultReload( int iClipSize, int iAnim, float fDelay,
 
 	m_fInReload = TRUE;
 
-	//magic nipples - broken reload
-	m_iClip += j;
-	m_pPlayer->m_rgAmmo[m_iPrimaryAmmoType] -= j;
-
-	m_pPlayer->TabulateAmmo();
-
-	m_fInReload = FALSE;
-	//end
-
 	m_flTimeWeaponIdle = gpGlobals->time + 3;
 	return TRUE;
 }

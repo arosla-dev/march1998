@@ -15,12 +15,6 @@ $scale 1.0
 $body body "glock_reference(gun)"
 $body body "glock_reference(beta_hands)"
 
-//$bodygroup body
-//{
-//	studio "glock_reference(beta_hands)"
-//	studio "glock_reference(ivan_hands)"
-//}
-
 $bodygroup silencer
 {
 blank
@@ -29,11 +23,13 @@ studio "glock_reference(silencer)"
 
 $origin 0 -4 62
 
+$attachment 0 "Bip01 R Hand" 10 2.25 4.25 X 1
+
 $sequence idle1 "glock_idle1" fps 15
 $sequence idle2 "glock_idle2" fps 15
 $sequence idle3 "glock_idle3" fps 15
-$sequence shoot "glock_shoot" fps 25
-$sequence shoot_empty "glock_shoot_slideback" fps 25
+$sequence shoot "glock_shoot" fps 25 { event 5001 0 "20" }
+$sequence shoot_empty "glock_shoot_slideback" fps 25 { event 5001 0 "11" }
 
 $sequence reload "glock_reload" fps 12 {
 { event 5004 19 "items/9mmclip2.wav" }

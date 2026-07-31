@@ -3860,11 +3860,7 @@ void CBasePlayer::ImpulseCommands( )
 		{
 			FlashlightTurnOff();
 		}
-        else if ( pev->armorvalue > 0 )
-		{
-			FlashlightTurnOn();
-		}
-		else if (g_iSkillLevel != SKILL_HARD)
+        else 
 		{
 			FlashlightTurnOn();
 		}
