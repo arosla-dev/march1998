@@ -20,6 +20,12 @@ $bodygroup hands
     studio "mp5sd_hands_ivan"
 }
 
+$texturegroup "skinfamily"
+{
+	{"PLAYER_ForeArm1.bmp" "chrome1.bmp"}
+	{"PLAYER_ForeArm2.bmp" "chrome2.bmp"}
+}
+
 //$origin	SIDE-SIDE IN-OUT  UP-DOWN
 $origin 4 15 9
 

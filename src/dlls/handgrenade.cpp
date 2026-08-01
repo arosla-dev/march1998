@@ -113,6 +113,11 @@ BOOL CHandGrenade::Deploy( )
 	else
 		pev->body = 0;
 
+	if (m_pPlayer->m_rgItems[ITEM_BETASUIT])
+		pev->skin = 1;
+	else
+		pev->skin = 0;
+
 	m_flReleaseThrow = -1;
 	return DefaultDeploy( "models/v_grenade.mdl", "models/p_grenade.mdl", HANDGRENADE_DRAW, "crowbar" );
 }

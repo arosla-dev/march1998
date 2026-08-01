@@ -72,6 +72,7 @@ public:
 #define ITEM_IVANSUIT		12
 #define ITEM_CROSSBOWSCOPE	13
 #define ITEM_SILENCER		14
+#define ITEM_BETASUIT		15
 
 
 #define WEAPON_NONE				0

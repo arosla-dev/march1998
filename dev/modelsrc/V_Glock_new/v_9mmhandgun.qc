@@ -21,6 +21,12 @@ blank
 studio "glock_reference(silencer)"
 }
 
+$texturegroup "skinfamily"
+{
+	{"GLOVE_handpak.bmp" "GLOVED_knuckle.bmp" "GLOVED_sleeve.bmp" "chrome.bmp"}
+	{"GLOVE_handpak_yellow.bmp" "GLOVED_knuckle_yellow.bmp" "GLOVED_sleeve_yellow.bmp" "rubbergloveCHROME.bmp"}
+}
+
 $origin 0 -4 62
 
 $attachment 0 "Bip01 R Hand" 10 2.25 4.25 X 1

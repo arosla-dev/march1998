@@ -246,7 +246,9 @@ DECLARE_MESSAGE(m_Ammo, FlashlightV);
 DECLARE_MESSAGE(m_Ammo, AdrenalineV);
 DECLARE_MESSAGE(m_Ammo, FlashBat)
 DECLARE_MESSAGE(m_Ammo, LonJumBat);
+
 DECLARE_MESSAGE(m_Ammo, IvanSuitV);
+DECLARE_MESSAGE(m_Ammo, E3SuitV);
 DECLARE_MESSAGE(m_Ammo, DefaultSuitV);
 
 DECLARE_COMMAND(m_Ammo, Slot1);
@@ -292,6 +294,7 @@ int CHudAmmo::Init(void)
 
 	// Suit variants
 	HOOK_MESSAGE(IvanSuitV);
+	HOOK_MESSAGE(E3SuitV);
 	HOOK_MESSAGE(DefaultSuitV);
 
 	HOOK_COMMAND("slot1", Slot1);
@@ -332,6 +335,7 @@ void CHudAmmo::Reset(void)
 	m_flashOn = 0;
 	m_iAdrenaline = 0;
 	gHUD.m_fAlphaSuit = 0;
+	gHUD.m_fE3Suit = 0;
 
 	m_fFade = 0;
 	m_iFlags |= HUD_ACTIVE; //!!!
@@ -637,6 +641,21 @@ int CHudAmmo::MsgFunc_IvanSuitV(const char* pszName, int iSize, void* pbuf)
 	{
 		m_fFade = FADE_TIME;
 		gHUD.m_fAlphaSuit = x;
+	}
+
+	return 1;
+}
+
+int CHudAmmo::MsgFunc_E3SuitV(const char* pszName, int iSize, void* pbuf)
+{
+	BEGIN_READ(pbuf, iSize);
+
+	int x = READ_BYTE();
+
+	if (x != gHUD.m_fE3Suit)
+	{
+		m_fFade = FADE_TIME;
+		gHUD.m_fE3Suit = x;
 	}
 
 	return 1;
@@ -1020,7 +1039,10 @@ int CHudAmmo::Draw(float flTime)
 	int hud_ammo = gHUD.GetSpriteIndex("alpha_ammo");
 	int iWidth = gHUD.GetSpriteRect(gHUD.m_HUD_snumber_0).right - gHUD.GetSpriteRect(gHUD.m_HUD_snumber_0).left;
 
-	UnpackRGB(r, g, b, RGB_GREENISH);
+	if (gHUD.m_fE3Suit == TRUE)
+		UnpackRGB(r, g, b, RGB_YELLOWISH);
+	else
+		UnpackRGB(r, g, b, RGB_GREENISH);
 
 	a = (int)max(MIN_ALPHA_B, m_fFade);
 
@@ -1033,6 +1055,18 @@ int CHudAmmo::Draw(float flTime)
 	y = ScreenHeight - 56;
 
 	// Draw Weapon Menu
+
+	if (!(gHUD.m_iWeaponBits & (1 << (WEAPON_SUIT))))
+		return 1;
+
+	if ((gHUD.m_iHideHUDDisplay & (HIDEHUD_WEAPONS | HIDEHUD_ALL)))
+		return 1;
+
+	if (!(m_iFlags & HUD_ACTIVE))
+		return 0;
+
+	if (!m_pWeapon)
+		return 0;
 
 	WEAPON* w = m_pWeapon;
 
@@ -1084,6 +1118,116 @@ int CHudAmmo::Draw(float flTime)
 			x += iWidth * 4;
 			x = gHUD.DrawSHudNumber(x, y, iFlags | DHN_3DIGITS, 255, r, g, b);
 		}
+	}
+	else if (gHUD.m_fE3Suit == TRUE)
+	{
+		WEAPON* pw = m_pWeapon; // shorthand
+
+	// SPR_Draw Ammo
+		if ((pw->iAmmoType < 0) && (pw->iAmmo2Type < 0))
+			return 0;
+
+		int iFlags = DHN_DRAWZERO; // draw 0 values
+
+		AmmoWidth = gHUD.GetSpriteRect(gHUD.m_HUD_number_0).right - gHUD.GetSpriteRect(gHUD.m_HUD_number_0).left;
+
+		a = (int)max(MIN_ALPHA, m_fFade);
+
+		if (m_fFade > 0)
+			m_fFade -= (gHUD.m_flTimeDelta * 20);
+
+		UnpackRGB(r, g, b, RGB_YELLOWISH);
+
+		ScaleColors(r, g, b, a);
+
+
+		
+
+			y = ScreenHeight - gHUD.m_iFontHeight - gHUD.m_iFontHeight / 1.25;
+
+			// Does weapon have any ammo at all?
+			if (m_pWeapon->iAmmoType > 0)
+			{
+				int iIconWidth = m_pWeapon->rcAmmo.right - m_pWeapon->rcAmmo.left;
+
+				if (pw->iClip >= 0)
+				{
+					// room for the number and the '|' and the current ammo
+
+					x = ScreenWidth - (8 * AmmoWidth);
+
+					if (ScreenWidth < 640) {
+						x = gHUD.DrawHudNumber(x, ScreenHeight - 24, iFlags | DHN_3DIGITS, pw->iClip, r, g, b);
+					}
+					else {
+						x = gHUD.DrawHudNumber(x, y, iFlags | DHN_3DIGITS, pw->iClip, r, g, b);
+					}
+
+					wrect_t rc;
+					rc.top = 0;
+					rc.left = 0;
+					rc.right = AmmoWidth;
+					rc.bottom = 100;
+
+					int iBarWidth = AmmoWidth / 10;
+
+					x += AmmoWidth / 2;
+
+					UnpackRGB(r, g, b, RGB_YELLOWISH);
+
+					// draw the | bar
+					if (ScreenWidth < 640) {
+						FillRGBA(x, ScreenHeight - 24, iBarWidth, 17, r, g, b, a); // 320
+					}
+					else {
+						FillRGBA(x, y - 4, iBarWidth, gHUD.m_iFontHeight + 8, r, g, b, a);
+					}
+
+					x += iBarWidth + AmmoWidth / 2;
+
+					// GL Seems to need this
+					ScaleColors(r, g, b, a);
+
+					if (ScreenWidth < 640) {
+						x = gHUD.DrawHudNumber(x - 2, ScreenHeight - 24, iFlags | DHN_3DIGITS, gWR.CountAmmo(pw->iAmmoType), r, g, b);
+					}
+					else {
+						x = gHUD.DrawHudNumber(x - 4, y, iFlags | DHN_3DIGITS, gWR.CountAmmo(pw->iAmmoType), r, g, b);
+					}
+
+				}
+				else
+				{
+					// SPR_Draw a bullets only line
+					x = ScreenWidth - 4 * AmmoWidth;
+					if (ScreenWidth < 640) {
+						x = gHUD.DrawHudNumber(x - 2, ScreenHeight - 24, iFlags | DHN_3DIGITS, gWR.CountAmmo(pw->iAmmoType), r, g, b);
+					}
+					else {
+						x = gHUD.DrawHudNumber(x - 2, y, iFlags | DHN_3DIGITS, gWR.CountAmmo(pw->iAmmoType), r, g, b);
+					}
+				}
+			}
+
+			// Does weapon have seconday ammo?
+			if (pw->iAmmo2Type > 0)
+			{
+				int iIconWidth = m_pWeapon->rcAmmo2.right - m_pWeapon->rcAmmo2.left;
+
+				// Do we have secondary ammo?
+				if ((pw->iAmmo2Type != 0) && (gWR.CountAmmo(pw->iAmmo2Type) > 0))
+				{
+					y -= gHUD.m_iFontHeight + gHUD.m_iFontHeight / 1.5;
+					x = ScreenWidth - 3.8 * AmmoWidth - 24;
+
+					if (ScreenWidth < 640) {
+						x = gHUD.DrawHudNumber(x + 12, ScreenHeight - 44, iFlags | DHN_3DIGITS, gWR.CountAmmo(pw->iAmmo2Type), r, g, b);
+					}
+					else {
+						x = gHUD.DrawHudNumber(x, y, iFlags | DHN_3DIGITS, gWR.CountAmmo(pw->iAmmo2Type), r, g, b);
+					}
+				}
+			}
 	}
 	else
 	{
@@ -1348,7 +1492,10 @@ int CHudAmmo::DrawWList(float flTime)
 			}
 		}
 
-		UnpackRGB(r, g, b, RGB_GREENISH);
+		if (gHUD.m_fE3Suit == TRUE)
+			UnpackRGB(r, g, b, RGB_YELLOWISH);
+		else
+			UnpackRGB(r, g, b, RGB_GREENISH);
 
 		//LEFT SIDE
 		int slotL1;
@@ -1537,7 +1684,10 @@ int CHudAmmo::DrawInventory(float flTime) //magic nipples - INVENTORY
 
 	a = 255;
 
-	UnpackRGB(r, g, b, RGB_GREENISH);
+	if (gHUD.m_fE3Suit == TRUE)
+		UnpackRGB(r, g, b, RGB_YELLOWISH);
+	else
+		UnpackRGB(r, g, b, RGB_GREENISH);
 
 	ScaleColors(r, g, b, a);
 

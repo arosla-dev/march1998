@@ -154,6 +154,11 @@ BOOL CShotgun::Deploy( )
 	else
 		pev->body = 0;
 
+	if (m_pPlayer->m_rgItems[ITEM_BETASUIT])
+		pev->skin = 1;
+	else
+		pev->skin = 0;
+
 	return DefaultDeploy( "models/v_shotgun.mdl", "models/p_shotgun.mdl", SHOTGUN_DRAW, "shotgun" );
 }
 

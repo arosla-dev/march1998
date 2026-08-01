@@ -226,6 +226,7 @@ int gmsgAdrenaline = 0;
 // Suit Variation
 int gmsgDefaultSuit = 0;
 int gmsgIvanSuit = 0;
+int gmsgE3Suit = 0;
 
 // Enviroment
 int gmsgSetSky = 0;		//LRC
@@ -293,6 +294,7 @@ void LinkUserMessages( void )
 
 	gmsgIvanSuit = REG_USER_MSG("IvanSuitV", -1);
 	gmsgDefaultSuit = REG_USER_MSG("DefaultSuitV", -1);
+	gmsgE3Suit = REG_USER_MSG("E3SuitV", -1);
 
 	// ENVIROMENT
 	gmsgSetSky = REG_USER_MSG("SetSky", 7);	//LRC
@@ -3034,8 +3036,10 @@ void CBasePlayer::PostThink()
 	else
 		SetBodygroup(1, 0);
 
-	// if we have alpha suit, then gordon will be in ivan suit
-	if (m_rgItems[ITEM_IVANSUIT])
+	// suit models for players
+	if (m_rgItems[ITEM_BETASUIT])
+		SetBodygroup(0, 3);
+	else if (m_rgItems[ITEM_IVANSUIT])
 		SetBodygroup(0, 2);
 	else if (m_rgItems[ITEM_SUIT])
 		SetBodygroup(0, 1);
@@ -4618,6 +4622,11 @@ void CBasePlayer :: UpdateClientData( void )
 	//update default suit
 	MESSAGE_BEGIN(MSG_ONE, gmsgDefaultSuit, NULL, pev);
 	WRITE_BYTE(m_rgItems[ITEM_SUIT]);
+	MESSAGE_END();
+
+	//update default suit
+	MESSAGE_BEGIN(MSG_ONE, gmsgE3Suit, NULL, pev);
+	WRITE_BYTE(m_rgItems[ITEM_BETASUIT]);
 	MESSAGE_END();
 
 	if (gmsgLongJumpBat)

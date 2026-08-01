@@ -175,6 +175,11 @@ BOOL CEgon::Deploy( void )
 	else
 		pev->body = 0;
 
+	if (m_pPlayer->m_rgItems[ITEM_BETASUIT])
+		pev->skin = 1;
+	else
+		pev->skin = 0;
+
 	return DefaultDeploy( "models/v_egon.mdl", "models/p_egon.mdl", EGON_DRAW, "egon" );
 }
 
