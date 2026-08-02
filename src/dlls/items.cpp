@@ -291,38 +291,6 @@ class CItemAlphaSuit: public CItem
 
 LINK_ENTITY_TO_CLASS(item_ivansuit, CItemAlphaSuit);
 
-class CItemBetaSuit : public CItem
-{
-	void Spawn(void)
-	{
-		Precache();
-		SET_MODEL(ENT(pev), "models/w_suit.mdl");
-		pev->body = 2;
-		CItem::Spawn();
-	}
-	void Precache(void)
-	{
-		PRECACHE_MODEL("models/w_suit.mdl");
-	}
-	BOOL MyTouch(CBasePlayer* pPlayer)
-	{
-		if (pPlayer->pev->weapons & (1 << WEAPON_SUIT))
-			return FALSE;
-
-		if (pev->spawnflags & SF_SUIT_SHORTLOGON)
-			EMIT_SOUND_SUIT(pPlayer->edict(), "!HEV_A0");		// short version of suit logon,
-		else
-			EMIT_SOUND_SUIT(pPlayer->edict(), "!HEV_AAx");	// long version of suit logon
-
-		pPlayer->m_rgItems[ITEM_BETASUIT] += 1;
-
-		pPlayer->pev->weapons |= (1 << WEAPON_SUIT);
-		return TRUE;
-	}
-};
-
-LINK_ENTITY_TO_CLASS(item_betasuit, CItemBetaSuit);
-
 class CItemBattery : public CItem
 {
 	void Spawn( void )

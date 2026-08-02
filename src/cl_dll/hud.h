@@ -125,10 +125,7 @@ public:
 	int MsgFunc_AdrenalineV(const char* pszName, int iSize, void* pbuf);
 	int MsgFunc_FlashlightV(const char* pszName, int iSize, void* pbuf);
 	int MsgFunc_FlashBat(const char* pszName, int iSize, void* pbuf);
-
-	// Suits
 	int MsgFunc_IvanSuitV(const char* pszName, int iSize, void* pbuf);
-	int MsgFunc_E3SuitV(const char* pszName, int iSize, void* pbuf);
 	int MsgFunc_DefaultSuitV(const char* pszName, int iSize, void* pbuf);
 
 	void SlotInput( int iSlot );
@@ -675,7 +672,6 @@ public:
 	// Suit variation
 
 	int _cdecl m_fAlphaSuit;
-	int _cdecl m_fE3Suit;
 	int _cdecl m_fDefaultSuit;
 
 	WEAPON* _cdecl gpActiveSel;	// NULL means off, 1 means just the menu bar, otherwise

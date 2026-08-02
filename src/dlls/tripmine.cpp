@@ -446,11 +446,6 @@ BOOL CTripmine::Deploy()
 	else
 		SetBodygroup(0, 0);
 
-	if (m_pPlayer->m_rgItems[ITEM_BETASUIT])
-		pev->skin = 1;
-	else
-		pev->skin = 0;
-
 	SetBodygroup(1, 0);
 
 	return DefaultDeploy("models/v_tripmine.mdl", "models/p_tripmine.mdl", TRIPMINE_DRAW, "trip");

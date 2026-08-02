@@ -412,11 +412,6 @@ BOOL CSatchel::Deploy()
 	else
 		pev->body = 0;
 
-	if (m_pPlayer->m_rgItems[ITEM_BETASUIT])
-		pev->skin = 1;
-	else
-		pev->skin = 0;
-
 
 	if (m_chargeReady)
 		return DefaultDeploy("models/v_satchel_radio.mdl", "models/p_satchel_radio.mdl", SATCHEL_RADIO_DRAW, "hive");
