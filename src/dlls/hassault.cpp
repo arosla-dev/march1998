@@ -101,6 +101,7 @@ public:
 	int TakeDamage(entvars_t* pevInflictor, entvars_t* pevAttacker, float flDamage, int bitsDamageType);
 	BOOL FVisible(CBaseEntity* pEntity);
 	Vector ShootAtEnemy(const Vector& shootOrigin);
+	void GibMonster(void); // Throw minigun
 
 	int	Save(CSave& save);
 	int Restore(CRestore& restore);
@@ -843,6 +844,28 @@ void CHassault::Killed(entvars_t* pevAttacker, int iGib)
 		SpinDown();
 
 	CSquadMonster::Killed(pevAttacker, iGib);
+}
+
+//=========================================================
+// GibMonster - make gun fly through the air.
+//=========================================================
+void CHassault::GibMonster(void)
+{
+	Vector	vecGunPos;
+	Vector	vecGunAngles;
+
+	// throw a gun if the grunt has one
+	GetAttachment(0, vecGunPos, vecGunAngles);
+
+	CBaseEntity* pGun;
+	pGun = DropItem("weapon_minigun", vecGunPos, vecGunAngles);
+	if (pGun)
+	{
+		pGun->pev->velocity = Vector(RANDOM_FLOAT(-100, 100), RANDOM_FLOAT(-100, 100), RANDOM_FLOAT(200, 300));
+		pGun->pev->avelocity = Vector(0, RANDOM_FLOAT(200, 400), 0);
+	}
+
+	CBaseMonster::GibMonster();
 }
 
 //=========================================================

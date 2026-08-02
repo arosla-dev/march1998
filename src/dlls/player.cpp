@@ -491,6 +491,8 @@ int CBasePlayer :: TakeDamage( entvars_t *pevInflictor, entvars_t *pevAttacker, 
 		return 0;
 	// go take the damage first
 
+	if (!(bitsDamageType & (DMG_FALL | DMG_DROWN)))
+		Pain();
 
 	//magic nipples - if you have radiation suit on only become immune to radiation damage
 	if (pev->radsuit_finished >= gpGlobals->time)
@@ -547,12 +549,6 @@ int CBasePlayer :: TakeDamage( entvars_t *pevInflictor, entvars_t *pevAttacker, 
 			pev->armorvalue -= flArmor;
 
 		flDamage = flNew;
-	}
-
-	if (pev->armorvalue <= 0)
-	{
-		if (g_iSkillLevel == SKILL_HARD)
-			FlashlightTurnOff();
 	}
 
 	if (flDamage > 0 && bitsDamageType & DMG_DROWN && pev->health - flDamage <= 0)

@@ -333,6 +333,11 @@ void CHoundeye::Spawn()
 {
 	Precache();
 
+	if (RANDOM_LONG(0, 1) == 1)
+		pev->body = 1;
+	else
+		pev->body = 0;
+
 	SET_MODEL(ENT(pev), "models/houndeye.mdl");
 	UTIL_SetSize(pev, Vector(-16, -16, 0), Vector(16, 16, 36));
 

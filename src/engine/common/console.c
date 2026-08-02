@@ -2648,7 +2648,7 @@ void Con_DrawSolidConsole( int lines )
 		memcpy( color, g_color_table[7], sizeof( color ));
 
 		//Q_snprintf( curbuild, MAX_STRING, "Xash3D %i/%s (hw build %i)", PROTOCOL_VERSION, XASH_VERSION, Q_buildnum( ));
-		Q_snprintf(curbuild, MAX_STRING, "March 1998 alpha 0.62", XASH_VERSION, Q_buildnum());
+		Q_snprintf(curbuild, MAX_STRING, "March 1998 alpha 0.65", XASH_VERSION, Q_buildnum());
 		Con_DrawStringLen( curbuild, &stringLen, &charH );
 		start = glState.width - stringLen;
 		stringLen = Con_StringLength( curbuild );

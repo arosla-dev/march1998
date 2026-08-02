@@ -28,4 +28,5 @@ Crazy rasputin monk - beta models.\
 Drooga/dermoker - models.\
 Thrill-dev - base for mod.\
 Magic nipples - xash3d 2019 fork, some shaft code, quiver as a base.\
-Blooresque - zombie models (thank ya).
+Blooresque - zombie models (thank ya).\
+serecky - early houndeye recreation, hud icons for weapons
