@@ -420,6 +420,7 @@ Node #   8:
    6   6
    7   7
    9   9
+  27  Entity on connection: func_train, name:   Model: *51  27
 ----------------------------------------------------------------------------
 Node #   9:
 
@@ -619,6 +620,7 @@ Node #  27:
    5   5
    6  Entity on connection: func_train, name:   Model: *51   6
    7   7
+   8  Entity on connection: func_train, name:   Model: *51   8
    9  Entity on connection: func_train, name:   Model: *51   9
   25  25
   26  26
@@ -863,7 +865,7 @@ Node #  55:
   54  54
 ----------------------------------------------------------------------------
 
- 352 Total Initial Connections -   15 Maximum connections for a single node.
+ 354 Total Initial Connections -   15 Maximum connections for a single node.
 ----------------------------------------------------------------------------
 
 
@@ -967,6 +969,8 @@ Node    8:
 
 NODE_SMALL_HULL step 0
 Rejected Node   4 - Unreachable by Any Hull
+NODE_SMALL_HULL step 0
+Rejected Node  27 - Unreachable by Any Hull
 NODE_SMALL_HULL step 0
 Rejected Node   9 - Unreachable by Any Hull
 NODE_SMALL_HULL step 0
@@ -1216,8 +1220,10 @@ NODE_SMALL_HULL step 0
 Rejected Node   7 - Unreachable by Any Hull
 NODE_SMALL_HULL step 0
 NODE_SMALL_HULL step 0
-Rejected Node   9 - Unreachable by Any Hull
+Rejected Node   8 - Unreachable by Any Hull
 NODE_SMALL_HULL step 0
+NODE_SMALL_HULL step 0
+Rejected Node   9 - Unreachable by Any Hull
 -------------------------------------------------------------------------------
 Node   28:
 

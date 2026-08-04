@@ -339,9 +339,6 @@
     <ClCompile Include="env_model.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="reddoc.cpp">
-      <Filter>Source Files\Monsters</Filter>
-    </ClCompile>
     <ClCompile Include="controlsphere.cpp">
       <Filter>Source Files\Monsters</Filter>
     </ClCompile>

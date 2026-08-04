@@ -237,7 +237,6 @@
     <ClCompile Include="python.cpp" />
     <ClCompile Include="rain.cpp" />
     <ClCompile Include="rat.cpp" />
-    <ClCompile Include="reddoc.cpp" />
     <ClCompile Include="roach.cpp" />
     <ClCompile Include="rope\CElectrifiedWire.cpp" />
     <ClCompile Include="rope\CRope.cpp" />

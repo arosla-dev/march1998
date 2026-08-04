@@ -540,7 +540,6 @@ void CAGrunt::HandleAnimEvent(MonsterEvent_t* pEvent)
 			}
 
 			SetBlending(0, angDir.x);
-			SetBodygroup(1, 1);
 			GetAttachment(0, vecArmPos, vecArmDir);
 
 			vecArmPos = vecArmPos + vecDirToEnemy * 32;

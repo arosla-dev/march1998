@@ -206,8 +206,7 @@ void CGauss::PrimaryAttack()
 
 	m_fPrimaryFire = TRUE;
 
-	if (CVAR_GET_FLOAT("no_ammo") == 0)
-		m_pPlayer->m_rgAmmo[m_iPrimaryAmmoType] -= 5;
+	m_pPlayer->m_rgAmmo[m_iPrimaryAmmoType] -= 2;
 
 	StartFire();
 	m_fInAttack = 0;
@@ -246,8 +245,7 @@ void CGauss::SecondaryAttack()
 
 		m_fPrimaryFire = FALSE;
 
-		if (CVAR_GET_FLOAT("no_ammo") == 0)
-			m_pPlayer->m_rgAmmo[m_iPrimaryAmmoType]--;// take one ammo just to start the spin
+		m_pPlayer->m_rgAmmo[m_iPrimaryAmmoType]--;// take one ammo just to start the spin
 
 		m_flNextAmmoBurn = gpGlobals->time;
 

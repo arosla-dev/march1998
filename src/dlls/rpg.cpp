@@ -367,13 +367,6 @@ void CRpgRocket::FollowThink(void)
 	pev->nextthink = gpGlobals->time + 0.1;
 }
 
-
-
-
-
-
-
-
 void CRpg::Reload(void)
 {
 	int iResult;
