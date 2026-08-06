@@ -1477,7 +1477,10 @@ pfnSPR_DrawAdditive
 static void pfnSPR_DrawAdditive( int frame, int x, int y, const wrect_t *prc )
 {
 	pglEnable( GL_BLEND );
-	pglBlendFunc( GL_ONE, GL_ONE );
+	if (cl_broken_hud->value)
+		pglBlendFunc(GL_ONE, GL_ONE_MINUS_DST_COLOR);
+	else
+		pglBlendFunc(GL_ONE, GL_ONE);
 
 	SPR_DrawGeneric( frame, x, y, -1, -1, prc );
 

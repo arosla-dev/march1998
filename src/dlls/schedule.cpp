@@ -454,7 +454,18 @@ void CBaseMonster :: RunTask ( Task_t *pTask )
 		{
 			pev->deadflag = DEAD_DEAD;
 
-			SetThink(NULL);
+			if (RANDOM_FLOAT(0, 5) >= 4)
+			{
+				//p1llowguy - testing
+				//flytime = gpGlobals->time + 10;
+
+				flytime = gpGlobals->time + 120;
+				SetThink(&CBaseMonster::DeathThink);
+			}
+			else
+			{
+				SetThink(NULL);
+			}
 			StopAnimation();
 
 			if (!BBoxFlat())

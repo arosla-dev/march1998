@@ -674,9 +674,6 @@ public:
 	int _cdecl m_fAlphaSuit;
 	int _cdecl m_fDefaultSuit;
 
-	WEAPON* _cdecl gpActiveSel;	// NULL means off, 1 means just the menu bar, otherwise
-								// this points to the active weapon menu item
-
 	// ENVIROMENT
 	void _cdecl MsgFunc_SetSky(const char* pszName, int iSize, void* pbuf);		//LRC
 	void _cdecl MsgFunc_SetFog(const char* pszName, int iSize, void* pbuf);
