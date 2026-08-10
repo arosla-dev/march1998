@@ -6,10 +6,10 @@ $cdtexture ./maps_8bit
 
 $scale 1.0
 
-$origin 0 0 64
+$origin 0 0 0
 
 // whole body
-$body body "SQUEAK_Template_Biped(Weapon)1" reverse
+$body body "SQUEAK_Template_Biped(Weapon)1"
 
 $bodygroup body
 {
@@ -29,3 +29,4 @@ $sequence down "SQUEAK_Down1" fps 16
 $sequence up "SQUEAK_Up1" fps 30
 $sequence throw "SQUEAK_Throw1" fps 24 
 $sequence throw "SQUEAK_Throw2" fps 24
+$sequence ref "SQUEAK_Template_Biped(Weapon)1" fps 24
