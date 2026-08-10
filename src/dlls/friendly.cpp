@@ -140,8 +140,6 @@ public:
 
 	void IdleSound(void);
 	void AlertSound(void);
-	void PainSound(void);
-	void StepSound(void);
 
 	BOOL CheckMeleeAttack1(float flDot, float flDist);
 	BOOL CheckRangeAttack1(float flDot, float flDist);
@@ -247,8 +245,6 @@ void CFriendly::Precache()
 	PRECACHE_SOUND("friendly/fr_attack1.wav");
 	PRECACHE_SOUND("friendly/fr_idle1.wav");
 	PRECACHE_SOUND("friendly/fr_idle2.wav");
-	PRECACHE_SOUND("friendly/fr_step");
-	PRECACHE_SOUND("friendly/fr_pain");
 
 	int i;
 
@@ -271,17 +267,6 @@ void CFriendly::AlertSound(void)
 {
 	EMIT_SOUND(ENT(pev), CHAN_VOICE, "friendly/fr_alert1.wav", 1, ATTN_NORM);
 }
-
-void CFriendly::PainSound(void)
-{
-	EMIT_SOUND(ENT(pev), CHAN_VOICE, "friendly/fr_pain.wav", 1, ATTN_NORM);
-}
-
-void CFriendly::StepSound(void)
-{
-	EMIT_SOUND(ENT(pev), CHAN_VOICE, "friendly/fr_step.wav", 1, ATTN_NORM);
-}
-
 //=========================================================
 // AI Schedules Specific to this monster
 //=========================================================

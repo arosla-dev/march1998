@@ -30,14 +30,11 @@ $bodygroup "hands"
     studio "vchub_Template(ivan_hands)"
 }
 
-$texturegroup skinfamilies 
+$texturegroup eye
 {
-{ "CHB_Side1.bmp" "CHB_Eye1.bmp"}
-{ "CHB_Skin1.bmp" "CHB_SKINEye1.bmp"}
-{ "CHB_Skin2.bmp" "CHB_SKINEye4.bmp"}
-{ "CHB_Skin3.bmp" "CHB_SKINEye3.bmp"}
-{ "CHB_Skin4.bmp" "CHB_SKINEye2.bmp"}
+{ "CHB_Eye1.bmp" } { "CHB_Eye(Blink2).bmp" } { "CHB_Eye(Blink3).bmp" }
 }
+
 
 $sequence idle1 "vchub_Idle1(Subtle)" loop fps 16
 $sequence fidgetLick "vchub_Fidget1(lick)" fps 16

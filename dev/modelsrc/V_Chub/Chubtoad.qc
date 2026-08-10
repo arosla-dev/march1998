@@ -10,13 +10,9 @@ $body studio "Chub_Template_Biped1"
 $eyeposition 0 0 8
 //$eyeposition 0 7 8
 
-$texturegroup skinfamilies 
+$texturegroup eye
 {
-{ "CHB_Side1.bmp" "CHB_Eye1.bmp"}
-{ "CHB_Skin1.bmp" "CHB_SKINEye1.bmp"}
-{ "CHB_Skin2.bmp" "CHB_SKINEye4.bmp"}
-{ "CHB_Skin3.bmp" "CHB_SKINEye3.bmp"}
-{ "CHB_Skin4.bmp" "CHB_SKINEye2.bmp"}
+{ "CHB_Eye1.bmp" } { "CHB_Eye(Blink2).bmp" } { "CHB_Eye(Blink3).bmp" }
 }
 
 $hbox 0 "Bip01 L Leg" -2.130000 -3.210000 -0.660000 2.969935 0.960000 1.680000

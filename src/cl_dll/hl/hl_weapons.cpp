@@ -154,6 +154,13 @@ BOOL CBasePlayerWeapon :: DefaultReload( int iClipSize, int iAnim, float fDelay,
 	return TRUE;
 }
 
+//magic nipples - restore body/skin
+//restore pev->body and thirdperson animation after save\load
+void CBasePlayerWeapon::RestoreBody(void)
+{
+	// aint gonna put anything in here cause i'm not using client weapons
+
+}
 /*
 =====================
 CBasePlayerWeapon :: CanDeploy

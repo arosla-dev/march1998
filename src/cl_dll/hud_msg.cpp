@@ -92,6 +92,22 @@ int CHud :: MsgFunc_GameMode(const char *pszName, int iSize, void *pbuf )
 	return 1;
 }
 
+void CHud::MsgFunc_SetBody(const char* pszName, int iSize, void* pbuf)
+{
+	BEGIN_READ(pbuf, iSize);
+	gHUD.m_iBody = READ_BYTE();
+	cl_entity_s* view = gEngfuncs.GetViewModel();
+	view->curstate.body = gHUD.m_iBody;
+	//gEngfuncs.pfnWeaponAnim( 2, gHUD.m_iBody );//UNDONE: custom frame for view model don't working
+}
+
+void CHud::MsgFunc_SetSkin(const char* pszName, int iSize, void* pbuf)
+{
+	BEGIN_READ(pbuf, iSize);
+	gHUD.m_iSkin = READ_BYTE();
+	cl_entity_s* view = gEngfuncs.GetViewModel();
+	view->curstate.skin = gHUD.m_iSkin;
+}
 
 int CHud :: MsgFunc_Damage(const char *pszName, int iSize, void *pbuf )
 {

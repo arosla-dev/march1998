@@ -600,6 +600,10 @@ public:
 	int		m_iSkyMode;  //LRC
 	Vector PunchAngle;
 
+	//magic nipples - restore body/skin
+	int m_iSkin;//set skin for view weaponmodel
+	int m_iBody;//set body for view weaponmodel
+
 	int m_iFontHeight;
 	int DrawHudNumber(int x, int y, int iFlags, int iNumber, int r, int g, int b );
 	int DrawHudString(int x, int y, int iMaxX, char *szString, int r, int g, int b );
@@ -689,6 +693,10 @@ public:
 	qboolean g_fskybox;
 	cvar_t* RainInfo;
 	cvar_t* RainSplash;
+
+	//magic nipples - restore body/skin
+	void _cdecl MsgFunc_SetBody(const char* pszName, int iSize, void* pbuf);
+	void _cdecl MsgFunc_SetSkin(const char* pszName, int iSize, void* pbuf);
 
 	// Screen information
 	SCREENINFO	m_scrinfo;

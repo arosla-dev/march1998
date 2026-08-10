@@ -97,6 +97,20 @@ int __MsgFunc_ResetHUD(const char *pszName, int iSize, void *pbuf)
 	return gHUD.MsgFunc_ResetHUD(pszName, iSize, pbuf );
 }
 
+//change body for weapon models
+int __MsgFunc_SetBody(const char* pszName, int iSize, void* pbuf)
+{
+	gHUD.MsgFunc_SetBody(pszName, iSize, pbuf);
+	return 1;
+}
+
+//change skin for weapon models
+int __MsgFunc_SetSkin(const char* pszName, int iSize, void* pbuf)
+{
+	gHUD.MsgFunc_SetSkin(pszName, iSize, pbuf);
+	return 1;
+}
+
 int __MsgFunc_InitHUD(const char *pszName, int iSize, void *pbuf)
 {
 	gHUD.MsgFunc_InitHUD( pszName, iSize, pbuf );
@@ -309,6 +323,11 @@ void CHud :: Init( void )
 	HOOK_MESSAGE( SetFOV );
 	HOOK_MESSAGE( Concuss );
 	HOOK_MESSAGE( SetSky ); //LRC
+
+	//magic nipples - restore body/skin
+	HOOK_MESSAGE(SetBody);//change body for view weapon model
+	HOOK_MESSAGE(SetSkin);//change skin for view weapon model
+
 
 	// TFFree CommandMenu
 	HOOK_COMMAND( "+commandmenu", OpenCommandMenu );

@@ -645,6 +645,7 @@ BOOL CanAttack( float attack_time, float curtime, BOOL isPredicted )
 
 void CBasePlayerWeapon::ItemPostFrame( void )
 {
+	RestoreBody(); //magic nipples - restore body/skin
 	if ((m_fInReload) && ( m_pPlayer->m_flNextAttack <= gpGlobals->time ) )
 	{
 		// complete the reload. 
@@ -986,6 +987,18 @@ BOOL CBasePlayerWeapon :: DefaultDeploy( char *szViewModel, char *szWeaponModel,
 	if (!CanDeploy( ))
 		return FALSE;
 
+	MESSAGE_BEGIN(MSG_ONE, gmsgSetBody, NULL, m_pPlayer->pev);
+	WRITE_BYTE(pev->body); //weaponmodel body
+	MESSAGE_END();
+
+	MESSAGE_BEGIN(MSG_ONE, gmsgSetSkin, NULL, m_pPlayer->pev);
+	WRITE_BYTE(pev->skin); //weaponmodel skin.
+	MESSAGE_END();
+
+	//magic nipples - restore body/skin
+	m_iLastSkin = -1;//reset last skin info for new weapon
+	b_Restored = TRUE;//no need update if deploy
+
 	m_pPlayer->TabulateAmmo();
 	m_pPlayer->pev->viewmodel = MAKE_STRING(szViewModel);
 	m_pPlayer->pev->weaponmodel = MAKE_STRING(szWeaponModel);
@@ -1038,6 +1051,44 @@ BOOL CBasePlayerWeapon :: PlayEmptySound( void )
 void CBasePlayerWeapon :: ResetEmptySound( void )
 {
 	m_iPlayEmptySound = 1;
+}
+
+//magic nipples - restore body/skin
+//restore pev->body and thirdperson animation after save\load
+void CBasePlayerWeapon::RestoreBody(void)
+{
+	//Global function. restored and just set pev->body & pev->skin 
+	//after each save\load for weapons. For use - insert her in WeaponIdle()
+	//e.g. see in glock.cpp - RestoreBody ("onehanded");
+
+	if (!b_Restored)
+	{         //calculate additional body for special effects
+		pev->body = (pev->body % NUM_HANDS) + NUM_HANDS * m_iBody;
+		MESSAGE_BEGIN(MSG_ONE, gmsgSetBody, NULL, m_pPlayer->pev);
+		WRITE_BYTE(pev->body); //weaponmodel body
+		MESSAGE_END();
+
+		//restore idle animation and hands position
+		m_flTimeWeaponIdle = UTIL_WeaponTimeBase();
+
+		//saved in CBasePlayer
+		//strcpy( m_pPlayer->m_szAnimExtention, szAnimExt );
+
+		b_Restored = TRUE;//reset after next save/load
+	}
+
+	//update weapon skin
+//	if( m_iLastSkin != pev->skin)
+//	{
+	MESSAGE_BEGIN(MSG_ONE, gmsgSetBody, NULL, m_pPlayer->pev);
+	WRITE_BYTE(pev->body); //weaponmodel body
+	MESSAGE_END();
+
+	MESSAGE_BEGIN(MSG_ONE, gmsgSetSkin, NULL, m_pPlayer->pev);
+	WRITE_BYTE(pev->skin); //weaponmodel skin.
+	MESSAGE_END();
+	m_iLastSkin = pev->skin;
+	//	}
 }
 
 //=========================================================

@@ -17,6 +17,11 @@ $bodygroup body
     studio "SQUEAK_Template_Biped(Hand_ivan)1"
 }
 
+$texturegroup eye
+{
+{ "SQK_Eye1.bmp" } { "SQK_Eye1(Blink2).bmp" } { "SQK_Eye1(Blink3).bmp" }
+}
+
 $sequence idle1 "SQUEAK_Idle1(Subtle)" loop fps 16
 $sequence fidgetfit "SQUEAK_Fidget1(Fit)" fps 16
 $sequence fidgetnip "SQUEAK_Fidget1(nip)" fps 16

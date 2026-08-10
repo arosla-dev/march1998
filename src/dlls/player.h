@@ -378,6 +378,9 @@ private:
 #define AUTOAIM_8DEGREES  0.1391731009601
 #define AUTOAIM_10DEGREES 0.1736481776669
 
+//magic nipples - restore body/skin
+extern int	gmsgSetBody;
+extern int	gmsgSetSkin;
 
 extern int	gmsgHudText;
 extern BOOL gInitHUD;

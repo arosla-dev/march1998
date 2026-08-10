@@ -214,6 +214,9 @@ typedef	enum
 
 #define WEAPON_IS_ONTARGET 0x40
 
+//magic nipples - restore body/skin
+#define NUM_HANDS			2 // number of hands: barney and gordon
+
 typedef struct
 {
 	int		iSlot;
@@ -352,6 +355,8 @@ public:
 	virtual BOOL ShouldWeaponIdle( void ) {return FALSE; };
 	virtual void Holster( void );
 	virtual BOOL UseDecrement( void ) { return FALSE; };
+
+	virtual void RestoreBody(void); //magic nipples - restore body/skin
 	
 	int	PrimaryAmmoIndex(); 
 	int	SecondaryAmmoIndex(); 
@@ -373,6 +378,14 @@ public:
 	int		m_fInReload;										// Are we in the middle of a reload;
 
 	int		m_iDefaultAmmo;// how much ammo you get when you pick up this weapon as placed by a level designer.
+
+	//magic nipples - restore body/skin
+	int		m_iLastSkin;
+	int		m_iSkin;//set skin for view weaponmodel
+	int		m_iBody;//set body for view weaponmodel
+	int		m_iLastBody;
+	BOOL	b_Restored;//restore body and skin after save/load
+
 
 };
 

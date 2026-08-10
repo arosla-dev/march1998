@@ -722,6 +722,7 @@ private:
 
 	unsigned short m_usChubFire;
 
+	float	m_flBlink;
 };
 
 #define		CHUBGRENADE_THROW_DELAY		1.0
@@ -753,6 +754,7 @@ void CChubGrenade::Precache(void)
 {
 	UTIL_PrecacheOther("monster_chumtoad");
 	PRECACHE_MODEL("models/v_chub.mdl");
+	m_usChubFire = PRECACHE_EVENT(1, "events/chubfire.sc");
 }
 
 
@@ -912,6 +914,20 @@ void CChubGrenade::PrimaryAttack()
 
 void CChubGrenade::WeaponIdle(void)
 {
+	if (m_flBlink < gpGlobals->time)
+	{
+		if (pev->skin < CHUB_EYE_CLOSED)
+		{
+			pev->skin++;
+			m_flBlink = gpGlobals->time + 0.15;
+		}
+		else
+		{
+			pev->skin = CHUB_EYE_OPEN;
+			m_flBlink = gpGlobals->time + RANDOM_FLOAT(2, 5);
+		}
+	}
+
 	if (m_flTimeWeaponIdle > UTIL_WeaponTimeBase() || m_flAttackDelay)
 		return;
 

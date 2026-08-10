@@ -518,8 +518,8 @@ HEV_44PISTOL fvox/blip get_44pistol acquired
 HEV_RPG fvox/blip get_rpg acquired
 HEV_SATCHEL fvox/blip get_satchel acquired
 HEV_TRIPMINE fvox/blip get_tripmine acquired
-HEV_HORNET fvox/blip get_alien_wpn
-HEV_SQUEEK fvox/blip get_alien_wpn
+HEV_HORNET fvox/blip get_alien_wpn acquired
+HEV_SQUEEK fvox/blip get_alien_wpn acquired
 HEV_EGON fvox/blip get_egon acquired
 HEV_GAUSS fvox/blip get_gauss acquired
 HEV_XBOW fvox/blip get_crossbow acquired

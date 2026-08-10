@@ -129,7 +129,7 @@ BOOL CHgun::Deploy()
 
 void CHgun::Holster()
 {
-	m_pPlayer->m_flNextAttack = gpGlobals->time + 0.5;
+	m_pPlayer->m_flNextAttack = gpGlobals->time + 1.0;
 	// m_flTimeWeaponIdle = gpGlobals->time + RANDOM_FLOAT ( 10, 15 );
 	SendWeaponAnim(HGUN_DOWN);
 

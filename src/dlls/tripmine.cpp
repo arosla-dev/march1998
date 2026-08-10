@@ -466,7 +466,7 @@ int CTripmine::AddToPlayer(CBasePlayer* pPlayer)
 
 void CTripmine::Holster()
 {
-	m_pPlayer->m_flNextAttack = UTIL_WeaponTimeBase() + 1.1;
+	m_pPlayer->m_flNextAttack = UTIL_WeaponTimeBase() + 1.4;
 
 	if (!m_pPlayer->m_rgAmmo[m_iPrimaryAmmoType])
 	{

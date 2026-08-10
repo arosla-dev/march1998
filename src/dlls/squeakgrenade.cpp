@@ -24,6 +24,10 @@
 #include "soundent.h"
 #include "gamerules.h"
 
+#define		SQK_EYE_OPEN			0
+#define		SQK_EYE_SEMI			1
+#define		SQK_EYE_CLOSED			2
+
 enum w_squeak_e {
 	WSQUEAK_IDLE1 = 0,
 	WSQUEAK_FIDGET,
@@ -420,6 +424,7 @@ public:
 	void Holster(void);
 	void WeaponIdle(void);
 	int m_fJustThrown;
+	float	m_flBlink;
 };
 
 LINK_ENTITY_TO_CLASS(weapon_snark, CSqueak);
@@ -518,6 +523,8 @@ void CSqueak::Holster()
 		return;
 	}
 
+	pev->skin = SQK_EYE_SEMI;
+
 	m_pPlayer->m_flNextAttack = gpGlobals->time + 1.0;
 	SendWeaponAnim(SQUEAK_DOWN);
 	EMIT_SOUND(ENT(m_pPlayer->pev), CHAN_WEAPON, "common/null.wav", 1.0, ATTN_NORM);
@@ -590,6 +597,20 @@ void CSqueak::SecondaryAttack(void)
 void CSqueak::WeaponIdle(void)
 {
 	m_pPlayer->pev->viewmodel = MAKE_STRING("models/v_squeak.mdl");
+
+	if (m_flBlink < gpGlobals->time)
+	{
+		if (pev->skin < SQK_EYE_CLOSED)
+		{
+			pev->skin++;
+			m_flBlink = gpGlobals->time + 0.15;
+		}
+		else
+		{
+			pev->skin = SQK_EYE_OPEN;
+			m_flBlink = gpGlobals->time + RANDOM_FLOAT(2, 5);
+		}
+	}
 
 	if (m_flTimeWeaponIdle > UTIL_WeaponTimeBase())
 		return;

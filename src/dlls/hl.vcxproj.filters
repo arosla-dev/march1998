@@ -408,6 +408,9 @@
     <ClCompile Include="mp5_alpha.cpp">
       <Filter>Source Files\Weapons\Alpha weapons</Filter>
     </ClCompile>
+    <ClCompile Include="missing.cpp">
+      <Filter>Source Files\Monsters</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="activitymap.h">

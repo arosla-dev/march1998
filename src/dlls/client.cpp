@@ -723,6 +723,11 @@ void ClientPrecache( void )
 	PRECACHE_SOUND("player/pl_duct3.wav");
 	PRECACHE_SOUND("player/pl_duct4.wav");
 
+	PRECACHE_SOUND("player/pl_wood1.wav");		// walk on wood
+	PRECACHE_SOUND("player/pl_wood2.wav");
+	PRECACHE_SOUND("player/pl_wood3.wav");
+	PRECACHE_SOUND("player/pl_wood4.wav");
+
 	PRECACHE_SOUND("player/pl_grate1.wav");		// walk on grate
 	PRECACHE_SOUND("player/pl_grate2.wav");
 	PRECACHE_SOUND("player/pl_grate3.wav");

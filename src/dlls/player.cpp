@@ -216,6 +216,10 @@ int gmsgStatusValue = 0;
 
 int gmsgPunchAngle = 0;
 
+//magic nipples - restore body/skin
+int gmsgSetBody = 0;//change body for view weapon model
+int gmsgSetSkin = 0;//change skin for view weapon model
+
 // INVENTORY
 int gmsgAntidote = 0;
 int gmsgRadiation = 0;
@@ -298,6 +302,10 @@ void LinkUserMessages( void )
 	gmsgSetSky = REG_USER_MSG("SetSky", 7);	//LRC
 	gmsgSetFog = REG_USER_MSG("SetFog", -1);
 	gmsgRainData = REG_USER_MSG("RainData", -1);
+
+	//magic nipples - restore body/skin
+	gmsgSetBody = REG_USER_MSG("SetBody", 1);
+	gmsgSetSkin = REG_USER_MSG("SetSkin", 1);
 }
 
 LINK_ENTITY_TO_CLASS( player, CBasePlayer );
