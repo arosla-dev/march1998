@@ -129,7 +129,7 @@ void CFly::Spawn( void )
 //	UTIL_SetSize( pev, g_vecZero, g_vecZero );
 	UTIL_SetSize( pev, Vector(-1,-1,-1), Vector(1,1,1));
 	
-	pev->solid			= SOLID_SLIDEBOX;
+	pev->solid			= SOLID_TRIGGER;
 	pev->movetype		= MOVETYPE_FLY;
 	SetBits(pev->flags, FL_FLY);
 	pev->health			= 1;

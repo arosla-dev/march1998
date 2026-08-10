@@ -411,6 +411,9 @@
     <ClCompile Include="missing.cpp">
       <Filter>Source Files\Monsters</Filter>
     </ClCompile>
+    <ClCompile Include="spit.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="activitymap.h">
@@ -548,12 +551,6 @@
     <ClInclude Include="hornet.h">
       <Filter>Header Files\Weapons</Filter>
     </ClInclude>
-    <ClInclude Include="xbowbolt.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="rain.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="rope\CElectrifiedWire.h">
       <Filter>Source Files\Rope</Filter>
     </ClInclude>
@@ -565,6 +562,12 @@
     </ClInclude>
     <ClInclude Include="rope\CRopeSegment.h">
       <Filter>Source Files\Rope</Filter>
+    </ClInclude>
+    <ClInclude Include="rain.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="xbowbolt.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

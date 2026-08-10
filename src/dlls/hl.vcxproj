@@ -256,6 +256,7 @@
     <ClCompile Include="soundent.cpp" />
     <ClCompile Include="spectator.cpp" />
     <ClCompile Include="sphere.cpp" />
+    <ClCompile Include="spit.cpp" />
     <ClCompile Include="squadmonster.cpp" />
     <ClCompile Include="squeakgrenade.cpp" />
     <ClCompile Include="stealth.cpp" />
