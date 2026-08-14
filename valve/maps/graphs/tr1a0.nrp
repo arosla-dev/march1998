@@ -278,13 +278,13 @@ HintActivity:    0
 HintYaw:      0.000000
 -------------------------------------------------------------------------------
 Node#           46
-Location      -2848,1288,-256
+Location      -3056,1288,-256
 HintType:        0
 HintActivity:    0
 HintYaw:      0.000000
 -------------------------------------------------------------------------------
 Node#           47
-Location      -3216,1288,-256
+Location      -3424,1288,-256
 HintType:        0
 HintActivity:    0
 HintYaw:      0.000000
@@ -702,7 +702,6 @@ Node #  44:
 
   43  43
   45  45
-  46  46
   48  48
   49  49
 ----------------------------------------------------------------------------
@@ -715,9 +714,7 @@ Node #  45:
 ----------------------------------------------------------------------------
 Node #  46:
 
-  44  44
   47  47
-  48  48
 ----------------------------------------------------------------------------
 Node #  47:
 
@@ -730,7 +727,6 @@ Node #  48:
   43  43
   44  44
   45  45
-  46  46
   49  49
   50  Entity on connection: func_door, name: rr1  Model: *58  50
 ----------------------------------------------------------------------------
@@ -792,7 +788,7 @@ Node #  56:
   55  55
 ----------------------------------------------------------------------------
 
- 272 Total Initial Connections -   10 Maximum connections for a single node.
+ 268 Total Initial Connections -   10 Maximum connections for a single node.
 ----------------------------------------------------------------------------
 
 
@@ -1005,6 +1001,8 @@ Rejected Node  48 - Unreachable by Any Hull
 -------------------------------------------------------------------------------
 Node   44:
 
+NODE_SMALL_HULL step 16
+Rejected Node  48 - Unreachable by Any Hull
 NODE_SMALL_HULL step 96
 Rejected Node  49 - Unreachable by Any Hull
 -------------------------------------------------------------------------------
@@ -1023,6 +1021,8 @@ Node   48:
 
 NODE_SMALL_HULL step 96
 Rejected Node  43 - Unreachable by Any Hull
+NODE_SMALL_HULL step 32
+Rejected Node  44 - Unreachable by Any Hull
 NODE_SMALL_HULL step 96
 Rejected Node  45 - Unreachable by Any Hull
 -------------------------------------------------------------------------------
@@ -1248,7 +1248,6 @@ Node  45:
 ----------------------------------------------------------------------------
 
 Node  46:
-REJECTED NODE  48 through Node  44, Dot = 0.998999
 ----------------------------------------------------------------------------
 
 Node  47:
@@ -1256,7 +1255,6 @@ Node  47:
 
 Node  48:
 REJECTED NODE  30 through Node  49, Dot = 0.999404
-REJECTED NODE  46 through Node  44, Dot = 0.999385
 REJECTED NODE  33 through Node  49, Dot = 0.999971
 REJECTED NODE  50 through Node  49, Dot = 0.999952
 ----------------------------------------------------------------------------
@@ -1302,7 +1300,7 @@ WARNING: Node  36 does not connect back to Node  37
 
 
 -------------------------------------------------------------------------------
-Total Number of Connections in Pool: 189
+Total Number of Connections in Pool: 185
 -------------------------------------------------------------------------------
-Connection Pool: 4536 bytes
+Connection Pool: 4440 bytes
 -------------------------------------------------------------------------------

@@ -199,31 +199,28 @@ static void SubdividePolygon_r( msurface_t *warpface, int numverts, float *verts
 	}
 }
 
-void GL_SetupFogColorForSurfaces( void )
+void GL_SetupFogColorForSurfaces(void)
 {
 	vec3_t	fogColor;
 	float	factor, div;
 
-	if( !glState.isFogEnabled )
+	if (!glState.isFogEnabled)
 		return;
+
+	if (RI.currententity && RI.currententity->curstate.rendermode == kRenderTransTexture)
+	{
+		pglFogfv(GL_FOG_COLOR, RI.fogColor);
+		return;
+	}
 
 	//div = (r_detailtextures->value) ? 2.0f : 1.0f;
 	div = (r_overbright->value) ? 4.0f : 2.0f; //magic nipples - adjusting values because fog for textures was too bright
 
 	factor = 3.0f;//(r_detailtextures->value) ? 3.0f : 2.0f;
-	fogColor[0] = pow( RI.fogColor[0] / div, ( 1.0f / factor ));
-	fogColor[1] = pow( RI.fogColor[1] / div, ( 1.0f / factor ));
-	fogColor[2] = pow( RI.fogColor[2] / div, ( 1.0f / factor ));
-
-	if ((RI.currententity && RI.currententity->curstate.rendermode == kRenderTransTexture) ||
-		(RI.currententity && RI.currententity->curstate.rendermode == kRenderTransColor))
-	{
-		GL_AdjustFogColor(0.5);
-	}
-	else
-	{
-		pglFogfv(GL_FOG_COLOR, fogColor);
-	}
+	fogColor[0] = pow(RI.fogColor[0] / div, (1.0f / factor));
+	fogColor[1] = pow(RI.fogColor[1] / div, (1.0f / factor));
+	fogColor[2] = pow(RI.fogColor[2] / div, (1.0f / factor));
+	pglFogfv(GL_FOG_COLOR, fogColor);
 }
 
 void GL_ResetFogColor( void )

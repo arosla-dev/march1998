@@ -843,7 +843,24 @@ void CHassault::Killed(entvars_t* pevAttacker, int iGib)
 	if (m_iSpinState > HASSAULT_NOT_SPINNING)
 		SpinDown();
 
-	CSquadMonster::Killed(pevAttacker, iGib);
+	if (pev->body == 0)
+	{
+		STOP_SOUND(ENT(pev), CHAN_ITEM, "hassault/hw_spin.wav");
+		STOP_SOUND(ENT(pev), CHAN_ITEM, "hassault/hw_spinup.wav");
+		// drop the gun!
+		Vector vecGunPos;
+		Vector vecGunAngles;
+
+		pev->body = 1;
+
+		GetAttachment(0, vecGunPos, vecGunAngles);
+
+		CBaseEntity* pGun;
+		pGun = DropItem("weapon_minigun", vecGunPos, vecGunAngles);
+	}
+
+	SetUse(NULL);
+	CBaseMonster::Killed(pevAttacker, iGib);
 }
 
 //=========================================================
@@ -851,20 +868,6 @@ void CHassault::Killed(entvars_t* pevAttacker, int iGib)
 //=========================================================
 void CHassault::GibMonster(void)
 {
-	Vector	vecGunPos;
-	Vector	vecGunAngles;
-
-	// throw a gun if the grunt has one
-	GetAttachment(0, vecGunPos, vecGunAngles);
-
-	CBaseEntity* pGun;
-	pGun = DropItem("weapon_minigun", vecGunPos, vecGunAngles);
-	if (pGun)
-	{
-		pGun->pev->velocity = Vector(RANDOM_FLOAT(-100, 100), RANDOM_FLOAT(-100, 100), RANDOM_FLOAT(200, 300));
-		pGun->pev->avelocity = Vector(0, RANDOM_FLOAT(200, 400), 0);
-	}
-
 	CBaseMonster::GibMonster();
 }
 

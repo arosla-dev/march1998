@@ -783,60 +783,43 @@ EmitWaterPolys
 Does a water warp on the pre-fragmented glpoly_t chain
 =============
 */
-void EmitWaterPolys( msurface_t *warp, qboolean reverse )
+void EmitWaterPolys(msurface_t* warp, qboolean reverse)
 {
-	float	*v, nv, waveHeight;
+	float* v, nv, waveHeight;
 	float	s, t, os, ot;
-	glpoly_t	*p;
+	glpoly_t* p;
 	int	i;
 
-	if( !warp->polys ) return;
+	if (!warp->polys)
+		return;
 
 	// set the current waveheight
-	if (r_ripple->value)
-		waveHeight = 0;
-	else if (warp->polys->verts[0][2] >= RI.vieworg[2])
+	if (warp->polys->verts[0][2] >= RI.vieworg[2])
 		waveHeight = -RI.currententity->curstate.scale;
-	else waveHeight = RI.currententity->curstate.scale;
+	else
+		waveHeight = RI.currententity->curstate.scale;
 
 	// reset fog color for nonlightmapped water
 	GL_ResetFogColor();
-	GL_AdjustFogColor(0.5);
 
-	//MAGIC NIPPLES - func_water fix!!
-	gl_texture_t* tex = R_GetTexture(warp->texinfo->texture->gl_texturenum);
+	if (FBitSet(warp->flags, SURF_DRAWTURB_QUADS))
+		pglBegin(GL_QUADS);
 
-	if (cl.local.waterlevel >= 3)
+	for (p = warp->polys; p; p = p->next)
 	{
-		RI.fogColor[0] = tex->fogParams[0] / 255.0f;
-		RI.fogColor[1] = tex->fogParams[1] / 255.0f;
-		RI.fogColor[2] = tex->fogParams[2] / 255.0f;
-		RI.fogDensity = tex->fogParams[3] * 0.000050f; //0.000025f
-		RI.fogStart = RI.fogEnd = 0.0f;
-		RI.fogColor[3] = 1.0f;
-		RI.fogCustom = false;
-		RI.fogEnabled = true;
-		RI.fogSkybox = true;
-	}
-
-	if( FBitSet( warp->flags, SURF_DRAWTURB_QUADS ))
-		pglBegin( GL_QUADS );
-
-	for( p = warp->polys; p; p = p->next )
-	{
-		if( reverse )
-			v = p->verts[0] + ( p->numverts - 1 ) * VERTEXSIZE;
+		if (reverse)
+			v = p->verts[0] + (p->numverts - 1) * VERTEXSIZE;
 		else v = p->verts[0];
 
-		if( !FBitSet( warp->flags, SURF_DRAWTURB_QUADS ))
-			pglBegin( GL_POLYGON );
+		if (!FBitSet(warp->flags, SURF_DRAWTURB_QUADS))
+			pglBegin(GL_POLYGON);
 
-		for( i = 0; i < p->numverts; i++ )
+		for (i = 0; i < p->numverts; i++)
 		{
-			if( waveHeight )
+			if (waveHeight)
 			{
 				nv = r_turbsin[(int)(cl.time * 160.0f + v[1] + v[0]) & 255] + 8.0f;
-				nv = (r_turbsin[(int)(v[0] * 5.0f + cl.time * 171.0f - v[1]) & 255] + 8.0f ) * 0.8f + nv;
+				nv = (r_turbsin[(int)(v[0] * 5.0f + cl.time * 171.0f - v[1]) & 255] + 8.0f) * 0.8f + nv;
 				nv = nv * waveHeight + v[2];
 			}
 			else nv = v[2];
@@ -844,38 +827,28 @@ void EmitWaterPolys( msurface_t *warp, qboolean reverse )
 			os = v[3];
 			ot = v[4];
 
-			if (!r_ripple->value)
-			{
-				s = os + r_turbsin[(int)((ot * 0.125f + cl.time) * TURBSCALE) & 255];
-				t = ot + r_turbsin[(int)((os * 0.125f + cl.time) * TURBSCALE) & 255];
-				//s = (os + r_turbsin[(int)((ot * 0.125f + cl.time) * TURBSCALE) & 255]) / g_ripple.texturescale;
-				//t = (ot + r_turbsin[(int)((os * 0.125f + cl.time) * TURBSCALE) & 255]) / g_ripple.texturescale;
-			}
-			else
-			{
-				s = os / g_ripple.texturescale;
-				t = ot / g_ripple.texturescale;
-			}
+			s = os + r_turbsin[(int)((ot * 0.125f + cl.time) * TURBSCALE) & 255];
 			s *= (1.0f / SUBDIVIDE_SIZE);
+
+			t = ot + r_turbsin[(int)((os * 0.125f + cl.time) * TURBSCALE) & 255];
 			t *= (1.0f / SUBDIVIDE_SIZE);
 
-			pglTexCoord2f( s, t );
-			pglVertex3f( v[0], v[1], nv );
+			pglTexCoord2f(s, t);
+			pglVertex3f(v[0], v[1], nv);
 
-			if( reverse )
+			if (reverse)
 				v -= VERTEXSIZE;
 			else v += VERTEXSIZE;
 		}
 
-		if( !FBitSet( warp->flags, SURF_DRAWTURB_QUADS ))
+		if (!FBitSet(warp->flags, SURF_DRAWTURB_QUADS))
 			pglEnd();
 	}
 
-	if( FBitSet( warp->flags, SURF_DRAWTURB_QUADS ))
+	if (FBitSet(warp->flags, SURF_DRAWTURB_QUADS))
 		pglEnd();
 
-	//GL_SetupFogColorForSurfaces();
-	GL_ResetFogColor(); //MAGIC NIPPLES - func_water fix!!
+	GL_SetupFogColorForSurfaces();
 }
 
 /*

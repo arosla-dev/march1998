@@ -614,38 +614,38 @@ using to find source waterleaf with
 watertexture to grab fog values from it
 =============
 */
-static gl_texture_t *R_RecursiveFindWaterTexture( const mnode_t *node, const mnode_t *ignore, qboolean down )
+static gl_texture_t* R_RecursiveFindWaterTexture(const mnode_t* node, const mnode_t* ignore, qboolean down)
 {
-	gl_texture_t *tex = NULL;
+	gl_texture_t* tex = NULL;
 
 	// assure the initial node is not null
 	// we could check it here, but we would rather check it 
 	// outside the call to get rid of one additional recursion level
-	Assert( node != NULL );
+	Assert(node != NULL);
 
 	// ignore solid nodes
-	if( node->contents == CONTENTS_SOLID )
+	if (node->contents == CONTENTS_SOLID)
 		return NULL;
 
-	if( node->contents < 0 )
+	if (node->contents < 0)
 	{
-		mleaf_t		*pleaf;
-		msurface_t	**mark;
+		mleaf_t* pleaf;
+		msurface_t** mark;
 		int		i, c;
 
 		// ignore non-liquid leaves
-		if( node->contents != CONTENTS_WATER && node->contents != CONTENTS_LAVA && node->contents != CONTENTS_SLIME )
-			 return NULL;
+		if (node->contents != CONTENTS_WATER && node->contents != CONTENTS_LAVA && node->contents != CONTENTS_SLIME)
+			return NULL;
 
 		// find texture
-		pleaf = (mleaf_t *)node;
+		pleaf = (mleaf_t*)node;
 		mark = pleaf->firstmarksurface;
-		c = pleaf->nummarksurfaces;	
+		c = pleaf->nummarksurfaces;
 
-		for( i = 0; i < c; i++, mark++ )
+		for (i = 0; i < c; i++, mark++)
 		{
-			if( (*mark)->flags & SURF_DRAWTURB && (*mark)->texinfo && (*mark)->texinfo->texture )
-				return R_GetTexture( (*mark)->texinfo->texture->gl_texturenum );
+			if ((*mark)->flags & SURF_DRAWTURB && (*mark)->texinfo && (*mark)->texinfo->texture)
+				return R_GetTexture((*mark)->texinfo->texture->gl_texturenum);
 		}
 
 		// texture not found
@@ -654,24 +654,27 @@ static gl_texture_t *R_RecursiveFindWaterTexture( const mnode_t *node, const mno
 
 	// this is a regular node
 	// traverse children
-	if( node->children[0] && ( node->children[0] != ignore ))
+	if (node->children[0] && (node->children[0] != ignore))
 	{
-		tex = R_RecursiveFindWaterTexture( node->children[0], node, true );
-		if( tex ) return tex;
+		tex = R_RecursiveFindWaterTexture(node->children[0], node, true);
+		if (tex)
+			return tex;
 	}
 
-	if( node->children[1] && ( node->children[1] != ignore ))
+	if (node->children[1] && (node->children[1] != ignore))
 	{
-		tex = R_RecursiveFindWaterTexture( node->children[1], node, true );
-		if( tex )	return tex;
+		tex = R_RecursiveFindWaterTexture(node->children[1], node, true);
+		if (tex)
+			return tex;
 	}
 
 	// for down recursion, return immediately
-	if( down ) return NULL;
+	if (down)
+		return NULL;
 
 	// texture not found, step up if any
-	if( node->parent )
-		return R_RecursiveFindWaterTexture( node->parent, node, false );
+	if (node->parent)
+		return R_RecursiveFindWaterTexture(node->parent, node, false);
 
 	// top-level node, bail out
 	return NULL;
