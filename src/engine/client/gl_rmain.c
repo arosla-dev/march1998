@@ -1019,7 +1019,21 @@ void R_RenderScene( void )
 
 	R_DrawEntitiesOnList();
 
-	//R_DrawWaterSurfaces(); //magic nipples - off in yotd
+	R_DrawWaterSurfaces();
+
+	if (RI.drawWorld && r_glsl->value == 1) //magic nipples - put here to make glsl affect hud but not menu or console.
+	{
+		pglScissor(0, 0, glState.width, glState.height);
+		pglViewport(0, 0, glState.width, glState.height);
+		pglMatrixMode(GL_PROJECTION);
+		pglLoadIdentity();
+
+		pglOrtho(0, glState.width, glState.height, 0, -10, 100);
+
+		pglMatrixMode(GL_MODELVIEW);
+		pglLoadIdentity();
+	}
+
 
 	R_DownSampling(); //magic nipples - down sampling
 

@@ -732,6 +732,9 @@ extern convar_t* r_overbright; //magic nipples - overbright
 
 extern convar_t* r_lighting_lambert;
 
+//glsl
+extern convar_t* r_glsl;
+
 extern convar_t* gammaboost;
 
 //software water

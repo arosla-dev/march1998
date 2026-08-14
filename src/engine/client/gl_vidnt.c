@@ -90,6 +90,13 @@ convar_t* r_ripple;
 convar_t* r_ripple_updatetime;
 convar_t* r_ripple_spawntime;
 
+//glsl
+convar_t* r_glsl;
+convar_t* r_pixelate;
+convar_t* r_3point;
+convar_t* r_palettelimit;
+
+
 byte		*r_temppool;
 
 ref_globals_t	tr;
@@ -348,7 +355,7 @@ static dllfunc_t wglgetextensionsstring[] =
 { NULL, NULL }
 };
 
-dll_info_t opengl_dll = { "opengl32.dll", wgl_funcs, true };
+dll_info_t opengl_dll = { "shaders.dll", wgl_funcs, true };
 
 /*
 ========================
@@ -1454,6 +1461,28 @@ qboolean VID_SetMode( void )
 	return true;
 }
 
+void Host_WriteShaderConfig(void)
+{
+	file_t* f;
+
+	if (!clgame.hInstance) return;
+
+	f = FS_Open("shaders.cfg", "w", false);
+	if (f)
+	{
+		Con_Reportf("Host_WriteShaderConfig()\n");
+
+		FS_Printf(f, "[Default]\n");
+		FS_Printf(f, "PixelateResolution=%i\n", (int)r_pixelate->value);
+		FS_Printf(f, "PaletteLimit=%i\n", (int)r_palettelimit->value);
+		FS_Printf(f, "Dither=0\n");
+		FS_Printf(f, "3PointFilter=%i\n", (int)r_3point->value);
+
+		FS_Close(f);
+	}
+	else Con_DPrintf(S_ERROR "Couldn't write shaders.cfg.\n");
+}
+
 /*
 ==================
 VID_CheckChanges
@@ -1472,6 +1501,7 @@ void VID_CheckChanges( void )
  
 	if( host.renderinfo_changed )
 	{
+		Host_WriteShaderConfig();
 		if( !VID_SetMode( ))
 		{
 			Sys_Error( "Can't re-initialize video subsystem\n" );
@@ -1652,7 +1682,7 @@ void GL_InitCommands( void )
 	window_cwidth = Cvar_Get("custom_width", "640", FCVAR_RENDERINFO | FCVAR_VIDRESTART, "custom window width");
 	window_cheight = Cvar_Get("custom_height", "480", FCVAR_RENDERINFO | FCVAR_VIDRESTART, "custom window height");
 
-	gl_extensions = Cvar_Get( "gl_allow_extensions", "1", FCVAR_GLCONFIG, "allow gl_extensions" );			
+	gl_extensions = Cvar_Get("gl_allow_extensions", "1", FCVAR_GLCONFIG, "allow gl_extensions"); //magic nipples - was on but this fixes glsl on radeon gpus and doesn't affect nvidia.	
 	gl_wgl_msaa_samples = Cvar_Get( "gl_wgl_msaa_samples", "4", FCVAR_GLCONFIG, "enable multisample anti-aliasing" );
 	gl_texture_nearest = Cvar_Get( "gl_texture_nearest", "0", FCVAR_ARCHIVE, "disable texture filter" );
 	gl_lightmap_nearest = Cvar_Get( "gl_lightmap_nearest", "0", FCVAR_ARCHIVE, "disable lightmap filter" );
@@ -1690,6 +1720,21 @@ void GL_InitCommands( void )
 
 	//magic nipples - down sampling
 	r_downsample = Cvar_Get("r_scale", "0", FCVAR_ARCHIVE, "downscale the view 1 - 1/2, 2 - 1/4, etc...");
+
+	//magic nipples - glsl
+	r_glsl = Cvar_Get("r_glsl", "0", FCVAR_ARCHIVE, "Render glsl scripts");
+	r_pixelate = Cvar_Get("glsl_pixelate_size", "0", FCVAR_VIDRESTART, "glsl pixelate filter");
+	r_palettelimit = Cvar_Get("glsl_palette", "0", FCVAR_VIDRESTART, "glsl palette limiter");
+	r_3point = Cvar_Get("glsl_3point_size", "0", FCVAR_VIDRESTART, "glsl 3 point filter");
+
+	string	localPath;
+	Q_snprintf(localPath, sizeof(localPath), "%s/shaders.cfg", GI->gamedir);
+	Con_Printf("Loading glsl cvars in: %s\n", localPath);
+
+	Cvar_SetValue("glsl_pixelate_size", (float)GetPrivateProfileInt("Default", "PixelateResolution", 0, localPath));
+	Cvar_SetValue("glsl_palette", (float)GetPrivateProfileInt("Default", "PaletteLimit", 0, localPath));
+	Cvar_SetValue("glsl_3point_size", (float)GetPrivateProfileInt("Default", "3point", 0, localPath));
+	//glsl end
 
 	Cmd_AddCommand( "r_info", R_RenderInfo_f, "display renderer info" );
 
@@ -1735,21 +1780,35 @@ void GL_InitExtensions( void )
 	glConfig.context = CONTEXT_TYPE_GL;
 	glConfig.wrapper = GLES_WRAPPER_NONE;
 
-	if( Q_stristr( glConfig.renderer_string, "geforce" ))
+	if (Q_stristr(glConfig.renderer_string, "geforce"))
 		glConfig.hardware_type = GLHW_NVIDIA;
-	else if( Q_stristr( glConfig.renderer_string, "quadro fx" ))
+	else if (Q_stristr(glConfig.renderer_string, "NVIDIA"))
 		glConfig.hardware_type = GLHW_NVIDIA;
-	else if( Q_stristr(glConfig.renderer_string, "rv770" ))
+	else if (Q_stristr(glConfig.renderer_string, "quadro fx"))
+		glConfig.hardware_type = GLHW_NVIDIA;
+	else if (Q_stristr(glConfig.renderer_string, "rv770"))
 		glConfig.hardware_type = GLHW_RADEON;
-	else if( Q_stristr(glConfig.renderer_string, "radeon hd" ))
+	else if (Q_stristr(glConfig.renderer_string, "radeon hd"))
 		glConfig.hardware_type = GLHW_RADEON;
-	else if( Q_stristr( glConfig.renderer_string, "eah4850" ) || Q_stristr( glConfig.renderer_string, "eah4870" ))
+	else if (Q_stristr(glConfig.renderer_string, "eah4850") || Q_stristr(glConfig.renderer_string, "eah4870"))
 		glConfig.hardware_type = GLHW_RADEON;
-	else if( Q_stristr( glConfig.renderer_string, "radeon" ))
+	else if (Q_stristr(glConfig.renderer_string, "radeon"))
 		glConfig.hardware_type = GLHW_RADEON;
-	else if( Q_stristr( glConfig.renderer_string, "intel" ))
+	else if (Q_stristr(glConfig.renderer_string, "intel"))
 		glConfig.hardware_type = GLHW_INTEL;
 	else glConfig.hardware_type = GLHW_GENERIC;
+
+	if(glConfig.hardware_type == GLHW_RADEON)
+		Con_Printf("^3Hardware Type:^7 GLHW_RADEON\n");
+	else if (glConfig.hardware_type == GLHW_NVIDIA)
+		Con_Printf("^3Hardware Type:^7 GLHW_NVIDIA\n");
+	else if (glConfig.hardware_type == GLHW_INTEL)
+		Con_Printf("^3Hardware Type:^7 GLHW_INTEL\n");
+	else
+		Con_Printf("^3Hardware Type:^7 GLHW_GENERIC\n");
+
+	if (glConfig.hardware_type == GLHW_RADEON || glConfig.hardware_type == GLHW_INTEL && !CVAR_TO_BOOL(gl_wgl_msaa_samples))
+		Cvar_FullSet("gl_wgl_msaa_samples", "0", FCVAR_GLCONFIG);
 
 	// initalize until base opengl functions loaded (old-context)
 	if( !context_flags && !CVAR_TO_BOOL( gl_wgl_msaa_samples ))

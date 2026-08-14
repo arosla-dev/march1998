@@ -157,14 +157,14 @@ qboolean Image_LoadMDL( const char *name, const byte *buffer, size_t filesize )
 		if( filesize < ( sizeof( *pin ) + pixels + 768 ))
 			return false;
 
-		if( FBitSet( flags, STUDIO_NF_MASKED ))
+		if (FBitSet(flags, STUDIO_NF_MASKED))
 		{
-			byte	*pal = fin + pixels;
+			byte* pal = fin + pixels;
 
-			Image_GetPaletteLMP( pal, LUMP_MASKED );
-			image.flags |= IMAGE_HAS_ALPHA|IMAGE_ONEBIT_ALPHA;
+			Image_GetPaletteLMP(pal, LUMP_MASKED);
+			image.flags |= IMAGE_HAS_ALPHA | IMAGE_ONEBIT_ALPHA;
 		}
-		else Image_GetPaletteLMPMag(fin + pixels, LUMP_NORMAL); //Image_GetPaletteLMP( fin + pixels, LUMP_NORMAL );
+		else Image_GetPaletteLMPCustom(fin + pixels, LUMP_NORMAL); //Image_GetPaletteLMP( fin + pixels, LUMP_NORMAL );
 	}
 	else
 	{
@@ -418,9 +418,9 @@ qboolean Image_LoadMIP( const char *name, const byte *buffer, size_t filesize )
 		}
 
 		if (!Q_strncmp(name, "cached/conback", 14))
-			Image_GetPaletteLMP( pal, rendermode );
+			Image_GetPaletteLMP(pal, rendermode);
 		else
-			Image_GetPaletteLMPMag(pal, rendermode);
+			Image_GetPaletteLMPCustom(pal, rendermode); //Image_GetPaletteLMP( pal, rendermode );
 		image.d_currentpal[255] &= 0xFFFFFF;
 	}
 	else if( image.hint != IL_HINT_HL && filesize >= (int)sizeof(mip) + ((pixels * 85)>>6))

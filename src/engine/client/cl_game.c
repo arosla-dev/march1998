@@ -1027,6 +1027,19 @@ void CL_DrawHUD( int state )
 		CL_DrawCenterPrint ();
 		clgame.dllFuncs.pfnRedraw( cl.time, cl.intermission );
 		if( cl.intermission ) CL_DrawScreenFade ();
+
+		if (RI.drawWorld && r_glsl->value >= 2) //magic nipples - put here to make glsl affect hud but not menu or console.
+		{
+			pglScissor(0, 0, glState.width, glState.height);
+			pglViewport(0, 0, glState.width, glState.height);
+			pglMatrixMode(GL_PROJECTION);
+			pglLoadIdentity();
+
+			pglOrtho(0, glState.width, glState.height, 0, -10, 100);
+
+			pglMatrixMode(GL_MODELVIEW);
+			pglLoadIdentity();
+		}
 		break;
 	case CL_PAUSED:
 		CL_DrawScreenFade ();
