@@ -34,10 +34,12 @@ studio "BARNEY2_Template_Biped2(WithGun)"
 
 $bodygroup "Type"
 {
-studio "barney_default"
-studio "barney_alpha"
-studio "barney_indeep"
+studio "Barney2_Template_Biped1(Ted)"
+studio "Barney2_Template_Biped1(freeze)"
+studio "Barney2_Template_Biped1(Widelgut)"
 }
+
+$body studio "Barney2_Template_Biped1(Headless_Body)"
 
 $texturegroup skinfamilies 
 {
