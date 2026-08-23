@@ -330,11 +330,13 @@ void CCrossbow::SecondaryAttack()
 {
 	if (m_fInZoom)
 	{
+		m_pPlayer->pev->viewmodel = MAKE_STRING("models/v_crossbow.mdl");
 		m_pPlayer->m_iFOV = 0; // 0 means reset to default fov
 		m_fInZoom = 0;
 	}
 	else
 	{
+		m_pPlayer->pev->viewmodel = 0;
 		if (m_pPlayer->m_rgItems[ITEM_CROSSBOWSCOPE] || pev->spawnflags & SF_CROSSBOW_SCOPE)
 			m_pPlayer->m_iFOV = 20;
 		else

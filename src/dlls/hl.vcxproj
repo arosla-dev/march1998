@@ -45,7 +45,7 @@
     <IgnoreImportLibrary>true</IgnoreImportLibrary>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <OutDir>$(SolutionDir)..\prelim\bin\</OutDir>
+    <OutDir>$(SolutionDir)..\valve\bin\</OutDir>
     <IntDir>$(SolutionDir)build\$(TargetName)\</IntDir>
     <LinkIncremental>true</LinkIncremental>
     <IgnoreImportLibrary>true</IgnoreImportLibrary>
@@ -235,6 +235,7 @@
     <ClCompile Include="plane.cpp" />
     <ClCompile Include="plats.cpp" />
     <ClCompile Include="player.cpp" />
+    <ClCompile Include="playermonster.cpp" />
     <ClCompile Include="python.cpp" />
     <ClCompile Include="rain.cpp" />
     <ClCompile Include="rat.cpp" />

@@ -414,6 +414,9 @@
     <ClCompile Include="spit.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="playermonster.cpp">
+      <Filter>Source Files\Monsters</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="activitymap.h">

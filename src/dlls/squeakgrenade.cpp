@@ -419,7 +419,6 @@ public:
 	int GetItemInfo(ItemInfo* p);
 	int AddToPlayer(CBasePlayer* pPlayer);
 	void PrimaryAttack(void);
-	void SecondaryAttack(void);
 	BOOL Deploy(void);
 	void Holster(void);
 	void WeaponIdle(void);
@@ -575,8 +574,7 @@ void CSqueak::PrimaryAttack()
 
 			m_pPlayer->m_iWeaponVolume = QUIET_GUN_VOLUME;
 
-			if (CVAR_GET_FLOAT("no_ammo") == 0)
-				m_pPlayer->m_rgAmmo[m_iPrimaryAmmoType]--;
+			m_pPlayer->m_rgAmmo[m_iPrimaryAmmoType]--;
 
 			m_fJustThrown = 1;
 
@@ -586,13 +584,6 @@ void CSqueak::PrimaryAttack()
 		}
 	}
 }
-
-
-void CSqueak::SecondaryAttack(void)
-{
-
-}
-
 
 void CSqueak::WeaponIdle(void)
 {

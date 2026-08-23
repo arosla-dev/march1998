@@ -1999,6 +1999,17 @@
 		3 : "On Table"
 	]
 ]
+
+@PointClass base(Monster, Sequence, Appearflags, RenderFields, Angles) size(-16 -16 0, 16 16 36) studio("models/player.mdl") = monster_player: "Player Monster for scripted sequence use." 
+[
+    body(Choices) : "Body" : 0 =
+	[
+		0 : "Scientist"
+		1 : "Default suit"
+		2 : "Ivan suit"
+	]
+]
+
 @PointClass base(Appearflags,RenderFields, Angles) size(-16 -16 0, 16 16 72) studio("models/hgrunt.mdl") = monster_hgrunt_dead : "Dead Human Grunt" 
 [
       pose(Choices) : "Pose" : 0 =

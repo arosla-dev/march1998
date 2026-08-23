@@ -4048,8 +4048,7 @@ void CBasePlayer::CheatImpulseCommands( int iImpulse )
 	case 108:
 		{
 		gEvilImpulse101 = TRUE;
-			GiveNamedItem("item_ivansuit");
-			GiveNamedItem("item_battery");
+			GiveNamedItem("item_suit");
 			GiveNamedItem("weapon_crowbar_alpha");
 			GiveNamedItem("weapon_glock_alpha");
 			GiveNamedItem("weapon_mp5_alpha");
@@ -5477,4 +5476,3 @@ void CInfoIntermission::Think ( void )
 }
 
 LINK_ENTITY_TO_CLASS( info_intermission, CInfoIntermission );
-

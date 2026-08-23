@@ -127,6 +127,7 @@ private:
 };
 
 LINK_ENTITY_TO_CLASS(monster_human_assault, CHassault);
+LINK_ENTITY_TO_CLASS(monster_hassault, CHassault);
 
 TYPEDESCRIPTION	CHassault::m_SaveData[] =
 {

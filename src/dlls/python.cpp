@@ -64,7 +64,7 @@ int CPython::GetItemInfo(ItemInfo *p)
 	p->iMaxAmmo2 = -1;
 	p->iMaxClip = PYTHON_MAX_CLIP;
 	p->iFlags = 0;
-	p->iSlot = 1;
+	p->iSlot = 0;
 	p->iPosition = 1; //1
 	p->iId = m_iId = WEAPON_PYTHON;
 	p->iWeight = PYTHON_WEIGHT;
@@ -139,18 +139,15 @@ void CPython::Holster( )
 
 void CPython::SecondaryAttack( void )
 {
-	//if ( !g_pGameRules->IsMultiplayer() )
-	{
-		//return;
-	}
-
 	if ( m_fInZoom )
 	{
+		m_pPlayer->pev->viewmodel = MAKE_STRING("models/v_357.mdl");
 		m_fInZoom = FALSE;
 		m_pPlayer->m_iFOV = 0;  // 0 means reset to default fov
 	}
 	else
 	{
+		m_pPlayer->pev->viewmodel = 0;
 		m_fInZoom = TRUE;
 		m_pPlayer->m_iFOV = 40;
 	}

@@ -20127,3 +20127,37 @@
 "renderfx" "0"
 "origin" "-3502 1487 36"
 }
+{
+"classname" "infodecal"
+"texture" "{BIGBLOOD1"
+"origin" "-3411 1483 0"
+}
+{
+"classname" "monster_scientist_dead"
+"sequence" "37"
+"pose" "0"
+"body" "-1"
+"angles" "0 0 0"
+"rendercolor" "0 0 0"
+"rendermode" "0"
+"renderfx" "0"
+"origin" "-3412 1483 36"
+}
+{
+"classname" "monster_player"
+"angles" "0 180 0"
+"body" "0"
+"origin" "-1820.45 -1184.93 37"
+}
+{
+"classname" "monster_player"
+"angles" "0 180 0"
+"body" "1"
+"origin" "-1824.45 -1133.93 37"
+}
+{
+"classname" "monster_player"
+"angles" "0 180 0"
+"body" "2"
+"origin" "-1820.45 -1079.93 37"
+}

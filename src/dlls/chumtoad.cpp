@@ -766,7 +766,7 @@ int CChubGrenade::GetItemInfo(ItemInfo* p)
 	p->pszAmmo2 = NULL;
 	p->iMaxAmmo2 = -1;
 	p->iMaxClip = WEAPON_NOCLIP;
-	p->iSlot = 0;
+	p->iSlot = 1;
 	p->iPosition = 1;
 	p->iId = m_iId = WEAPON_CHUB;
 	p->iWeight = 5;

@@ -75,6 +75,9 @@ static void UI_MultiPlayer_Callback( void *self, int event )
 	case ID_LANGAME:
 		UI_LanGame_Menu();
 		break;
+	case ID_CUSTOMIZE:
+		UI_PlayerSetup_Menu();
+		break;
 	case ID_CONTROLS:
 		UI_Controls_Menu();
 		break;

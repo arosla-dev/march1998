@@ -18,7 +18,7 @@ GNU General Public License for more details.
 #include "netchan.h"
 #include "mathlib.h"
 
-//#define NET_USE_FRAGMENTS
+#define NET_USE_FRAGMENTS
 
 #define PORT_ANY			-1
 #define MAX_LOOPBACK		4

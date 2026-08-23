@@ -3542,20 +3542,20 @@
 ( 304 -522 -574 ) ( 288 -560 -574 ) ( 304 -522 -257 ) -0FIFTIES_CASE [ 0 1 0 0 ] [ 0 0 -1 0 ] 0 1 1
 }
 {
-( 218 -608 -384.775 ) ( 218 -599 -384.775 ) ( 218 -608 -257 ) -0FIFTIES_CASE [ 0 1 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( 218 -608 -380 ) ( 218 -599 -380 ) ( 218 -608 -257 ) -0FIFTIES_CASE [ 0 1 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( 218 -599 -380 ) ( 218 -608 -380 ) ( 272 -576 -380 ) -0FIFTIES_CASE [ 1 0 0 12 ] [ 0 -1 0 -0 ] 0 1 1
 ( 272 -576 -257 ) ( 279 -583 -257 ) ( 218 -599 -257 ) -0FIFTIES_CASE [ 1 0 0 12 ] [ 0 -1 0 -0 ] 0 1 1
-( 218 -599 -384.775 ) ( 218 -608 -384.775 ) ( 272 -576 -384.775 ) -0FIFTIES_CASE [ 1 0 0 12 ] [ 0 -1 0 -0 ] 0 1 1
-( 218 -599 -384.775 ) ( 272 -576 -384.775 ) ( 218 -599 -257 ) -0FIFTIES_CASE [ 1 0 0 12 ] [ 0 0 -1 0 ] 0 1 1
-( 279 -583 -384.775 ) ( 218 -608 -384.775 ) ( 279 -583 -257 ) -0FIFTIES_CASE [ 1 0 0 12 ] [ 0 0 -1 0 ] 0 1 1
-( 272 -576 -384.775 ) ( 279 -583 -384.775 ) ( 272 -576 -257 ) -0FIFTIES_CASE [ 0 1 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( 272 -576 -380 ) ( 279 -583 -380 ) ( 272 -576 -257 ) -0FIFTIES_CASE [ 0 1 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( 279 -583 -380 ) ( 218 -608 -380 ) ( 279 -583 -257 ) -0FIFTIES_CASE [ 1 0 0 12 ] [ 0 0 -1 0 ] 0 1 1
+( 218 -599 -380 ) ( 272 -576 -380 ) ( 218 -599 -257 ) -0FIFTIES_CASE [ 1 0 0 12 ] [ 0 0 -1 0 ] 0 1 1
 }
 {
-( 279 -560 -384.775 ) ( 288 -560 -384.775 ) ( 279 -560 -257 ) -0FIFTIES_CASE [ 1 0 0 12 ] [ 0 0 -1 0 ] 0 1 1
+( 279 -560 -380 ) ( 288 -560 -380 ) ( 279 -560 -257 ) -0FIFTIES_CASE [ 1 0 0 12 ] [ 0 0 -1 0 ] 0 1 1
+( 272 -576 -380 ) ( 279 -583 -380 ) ( 279 -560 -380 ) -0FIFTIES_CASE [ 1 0 0 12 ] [ 0 -1 0 -0 ] 0 1 1
 ( 279 -583 -257 ) ( 272 -576 -257 ) ( 288 -560 -257 ) -0FIFTIES_CASE [ 1 0 0 12 ] [ 0 -1 0 -0 ] 0 1 1
-( 272 -576 -384.775 ) ( 279 -583 -384.775 ) ( 279 -560 -384.775 ) -0FIFTIES_CASE [ 1 0 0 12 ] [ 0 -1 0 -0 ] 0 1 1
-( 272 -576 -384.775 ) ( 279 -560 -384.775 ) ( 272 -576 -257 ) -0FIFTIES_CASE [ 0 1 0 0 ] [ 0 0 -1 0 ] 0 1 1
-( 288 -560 -384.775 ) ( 279 -583 -384.775 ) ( 288 -560 -257 ) -0FIFTIES_CASE [ 0 1 0 0 ] [ 0 0 -1 0 ] 0 1 1
-( 279 -583 -384.775 ) ( 272 -576 -384.775 ) ( 279 -583 -257 ) -0FIFTIES_CASE [ 0 1 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( 279 -583 -380 ) ( 272 -576 -380 ) ( 279 -583 -257 ) -0FIFTIES_CASE [ 0 1 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( 288 -560 -380 ) ( 279 -583 -380 ) ( 288 -560 -257 ) -0FIFTIES_CASE [ 0 1 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( 272 -576 -380 ) ( 279 -560 -380 ) ( 272 -576 -257 ) -0FIFTIES_CASE [ 0 1 0 0 ] [ 0 0 -1 0 ] 0 1 1
 }
 {
 ( 218 -427 -574 ) ( 218 -445 -574 ) ( 218 -427 -380 ) -0FIFTIES_CASE [ 0 1 0 0 ] [ 0 0 -1 0 ] 0 1 1
@@ -18012,7 +18012,7 @@
 "SpawnFrequency" "5"
 "MaxLiveChildren" "5"
 "StartDisabled" "1"
-"origin" "175 -518 -258"
+"origin" "175 -518 -305"
 }
 {
 "classname" "trigger_once"
@@ -22662,7 +22662,7 @@
 {
 "classname" "gibshooter"
 "spawnflags" "4"
-"targetname" "ventgibs_1"
+"targetname" "ventgibs"
 "m_iGibs" "10"
 "delay" ".1"
 "m_flVelocity" "222"
@@ -22676,7 +22676,7 @@
 "classname" "trigger_once"
 "delay" "0"
 "sounds" "0"
-"target" "ventpullrel_1"
+"target" "ventpullrel"
 {
 ( -22 -363 -160 ) ( -22 -363 -256 ) ( -22 -322 -160 ) FIFTIES_FLR02 [ 0 1 0 0 ] [ 0 0 -1 0 ] 0 1 1
 ( 76 -322 -160 ) ( 76 -322 -256 ) ( 76 -363 -160 ) FIFTIES_FLR02 [ 0 1 0 0 ] [ 0 0 -1 0 ] 0 1 1
@@ -30443,7 +30443,7 @@
 "angle" "270"
 "spawnflags" "128"
 "impulse" "0"
-"targetname" "sci_1"
+"targetname" "sci"
 "origin" "268 -152 -164"
 }
 {
@@ -30457,8 +30457,8 @@
 "m_iszEntity" "sci"
 "m_iszIdle" "ventpull_idle"
 "m_iszPlay" "ventpull_action"
-"targetname" "ventpullss_1"
-"target" "killscirel_1"
+"targetname" "ventpullss"
+"target" "killscirel"
 "origin" "268 -152 -164"
 }
 {
@@ -30466,8 +30466,8 @@
 "spawnflags" "1"
 "triggerstate" "1"
 "delay" "0"
-"targetname" "ventpullrel_1"
-"target" "ventpullss_1"
+"targetname" "ventpullrel"
+"target" "ventpullss"
 "origin" "236 -184 -185"
 }
 {
@@ -30475,9 +30475,9 @@
 "spawnflags" "1"
 "triggerstate" "1"
 "delay" "0"
-"targetname" "killscirel_1"
-"killtarget" "sci_1"
-"target" "ventgibsrel_1"
+"targetname" "killscirel"
+"killtarget" "sci"
+"target" "ventgibsrel"
 "origin" "268 -200 -165"
 }
 {
@@ -30485,8 +30485,8 @@
 "spawnflags" "1"
 "triggerstate" "1"
 "delay" "2"
-"target" "ventgibs_1"
-"targetname" "ventgibsrel_1"
+"target" "ventgibs"
+"targetname" "ventgibsrel"
 "origin" "268 -180 -165"
 }
 {
@@ -30799,16 +30799,14 @@
 "origin" "669 -2346 -684"
 }
 {
-"classname" "monster_scientist_dead"
-"sequence" "37"
-"skin" "1"
+"classname" "monster_construction_dead"
 "pose" "2"
-"body" "-1"
+"sequence" "35"
 "angles" "0 91 0"
 "rendercolor" "0 0 0"
 "rendermode" "0"
 "renderfx" "0"
-"origin" "120 -2283 -684"
+"origin" "114 -2264 -684"
 }
 {
 "classname" "item_battery"
@@ -30856,14 +30854,14 @@
 "origin" "-124 -1752 -525"
 }
 {
-"classname" "monster_barney_dead"
-"pose" "0"
-"sequence" "35"
-"angles" "0 0 0"
+"classname" "cycler"
+"model" "models/exploted.mdl"
+"spawnflags" "1"
 "rendercolor" "0 0 0"
 "rendermode" "0"
 "renderfx" "0"
-"origin" "1388 -729 260"
+"angles" "0 0 0"
+"origin" "1398 -729 224.021"
 }
 {
 "classname" "func_breakable"
@@ -30922,11 +30920,6 @@
 "classname" "infodecal"
 "texture" "{BIGBLOOD1"
 "origin" "1366 -725 224"
-}
-{
-"classname" "infodecal"
-"texture" "{BIGBLOOD2"
-"origin" "1324 -730 243"
 }
 {
 "classname" "scripted_sequence"
@@ -32735,4 +32728,49 @@
 ( 107 -958 -168 ) ( 107 -930 -168 ) ( 134 -958 -168 ) FIFTSFILE2 [ 1 0 0 -32.8333 ] [ 0 -1 0 -13.333 ] -0 0.6 0.6
 ( 107 -930 -171 ) ( 107 -958 -171 ) ( 134 -930 -171 ) FIFTSFILE2 [ -1 0 0 28.9998 ] [ 0 -1 0 -12.9998 ] 0 0.6 0.6
 }
+}
+{
+"classname" "infodecal"
+"texture" "{BLOOD2"
+"origin" "125 -2262 -720"
+}
+{
+"classname" "infodecal"
+"texture" "{BLOOD3"
+"origin" "91 -2278 -720"
+}
+{
+"classname" "infodecal"
+"texture" "{BLOOD4"
+"origin" "109 -2296 -685"
+}
+{
+"classname" "infodecal"
+"texture" "{BLOOD5"
+"origin" "127 -2296 -703"
+}
+{
+"classname" "infodecal"
+"texture" "{BLOOD6"
+"origin" "126 -2286 -720"
+}
+{
+"classname" "infodecal"
+"texture" "{BLOOD6"
+"origin" "105 -2289 -720"
+}
+{
+"classname" "infodecal"
+"texture" "{BLOOD6"
+"origin" "96 -2257 -720"
+}
+{
+"classname" "infodecal"
+"texture" "{BLOOD6"
+"origin" "115 -2250 -720"
+}
+{
+"classname" "infodecal"
+"texture" "{BIGBLOOD2"
+"origin" "1324 -730 243"
 }

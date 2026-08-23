@@ -65,9 +65,11 @@ extern DLL_GLOBAL int		g_iSkillLevel;
 #define HEAD_GROUP					1
 #define HEAD_GRUNT					0
 #define HEAD_BLOWN					1
+#define HEAD_COMMANDER				2
 #define GUN_GROUP					2
 #define GUN_MP5						0
-#define GUN_NONE					1
+#define GUN_SHOTGUN					1
+#define GUN_NONE					2
 
 //=========================================================
 // Monster's Anim Events Go Here
@@ -140,6 +142,7 @@ public:
 	void IdleSound(void);
 	Vector GetGunPosition(void);
 	void Shoot(void);
+	void Shotgun(void);
 	void PrescheduleThink(void);
 	void GibMonster(void);
 	void SpeakSentence(void);
@@ -187,6 +190,7 @@ public:
 	int m_voicePitch;
 
 	int		m_iBrassShell;
+	int		m_iShotgunShell;
 
 	int		m_iSentence;
 	BOOL	m_fHeadBlowup;
@@ -302,8 +306,14 @@ void CHGrunt::GibMonster(void)
 		GetAttachment(0, vecGunPos, vecGunAngles);
 
 		CBaseEntity* pGun;
-		pGun = DropItem("weapon_9mmAR", vecGunPos, vecGunAngles);
-
+		if (FBitSet(pev->weapons, HGRUNT_SHOTGUN))
+		{
+			pGun = DropItem("weapon_shotgun", vecGunPos, vecGunAngles);
+		}
+		else
+		{
+			pGun = DropItem("weapon_9mmAR", vecGunPos, vecGunAngles);
+		}
 		if (pGun)
 		{
 			pGun->pev->velocity = Vector(RANDOM_FLOAT(-100, 100), RANDOM_FLOAT(-100, 100), RANDOM_FLOAT(200, 300));
@@ -863,6 +873,30 @@ void CHGrunt::Shoot(void)
 	SetBlending(0, angDir.x);
 }
 
+void CHGrunt::Shotgun(void)
+{
+	if (m_hEnemy == NULL)
+	{
+		return;
+	}
+
+	Vector vecShootOrigin = GetGunPosition();
+	Vector vecShootDir = ShootAtEnemy(vecShootOrigin);
+
+	UTIL_MakeVectors(pev->angles);
+
+	Vector	vecShellVelocity = gpGlobals->v_right * RANDOM_FLOAT(40, 90) + gpGlobals->v_up * RANDOM_FLOAT(75, 200) + gpGlobals->v_forward * RANDOM_FLOAT(-40, 40);
+	EjectBrass(vecShootOrigin - vecShootDir * 24, vecShellVelocity, pev->angles.y, m_iShotgunShell, TE_BOUNCE_SHOTSHELL);
+	FireBullets(gSkillData.hgruntShotgunPellets, vecShootOrigin, vecShootDir, VECTOR_CONE_15DEGREES, 2048, BULLET_PLAYER_BUCKSHOT, 0); // shoot +-7.5 degrees
+
+	pev->effects |= EF_MUZZLEFLASH;
+
+	m_cAmmoLoaded--;// take away a bullet!
+
+	Vector angDir = UTIL_VecToAngles(vecShootDir);
+	SetBlending(0, angDir.x);
+}
+
 //=========================================================
 // HandleAnimEvent - catches the monster-specific messages
 // that occur when tagged animation frames are played.
@@ -891,8 +925,14 @@ void CHGrunt::HandleAnimEvent(MonsterEvent_t* pEvent)
 		SetBodygroup(GUN_GROUP, GUN_NONE);
 
 		// now spawn a gun.
-		DropItem("weapon_9mmAR", vecGunPos, vecGunAngles);
-
+		if (FBitSet(pev->weapons, HGRUNT_SHOTGUN))
+		{
+			DropItem("weapon_shotgun", vecGunPos, vecGunAngles);
+		}
+		else
+		{
+			DropItem("weapon_9mmAR", vecGunPos, vecGunAngles);
+		}
 		if (FBitSet(pev->weapons, HGRUNT_GRENADELAUNCHER))
 		{
 			DropItem("ammo_ARgrenades", BodyTarget(pev->origin), vecGunAngles);
@@ -949,7 +989,6 @@ void CHGrunt::HandleAnimEvent(MonsterEvent_t* pEvent)
 			Shoot();
 
 			// the first round of the three round burst plays the sound and puts a sound in the world sound list.
-
 			switch (RANDOM_LONG(0, 2))
 			{
 			case 0:
@@ -962,6 +1001,12 @@ void CHGrunt::HandleAnimEvent(MonsterEvent_t* pEvent)
 				EMIT_SOUND(ENT(pev), CHAN_WEAPON, "hgrunt/gr_mgun3.wav", 1, ATTN_NORM);
 				break;
 			}
+		}
+		else
+		{
+			Shotgun();
+
+			EMIT_SOUND(ENT(pev), CHAN_WEAPON, "weapons/sbarrel1.wav", 1, ATTN_NORM);
 		}
 
 		CSoundEnt::InsertSound(bits_SOUND_COMBAT, pev->origin, 384, 0.3);
@@ -1039,8 +1084,23 @@ void CHGrunt::Spawn()
 		pev->weapons = HGRUNT_9MMAR | HGRUNT_HANDGRENADE;
 	}
 
-	m_cClipSize = GRUNT_CLIP_SIZE;
+	if (FBitSet(pev->weapons, HGRUNT_SHOTGUN))
+	{
+		SetBodygroup(GUN_GROUP, GUN_SHOTGUN);
+		m_cClipSize = 8;
+		ALERT(at_console, "Mom I'm a shotgunner!\n");
+	}
+	else
+	{
+		m_cClipSize = GRUNT_CLIP_SIZE;
+	}
 	m_cAmmoLoaded = m_cClipSize;
+
+	//testing & only
+	if (FBitSet(pev->weapons, HGRUNT_SHOTGUN))
+	{
+		SetBodygroup(HEAD_GROUP, HEAD_BLOWN);
+	}
 
 	CTalkMonster::g_talkWaitTime = 0;
 
@@ -1090,6 +1150,7 @@ void CHGrunt::Precache()
 		m_voicePitch = 100;
 
 	m_iBrassShell = PRECACHE_MODEL("models/shell.mdl");// brass shell
+	m_iShotgunShell = PRECACHE_MODEL("models/shotgunshell.mdl");
 }
 
 //=========================================================
@@ -2014,6 +2075,19 @@ void CHGrunt::SetActivity(Activity NewActivity)
 				iSequence = LookupSequence("crouching_mp5");
 			}
 		}
+		else
+		{
+			if (m_fStanding)
+			{
+				// get aimable sequence
+				iSequence = LookupSequence("standing_shotgun");
+			}
+			else
+			{
+				// get crouching shoot
+				iSequence = LookupSequence("crouching_shotgun");
+			}
+		}
 		break;
 	case ACT_RANGE_ATTACK2:
 		// grunt is going to a secondary long range attack. This may be a thrown 
@@ -2645,7 +2719,7 @@ void CDeadHGrunt::Spawn(void)
 	case 1: // Commander with Gun
 		pev->body = 0;
 		pev->skin = 0;
-		SetBodygroup(HEAD_GROUP, HEAD_GRUNT);
+		SetBodygroup(HEAD_GROUP, HEAD_COMMANDER);
 		SetBodygroup(GUN_GROUP, GUN_MP5);
 		break;
 	case 2: // Grunt no Gun
@@ -2657,7 +2731,7 @@ void CDeadHGrunt::Spawn(void)
 	case 3: // Commander no Gun
 		pev->body = 0;
 		pev->skin = 0;
-		SetBodygroup(HEAD_GROUP, HEAD_GRUNT);
+		SetBodygroup(HEAD_GROUP, HEAD_COMMANDER);
 		SetBodygroup(GUN_GROUP, GUN_NONE);
 		break;
 	}
