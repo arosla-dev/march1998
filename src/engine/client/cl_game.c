@@ -903,34 +903,52 @@ CL_DrawCrosshair
 Render crosshair
 ====================
 */
-void CL_DrawCrosshair( void )
+/*
+====================
+CL_DrawCrosshair
+
+Render crosshair
+====================
+*/
+void CL_DrawCrosshair(void)
 {
 	int	x, y, width, height;
+	rgba_t color;
 
-	if (cl.paused)
-		return;
+	// get crosshair dimension
+	width = clgame.ds.rcCrosshair.right - clgame.ds.rcCrosshair.left;
+	height = clgame.ds.rcCrosshair.bottom - clgame.ds.rcCrosshair.top;
 
-	/*
-	if (cl.local.health <= 0 || cl.viewentity != (cl.playernum + 1))
-		return;
+	x = clgame.scrInfo.iWidth / 2;
+	y = clgame.scrInfo.iHeight / 2;
 
-	if (!clgame.ds.pCrosshair || !cl_crosshair->value)
-		return;
-		*/
+	// g-cont - cl.crosshairangle is the autoaim angle.
+	// if we're not using autoaim, just draw in the middle of the screen
+	if (!VectorIsNull(cl.crosshairangle))
+	{
+		vec3_t	angles;
+		vec3_t	forward;
+		vec3_t	point, screen;
 
-		x = clgame.viewport[0] + (clgame.viewport[2] >> 1);
-		y = clgame.viewport[1] + (clgame.viewport[3] >> 1);
+		VectorAdd(RI.viewangles, cl.crosshairangle, angles);
+		AngleVectors(angles, forward, NULL, NULL);
+		VectorAdd(RI.vieworg, forward, point);
+		R_WorldToScreen(point, screen);
 
-		int qscale;
-		if (glState.height < 640)
-			qscale = 2;
-		else if (glState.height < 1000)
-			qscale = 3;
-		else
-			qscale = 4;
+		x += (clgame.viewport[2] >> 1) * screen[0] + 0.5f;
+		y += (clgame.viewport[3] >> 1) * screen[1] + 0.5f;
+	}
 
-		Con_DrawCharCrosshair(x, y, 43, qscale);
+	// move at center the screen
+	x -= 0.5f * width;
+	y -= 0.5f * height;
 
+	clgame.ds.pSprite = clgame.ds.pCrosshair;
+	*(int*)clgame.ds.spriteColor = *(int*)clgame.ds.rgbaCrosshair;
+
+	SPR_EnableScissor(x, y, width, height);
+	pfnSPR_DrawHoles(0, x, y, &clgame.ds.rcCrosshair);
+	SPR_DisableScissor();
 }
 
 /*

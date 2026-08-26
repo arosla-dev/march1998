@@ -776,10 +776,10 @@ void ClientPrecache( void )
 	PRECACHE_SOUND( SOUND_FLASHLIGHT_ON );
 	PRECACHE_SOUND( SOUND_FLASHLIGHT_OFF );
 
-// player gib sounds
+	// player gib sounds
 	PRECACHE_SOUND("common/bodysplat.wav");		               
 
-// player pain sounds
+	// player pain sounds
 	PRECACHE_SOUND("player/pl_pain2.wav");
 	PRECACHE_SOUND("player/pl_pain4.wav");
 	PRECACHE_SOUND("player/pl_pain5.wav");
@@ -805,6 +805,10 @@ void ClientPrecache( void )
 	PRECACHE_SOUND("player/geiger3.wav");
 	PRECACHE_SOUND("player/geiger2.wav");
 	PRECACHE_SOUND("player/geiger1.wav");
+
+	// missing sounds
+	PRECACHE_SOUND("missing/drone.wav");
+	PRECACHE_SOUND("missing/scream.wav");
 
 	if (giPrecacheGrunt)
 		UTIL_PrecacheOther("monster_human_grunt");

@@ -36,7 +36,8 @@ LINK_ENTITY_TO_CLASS(monster_missing, CMissing);
 
 void CMissing::Spawn(void)
 {
-	Precache();
+	Precache( );
+
 	SET_MODEL(ENT(pev), "models/missing.mdl");
 
 	UTIL_SetOrigin(pev, pev->origin);
@@ -58,15 +59,17 @@ void CMissing::Spawn(void)
 	pev->sequence = LookupSequence("walk");
 	pev->frame = 0;
 	pev->framerate = 1.0;
-	ResetSequenceInfo();
+	ResetSequenceInfo();	
 
-	EMIT_SOUND_DYN(ENT(pev), CHAN_AUTO, "reddoc/bitchsaken.wav", 0.5, ATTN_NORM, SND_SPAWNING, PITCH_NORM);
-	
+
+	EMIT_SOUND_DYN(ENT(pev), CHAN_AUTO, "missing/drone.wav", 0.8, 2, 0, RANDOM_LONG(90, 110));
 }
 
 void CMissing::Precache(void)
 {
 	PRECACHE_MODEL("models/missing.mdl");
+	PRECACHE_SOUND("missing/drone.wav");
+	PRECACHE_SOUND("missing/scream.wav");
 }
 
 void CMissing::Think(void)
@@ -125,6 +128,11 @@ void CMissing::Think(void)
 		pev->skin = 1;
 	else
 		pev->skin = 0;
+
+	if (RANDOM_LONG(0, 4) >= 4)
+		EMIT_SOUND_DYN(ENT(pev), CHAN_AUTO, "missing/scream.wav", 0.8, 2, 0, RANDOM_LONG(90, 110));
+	else
+		STOP_SOUND(ENT(pev), CHAN_AUTO, "missing/scream.wav");
 }
 
 void CMissing::Touch(CBaseEntity* pOther)
