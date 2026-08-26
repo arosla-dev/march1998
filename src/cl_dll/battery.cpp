@@ -90,6 +90,62 @@ int CHudBattery::Draw(float flTime)
 
 		gHUD.DrawSHudNumber(82, ScreenHeight - 100, DHN_3DIGITS | DHN_DRAWZERO, m_iBat, 0, 0, 255);
 	}
+	else if (gHUD.m_fE3Suit == TRUE)
+	{
+		// Has health changed? Flash the health #
+		if (m_fFade)
+		{
+			if (m_fFade > FADE_TIME)
+				m_fFade = FADE_TIME;
+
+			m_fFade -= (gHUD.m_flTimeDelta * 20);
+			if (m_fFade <= 0)
+			{
+				a = 128;
+				m_fFade = 0;
+			}
+
+			// Fade the health number back to dim
+			a = MIN_ALPHA_A + (m_fFade / FADE_TIME) * 200;
+		}
+		else
+			a = MIN_ALPHA_A;
+
+
+		UnpackRGB(r, g, b, RGB_YELLOWISH);
+		ScaleColors(r, g, b, a);
+
+
+		y = ScreenHeight - gHUD.m_iFontHeight - gHUD.m_iFontHeight / 1.75;
+		//x = ScreenWidth/5;
+
+		int HealthWidth = gHUD.GetSpriteRect(gHUD.m_HUD_number_0).right - gHUD.GetSpriteRect(gHUD.m_HUD_number_0).left;
+		x = HealthWidth * 5.21;
+
+		// make sure we have the right sprite handles
+		//if ( !m_hSprite1 )
+		m_HLSPRITE1 = gHUD.GetSprite(gHUD.GetSpriteIndex("suit_empty"));
+		//if ( !m_hSprite2 )
+		m_HLSPRITE2 = gHUD.GetSprite(gHUD.GetSpriteIndex("suit_full"));
+
+		wrect_t batter = gHUD.GetSpriteRect(gHUD.GetSpriteIndex("suit_empty"));
+		int iBatWidth = batter.right - batter.left;
+		int iBatHeight = batter.bottom - batter.top;
+
+		SPR_Set(m_HLSPRITE1, r, g, b);
+		SPR_DrawAdditiveHud(0, x, y, m_prc1);
+
+		zrc.top = m_prc2->top;
+		zrc.left = m_prc2->left;
+		zrc.right = (m_prc2->left) + (m_iBat * 53 / 100);
+		zrc.bottom = m_prc2->bottom;
+
+		if ((zrc.right > 0) && (m_iBat > 0))
+		{
+			SPR_Set(m_HLSPRITE2, r, g, b);
+			SPR_DrawAdditiveHud(0, x + 4, y + 4, &zrc);
+		}
+	}
 	else
 	{
 		gHUD.m_Health.GetPainColor(r, g, b);

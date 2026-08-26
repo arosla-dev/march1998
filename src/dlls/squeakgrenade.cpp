@@ -505,7 +505,11 @@ BOOL CSqueak::Deploy()
 	else
 		pev->body = 0;
 
-	
+	if (m_pPlayer->m_rgItems[ITEM_BETASUIT])
+		pev->skin = 1;
+	else
+		pev->skin = 0;
+
 	return DefaultDeploy("models/v_squeak.mdl", "models/p_squeak.mdl", SQUEAK_UP, "squeak");
 }
 

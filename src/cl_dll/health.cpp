@@ -190,6 +190,50 @@ int CHudHealth::Draw(float flTime)
 
 		gHUD.DrawSHudNumber(30, ScreenHeight - 42, DHN_3DIGITS | DHN_DRAWZERO, m_iHealth, 240, 144, 24);
 	}
+	else if (gHUD.m_fE3Suit == TRUE)
+	{
+
+		UnpackRGB(r, g, b, RGB_YELLOWISH);
+
+		// Has health changed? Flash the health #
+		if (m_fFade)
+		{
+			m_fFade -= (gHUD.m_flTimeDelta * 20);
+			if (m_fFade <= 0)
+			{
+				a = MIN_ALPHA_A;
+				m_fFade = 0;
+			}
+
+			// Fade the health number back to dim
+			a = MIN_ALPHA_A + (m_fFade / FADE_TIME) * 200;
+		}
+		else
+			a = MIN_ALPHA_A;
+
+		// If health is getting low, make it bright red
+		if (m_iHealth <= 15)
+			a = 255;
+
+		ScaleColors(r, g, b, a);
+
+		HealthWidth = gHUD.GetSpriteRect(gHUD.m_HUD_number_0).right - gHUD.GetSpriteRect(gHUD.m_HUD_number_0).left;
+
+		y = ScreenHeight - gHUD.m_iFontHeight - gHUD.m_iFontHeight / 1.5;
+		x = 15;
+
+		x = gHUD.DrawHudNumber(x, y, DHN_3DIGITS | DHN_DRAWZERO, m_iHealth, r, g, b);
+
+		x += HealthWidth / 2;
+
+		int iHeight = gHUD.m_iFontHeight + 6;
+		int iWidth = HealthWidth / 10;
+
+		if (!(gHUD.m_iWeaponBits & (1 << (WEAPON_SUIT))))
+			return 1;
+
+		FillRGBA(x, y - 3, iWidth, iHeight, 255, 160, 0, a);
+	}
 	else
 	{
 		// Has health changed? Flash the health #

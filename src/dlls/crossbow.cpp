@@ -137,6 +137,11 @@ BOOL CCrossbow::Deploy( )
 	else
 		pev->body = 0;
 
+	if (m_pPlayer->m_rgItems[ITEM_BETASUIT])
+		pev->skin = 1;
+	else
+		pev->skin = 0;
+
 	// P1llowguy - dirty ass shit method for ivan suit
 	if (m_pPlayer->m_rgItems[ITEM_IVANSUIT])
 		return DefaultDeploy( "models/v_crossbow_ivan.mdl", "models/p_crossbow.mdl", CROSSBOW_DRAW1, "bow" );
