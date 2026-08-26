@@ -17,6 +17,12 @@ $bodygroup "hands"
 	studio "crowbar_reference(ivan_hands)"
 }
 
+$texturegroup "skinfamily"
+{
+	{ "GLOVE_handpak.bmp.bmp" "GLOVED_knuckle.bmp" "GLOVED_sleeve.bmp" "chrome1.bmp" }
+	{ "GLOVE_handpak_yellow.bmp" "GLOVED_knuckle_yellow.bmp" "GLOVED_sleeve_yellow.bmp" "rubbergloveCHROME.bmp" }
+}
+
 $flags 0
 
 

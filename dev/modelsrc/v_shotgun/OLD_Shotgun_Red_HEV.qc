@@ -20,6 +20,12 @@ $bodygroup hands
     studio "v_shotgun_reference_ivan"
 }
 
+$texturegroup "skinfamily"
+{
+	{ "HAND_ForeArm1.bmp" "chrome.bmp" }
+	{ "HAND_ForeArm2.bmp" "chrome2.bmp" }
+}
+
 //$origin       SIDE-SIDE IN-OUT  UP-DOWN
 
 //$origin 0 -3 61.499 3

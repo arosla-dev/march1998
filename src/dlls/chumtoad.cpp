@@ -799,9 +799,9 @@ BOOL CChubGrenade::Deploy()
 		pev->body = 0;
 
 	if (m_pPlayer->m_rgItems[ITEM_BETASUIT])
-		pev->skin = 1;
+		pev->body = 1;
 	else
-		pev->skin = 0;
+		pev->body = 0;
 
 	return DefaultDeploy("models/v_chub.mdl", "models/p_squeak.mdl", CHUB_UP, "chub");
 }

@@ -22,8 +22,8 @@ $bodygroup hands
 
 $texturegroup "skinfamily"
 {
-	{"PLAYER_ForeArm1.bmp" "chrome1.bmp"}
-	{"PLAYER_ForeArm2.bmp" "chrome2.bmp"}
+	{ "PLAYER_ForeArm1.bmp" "chrome1.bmp" }
+	{ "PLAYER_ForeArm2.bmp" "chrome2.bmp" }
 }
 
 //$origin	SIDE-SIDE IN-OUT  UP-DOWN
