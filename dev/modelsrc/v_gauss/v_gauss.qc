@@ -33,6 +33,12 @@ studio "gauss_hand_beta"
 studio "gauss_hand_ivan"
 }
 
+$texturegroup "skinfamily"
+{
+	{ "GLOVE_handpak.bmp.bmp" "GLOVED_knuckle.bmp" "GLOVED_sleeve.bmp" "chrome1.bmp" }
+	{ "GLOVE_handpak_yellow.bmp" "GLOVED_knuckle_yellow.bmp" "GLOVED_sleeve_yellow.bmp" "rubbergloveCHROME.bmp" }
+}
+
 // 1 attachment(s)
 $attachment 0 "Gauss Master" 17.000000 -1.000000 0.000000
 

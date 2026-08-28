@@ -13,6 +13,12 @@ studio "egon_hands_beta"
 studio "egon_hands_ivan"
 }
 
+$texturegroup "skinfamily"
+{
+	{ "GLOVE_handpak.bmp" "GLOVED_knuckle.bmp" "GLOVED_sleeve.bmp" "chrome.bmp" }
+	{ "GLOVE_handpak_yellow.bmp" "GLOVED_knuckle_yellow.bmp" "GLOVED_sleeve_yellow.bmp" "rubbergloveCHROME.bmp" }
+}
+
 
 $origin 2 4 64
 

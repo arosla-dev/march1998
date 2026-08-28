@@ -16,6 +16,11 @@ studio "crossbow_scope_bad"
 studio "crossbow_scope"
 }
 
+$texturegroup "skinfamily"
+{
+	{ "GLOVE_handpak.bmp.bmp" "GLOVED_knuckle.bmp" "xbow_sleeve.bmp" "chrome1.bmp" }
+	{ "GLOVE_handpak_yellow.bmp" "GLOVED_knuckle_yellow.bmp" "xbow_sleeve_yellow.bmp" "rubbergloveCHROME.bmp" }
+}
 
 $sequence idle1 "crossbow_idle1(simple)" loop fps 30
 $sequence idle2 "crossbow_idle2(empty)" loop fps 30
