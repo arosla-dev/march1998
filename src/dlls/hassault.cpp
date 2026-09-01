@@ -153,8 +153,14 @@ const char* CHassault::pHassaultStepSounds[] =
 void CHassault::Spawn()
 {
 	Precache();
-
-	SET_MODEL(ENT(pev), "models/hassault.mdl");
+	if (CVAR_GET_FLOAT("cl_m98_germanycensorship") == 1)
+	{
+		SET_MODEL(ENT(pev), "models/g_hassault.mdl");
+	}
+	else
+	{
+		SET_MODEL(ENT(pev), "models/hassault.mdl");
+	}
 	UTIL_SetSize(pev, VEC_HUMAN_HULL_MIN, VEC_HUMAN_HULL_MAX);
 
 	pev->solid = SOLID_SLIDEBOX;
@@ -179,6 +185,7 @@ void CHassault::Spawn()
 void CHassault::Precache()
 {
 	PRECACHE_MODEL("models/hassault.mdl");
+	PRECACHE_MODEL("models/g_hassault.mdl");
 
 	PRECACHE_SOUND("hassault/hw_gun4.wav");
 	PRECACHE_SOUND("hassault/hw_spin.wav");

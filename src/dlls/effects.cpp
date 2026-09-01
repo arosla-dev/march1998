@@ -1385,9 +1385,9 @@ LINK_ENTITY_TO_CLASS( gibshooter, CGibShooter );
 
 void CGibShooter :: Precache ( void )
 {
-	if ( g_Language == LANGUAGE_GERMAN )
+	if ( CVAR_GET_FLOAT("cl_m98_germanycensorship") == 1)
 	{
-		m_iGibModelIndex = PRECACHE_MODEL ("models/germanygibs.mdl");
+		m_iGibModelIndex = PRECACHE_MODEL ("models/germangibs.mdl");
 	}
 	else
 	{

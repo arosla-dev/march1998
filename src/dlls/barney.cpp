@@ -535,8 +535,17 @@ void CBarney::HandleAnimEvent(MonsterEvent_t* pEvent)
 void CBarney::Spawn()
 {
 	Precache();
+	
+	if (CVAR_GET_FLOAT("cl_m98_germanycensorship") == 1)
+	{
+		SET_MODEL(ENT(pev), "models/g_barney.mdl");
+	}
+	else
+	{
+		SET_MODEL(ENT(pev), "models/barney.mdl");
+	}
 
-	SET_MODEL(ENT(pev), "models/barney.mdl");
+	
 	UTIL_SetSize(pev, VEC_HUMAN_HULL_MIN, VEC_HUMAN_HULL_MAX);
 
 
@@ -582,7 +591,7 @@ void CBarney::Spawn()
 void CBarney::Precache()
 {
 	PRECACHE_MODEL("models/barney.mdl");
-
+	PRECACHE_MODEL("models/g_barney.mdl");
 	PRECACHE_SOUND("barney/ba_attack1.wav");
 	PRECACHE_SOUND("barney/ba_attack2.wav");
 
@@ -1029,7 +1038,16 @@ void CDeadBarney::BecomeDead(void)
 void CDeadBarney::Spawn()
 {
 	PRECACHE_MODEL("models/barney.mdl");
-	SET_MODEL(ENT(pev), "models/barney.mdl");
+	PRECACHE_MODEL("models/g_barney.mdl");
+
+	if (CVAR_GET_FLOAT("cl_m98_germanycensorship") == 1)
+	{
+		SET_MODEL(ENT(pev), "models/g_barney.mdl");
+	}
+	else
+	{
+		SET_MODEL(ENT(pev), "models/barney.mdl");
+	}
 
 	pev->effects = 0;
 	pev->yaw_speed = 8;
@@ -1103,8 +1121,15 @@ LINK_ENTITY_TO_CLASS(monster_construction, CConstruction);
 void CConstruction::Spawn()
 {
 	Precache();
-	SET_MODEL(ENT(pev), "models/construction.mdl");
 
+	if (CVAR_GET_FLOAT("cl_m98_germanycensorship") == 1)
+	{
+		SET_MODEL(ENT(pev), "models/g_construction.mdl");
+	}
+	else
+	{
+		SET_MODEL(ENT(pev), "models/construction.mdl");
+	}
 
 	UTIL_SetSize(pev, VEC_HUMAN_HULL_MIN, VEC_HUMAN_HULL_MAX);
 
@@ -1167,6 +1192,7 @@ void CConstruction::HandleAnimEvent(MonsterEvent_t* pEvent)
 void CConstruction::Precache(void)
 {
 	PRECACHE_MODEL("models/construction.mdl");
+	PRECACHE_MODEL("models/g_construction.mdl");
 	CBarney::Precache();
 }
 
@@ -1302,7 +1328,16 @@ void CDeadConstruction::BecomeDead(void)
 void CDeadConstruction::Spawn()
 {
 	PRECACHE_MODEL("models/construction.mdl");
-	SET_MODEL(ENT(pev), "models/construction.mdl");
+	PRECACHE_MODEL("models/g_construction.mdl");
+
+	if (CVAR_GET_FLOAT("cl_m98_germanycensorship") == 1)
+	{
+		SET_MODEL(ENT(pev), "models/g_construction.mdl");
+	}
+	else
+	{
+		SET_MODEL(ENT(pev), "models/construction.mdl");
+	}
 
 	pev->effects = 0;
 	pev->yaw_speed = 8;

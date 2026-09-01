@@ -1056,8 +1056,14 @@ void CHGrunt::HandleAnimEvent(MonsterEvent_t* pEvent)
 void CHGrunt::Spawn()
 {
 	Precache();
-
-	SET_MODEL(ENT(pev), "models/hgrunt.mdl");
+	if (CVAR_GET_FLOAT("cl_m98_germanycensorship") == 1)
+	{
+		SET_MODEL(ENT(pev), "models/g_hgrunt.mdl");
+	}
+	else
+	{
+		SET_MODEL(ENT(pev), "models/hgrunt.mdl");
+	}
 	UTIL_SetSize(pev, Vector(-18, -18, 0), Vector(18, 18, 72));	// 0.52 values
 
 	pev->solid = SOLID_SLIDEBOX;
@@ -1113,6 +1119,7 @@ void CHGrunt::Spawn()
 void CHGrunt::Precache()
 {
 	PRECACHE_MODEL("models/hgrunt.mdl");
+	PRECACHE_MODEL("models/g_hgrunt.mdl");
 
 	PRECACHE_SOUND("hgrunt/gr_mgun1.wav");
 	PRECACHE_SOUND("hgrunt/gr_mgun2.wav");
@@ -2690,7 +2697,15 @@ LINK_ENTITY_TO_CLASS(monster_hgrunt_dead, CDeadHGrunt);
 void CDeadHGrunt::Spawn(void)
 {
 	PRECACHE_MODEL("models/hgrunt.mdl");
-	SET_MODEL(ENT(pev), "models/hgrunt.mdl");
+	PRECACHE_MODEL("models/g_hgrunt.mdl");
+	if (CVAR_GET_FLOAT("cl_m98_germanycensorship") == 1)
+	{
+		SET_MODEL(ENT(pev), "models/g_hgrunt.mdl");
+	}
+	else
+	{
+		SET_MODEL(ENT(pev), "models/hgrunt.mdl");
+	}
 
 	pev->effects = 0;
 	pev->yaw_speed = 8;

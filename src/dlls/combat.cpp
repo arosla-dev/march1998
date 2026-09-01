@@ -57,7 +57,7 @@ void CGib::SpawnStickyGibs(entvars_t* pevVictim, Vector vecOrigin, int cGibs, in
 {
 	int i;
 
-	if (g_Language == LANGUAGE_GERMAN)
+	if (CVAR_GET_FLOAT("cl_m98_germanycensorship") == 1)
 	{
 		// no sticky gibs in germany right now!
 		return;
@@ -151,7 +151,7 @@ void CGib :: SpawnHeadGib( entvars_t *pevVictim )
 {
 	CGib *pGib = GetClassPtr( (CGib *)NULL );
 
-	if ( g_Language == LANGUAGE_GERMAN )
+	if ( CVAR_GET_FLOAT("cl_m98_germanycensorship") == 1 )
 	{
 		pGib->Spawn( "models/germangibs.mdl" );// throw one head
 		pGib->pev->body = 0;
@@ -213,7 +213,7 @@ void CGib :: SpawnRandomGibs( entvars_t *pevVictim, int cGibs, int human )
 	{
 		CGib *pGib = GetClassPtr( (CGib *)NULL );
 
-		if ( g_Language == LANGUAGE_GERMAN )
+		if ( CVAR_GET_FLOAT("cl_m98_germanycensorship") == 1 )
 		{
 			pGib->Spawn( "models/germangibs.mdl" );
 			pGib->pev->body = RANDOM_LONG(0,GERMAN_GIB_COUNT-1);

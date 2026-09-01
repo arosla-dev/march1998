@@ -307,7 +307,15 @@ void CZombie :: Spawn()
 {
 	Precache( );
 
-	SET_MODEL(ENT(pev), "models/zombie.mdl");
+	
+	if (CVAR_GET_FLOAT("cl_m98_germanycensorship") == 1)
+	{
+		SET_MODEL(ENT(pev), "models/g_zombie.mdl");
+	}
+	else
+	{
+		SET_MODEL(ENT(pev), "models/zombie.mdl");
+	}
 	UTIL_SetSize( pev, VEC_HUMAN_HULL_MIN, VEC_HUMAN_HULL_MAX );
 
 	pev->body = RANDOM_LONG(0, 3);// pick random zombie
@@ -333,6 +341,7 @@ void CZombie :: Precache()
 	int i;
 
 	PRECACHE_MODEL("models/zombie.mdl");
+	PRECACHE_MODEL("models/g_zombie.mdl");
 
 	for ( i = 0; i < ARRAYSIZE( pAttackHitSounds ); i++ )
 		PRECACHE_SOUND((char *)pAttackHitSounds[i]);

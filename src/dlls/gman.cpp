@@ -120,7 +120,14 @@ void CGMan::Spawn()
 {
 	Precache();
 
-	SET_MODEL(ENT(pev), "models/gman.mdl");
+	if (CVAR_GET_FLOAT("cl_m98_germanycensorship") == 1)
+	{
+		SET_MODEL(ENT(pev), "models/g_gman.mdl");
+	}
+	else
+	{
+		SET_MODEL(ENT(pev), "models/gman.mdl");
+	}
 	UTIL_SetSize(pev, VEC_HUMAN_HULL_MIN, VEC_HUMAN_HULL_MAX);
 
 	pev->solid = SOLID_SLIDEBOX;
@@ -139,6 +146,7 @@ void CGMan::Spawn()
 void CGMan::Precache()
 {
 	PRECACHE_MODEL("models/gman.mdl");
+	PRECACHE_MODEL("models/g_gman.mdl");
 }
 
 

@@ -97,6 +97,22 @@ void CGenericMonster :: Spawn()
 {
 	Precache();
 
+	//totally not stolen from companion doll germany pack code, trust me bro
+	if (FStrEq(STRING(pev->model), "models/scientist.mdl"))
+		SET_MODEL(ENT(pev), "models/g_scientist.mdl");
+	if (FStrEq(STRING(pev->model), "models/barney.mdl"))
+		SET_MODEL(ENT(pev), "models/g_barney.mdl");
+	if (FStrEq(STRING(pev->model), "models/hassault.mdl"))
+		SET_MODEL(ENT(pev), "models/g_hassault.mdl");
+	if (FStrEq(STRING(pev->model), "models/zombie.mdl"))
+		SET_MODEL(ENT(pev), "models/g_zombie.mdl");
+	if (FStrEq(STRING(pev->model), "models/hgrunt.mdl"))
+		SET_MODEL(ENT(pev), "models/g_hgrunt.mdl");
+	if (FStrEq(STRING(pev->model), "models/gman.mdl"))
+		SET_MODEL(ENT(pev), "models/g_gman.mdl");
+	if (FStrEq(STRING(pev->model), "models/construction.mdl"))
+		SET_MODEL(ENT(pev), "models/g_construction.mdl");
+
 	SET_MODEL( ENT(pev), STRING(pev->model) );
 
 /*

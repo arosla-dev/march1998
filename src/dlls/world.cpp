@@ -542,7 +542,7 @@ void CWorld :: Precache( void )
 	PRECACHE_SOUND( "common/bodydrop4.wav" );
 	
 	g_Language = (int)CVAR_GET_FLOAT( "sv_language" );
-	if ( g_Language == LANGUAGE_GERMAN )
+	if ( CVAR_GET_FLOAT("cl_m98_germanycensorship") == 1 )
 	{
 		PRECACHE_MODEL( "models/germangibs.mdl" );
 	}

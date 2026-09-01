@@ -721,7 +721,14 @@ void CScientist::Spawn(void)
 {
 	Precache();
 
-	SET_MODEL(ENT(pev), "models/scientist.mdl");
+	if (CVAR_GET_FLOAT("cl_m98_germanycensorship") == 1)
+	{
+		SET_MODEL(ENT(pev), "models/g_scientist.mdl");
+	}
+	else
+	{
+		SET_MODEL(ENT(pev), "models/scientist.mdl");
+	}
 	UTIL_SetSize(pev, VEC_HUMAN_HULL_MIN, VEC_HUMAN_HULL_MAX);
 
 	pev->solid = SOLID_SLIDEBOX;
@@ -762,6 +769,7 @@ void CScientist::Precache(void)
 	int i;
 
 	PRECACHE_MODEL("models/scientist.mdl");
+	PRECACHE_MODEL("models/g_scientist.mdl");
 
 	for (i = 0; i < ARRAYSIZE(pPainSounds); i++)
 		PRECACHE_SOUND((char*)pPainSounds[i]);
@@ -1232,7 +1240,15 @@ LINK_ENTITY_TO_CLASS(monster_scientist_dead, CDeadScientist);
 void CDeadScientist::Spawn()
 {
 	PRECACHE_MODEL("models/scientist.mdl");
-	SET_MODEL(ENT(pev), "models/scientist.mdl");
+	PRECACHE_MODEL("models/g_scientist.mdl");
+	if (CVAR_GET_FLOAT("cl_m98_germanycensorship") == 1)
+	{
+		SET_MODEL(ENT(pev), "models/g_scientist.mdl");
+	}
+	else
+	{
+		SET_MODEL(ENT(pev), "models/scientist.mdl");
+	}
 
 	pev->effects = 0;
 	pev->sequence = 0;
@@ -1327,7 +1343,15 @@ typedef enum
 void CSittingScientist::Spawn()
 {
 	PRECACHE_MODEL("models/scientist.mdl");
-	SET_MODEL(ENT(pev), "models/scientist.mdl");
+	PRECACHE_MODEL("models/g_scientist.mdl");
+	if (CVAR_GET_FLOAT("cl_m98_germanycensorship") == 1)
+	{
+		SET_MODEL(ENT(pev), "models/g_scientist.mdl");
+	}
+	else
+	{
+		SET_MODEL(ENT(pev), "models/scientist.mdl");
+	}
 	Precache();
 	InitBoneControllers();
 

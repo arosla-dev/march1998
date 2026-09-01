@@ -216,7 +216,6 @@
     <ClCompile Include="islave.cpp" />
     <ClCompile Include="items.cpp" />
     <ClCompile Include="kingpin.cpp" />
-    <ClCompile Include="lantern.cpp" />
     <ClCompile Include="leech.cpp" />
     <ClCompile Include="lights.cpp" />
     <ClCompile Include="maprules.cpp" />
