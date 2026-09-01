@@ -400,6 +400,9 @@ void W_Precache(void)
 	UTIL_PrecacheOtherWeapon("weapon_crowbar_alpha");
 	UTIL_PrecacheOtherWeapon("weapon_glock_alpha");
 	UTIL_PrecacheOtherWeapon("weapon_mp5_alpha");
+	
+	//p1llowguy - some custom weapons
+	UTIL_PrecacheOtherWeapon("weapon_lantern");
 
 #if !defined( OEM_BUILD ) && !defined( HLDEMO_BUILD )
 	if ( g_pGameRules->IsDeathmatch() )

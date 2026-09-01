@@ -6,7 +6,7 @@ gamedir		"valve"
 title		"valve Game Engine"
 
 startmap		"tr1a0"
-trainmap		"tr1a0"
+trainmap		"t0a0"
 
 dllpath		"bin"
 gamedll		"bin/server.dll"

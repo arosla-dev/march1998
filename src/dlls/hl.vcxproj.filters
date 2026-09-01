@@ -34,6 +34,9 @@
     <Filter Include="Source Files\Weapons\Alpha weapons">
       <UniqueIdentifier>{d4a46651-a173-4b65-a7e3-ab316781435d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Weapons\custom">
+      <UniqueIdentifier>{b380973d-a814-45af-b948-417354ce5787}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="animating.cpp">
@@ -416,6 +419,9 @@
     </ClCompile>
     <ClCompile Include="playermonster.cpp">
       <Filter>Source Files\Monsters</Filter>
+    </ClCompile>
+    <ClCompile Include="lantern.cpp">
+      <Filter>Source Files\Weapons\custom</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

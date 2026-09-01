@@ -39,27 +39,27 @@ typedef enum
 
 #include "netadr.h"
 
-extern convar_t	*net_showpackets;
-extern convar_t	*net_clockwindow;
+extern convar_t* net_showpackets;
+extern convar_t* net_clockwindow;
 
-void NET_Init( void );
-void NET_Shutdown( void );
-void NET_Sleep( int msec );
-qboolean NET_IsActive( void );
-qboolean NET_IsConfigured( void );
-void NET_Config( qboolean net_enable );
-qboolean NET_IsLocalAddress( netadr_t adr );
-char *NET_AdrToString( const netadr_t a );
-char *NET_BaseAdrToString( const netadr_t a );
-qboolean NET_IsReservedAdr( netadr_t a );
-qboolean NET_CompareClassBAdr( netadr_t a, netadr_t b );
-qboolean NET_StringToAdr( const char *string, netadr_t *adr );
-qboolean NET_CompareAdr( const netadr_t a, const netadr_t b );
-qboolean NET_CompareBaseAdr( const netadr_t a, const netadr_t b );
-qboolean NET_GetPacket( netsrc_t sock, netadr_t *from, byte *data, size_t *length );
-qboolean NET_BufferToBufferCompress( char *dest, uint *destLen, char *source, uint sourceLen );
-qboolean NET_BufferToBufferDecompress( char *dest, uint *destLen, char *source, uint sourceLen );
-void NET_SendPacket( netsrc_t sock, size_t length, const void *data, netadr_t to );
-void NET_ClearLagData( qboolean bClient, qboolean bServer );
+void NET_Init(void);
+void NET_Shutdown(void);
+void NET_Sleep(int msec);
+qboolean NET_IsActive(void);
+qboolean NET_IsConfigured(void);
+void NET_Config(qboolean net_enable);
+qboolean NET_IsLocalAddress(netadr_t adr);
+char* NET_AdrToString(const netadr_t a);
+char* NET_BaseAdrToString(const netadr_t a);
+qboolean NET_IsReservedAdr(netadr_t a);
+qboolean NET_CompareClassBAdr(netadr_t a, netadr_t b);
+qboolean NET_StringToAdr(const char* string, netadr_t* adr);
+qboolean NET_CompareAdr(const netadr_t a, const netadr_t b);
+qboolean NET_CompareBaseAdr(const netadr_t a, const netadr_t b);
+qboolean NET_GetPacket(netsrc_t sock, netadr_t* from, byte* data, size_t* length);
+qboolean NET_BufferToBufferCompress(char* dest, uint* destLen, char* source, uint sourceLen);
+qboolean NET_BufferToBufferDecompress(char* dest, uint* destLen, char* source, uint sourceLen);
+void NET_SendPacket(netsrc_t sock, size_t length, const void* data, netadr_t to);
+void NET_ClearLagData(qboolean bClient, qboolean bServer);
 
 #endif//NET_WS_H
