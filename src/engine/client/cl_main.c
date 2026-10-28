@@ -64,7 +64,7 @@ convar_t	*cl_cmdrate;
 convar_t	*cl_interp;
 convar_t	*cl_dlmax;
 convar_t	*cl_lw;
-convar_t	*cl_weaponsway;
+convar_t	*cl_m98_weaponsway;
 
 //
 // userinfo
@@ -2638,7 +2638,7 @@ void CL_InitLocal( void )
 
 	//p1llowguy - march 98 cvars here
 	Cvar_Get("cl_m98_germanycensorship", "0", FCVAR_ARCHIVE | FCVAR_CLIENTDLL | FCVAR_USERINFO, "Disables cruelty and replaces people with robots");
-	cl_weaponsway = Cvar_Get("cl_weaponsway", "1", FCVAR_ARCHIVE | FCVAR_CLIENTDLL | FCVAR_USERINFO, "HL2 like weapon sway");
+	cl_m98_weaponsway = Cvar_Get("cl_m98_weaponsway", "1", FCVAR_ARCHIVE | FCVAR_CLIENTDLL | FCVAR_USERINFO, "HL2 like weapon sway");
 	Cvar_Get("r_src_chrome", "0", FCVAR_ARCHIVE | FCVAR_CLIENTDLL | FCVAR_USERINFO, "Chrome like in half-life: source and the likes");
 	cl_broken_hud = Cvar_Get("broken_hud", "0", FCVAR_ARCHIVE | FCVAR_CLIENTDLL | FCVAR_USERINFO, "add black backing to hud like alpha photos");
 

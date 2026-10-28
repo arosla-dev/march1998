@@ -32,6 +32,9 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #define ID_SCREEN_SIZE	3
 #define ID_GAMMA		4
 #define ID_GLARE_REDUCTION	5 
+#define ID_SPARKS		6
+#define ID_GERMANYSHIP	7
+#define ID_WEAPONSWAY	8
 
 typedef struct
 {
@@ -43,6 +46,11 @@ typedef struct
 	menuBitmap_s	testImage;
 
 	menuPicButton_s	done;
+
+	//p1llowguy - m98 new
+	menuCheckBox_s	Sparks;
+	menuCheckBox_s	Germanyship;
+	menuCheckBox_s	Weaponsway;
 
 	menuSlider_s	screenSize;
 	menuSlider_s	gammaIntensity;
@@ -66,6 +74,13 @@ static void UI_VidOptions_GetConfig( void )
 	uiVidOptions.gammaIntensity.curValue = RemapVal( CVAR_GET_FLOAT( "gamma" ), 1.8f, 3.0f, 0.0f, 1.0f );
 	PIC_SetGamma( uiVidOptions.hTestImage, 1.0f );
 
+	if (!CVAR_GET_FLOAT("cl_m98_sparks"))
+		uiVidOptions.Sparks.enabled = 1;
+	if (!CVAR_GET_FLOAT("cl_m98_germanycensorship"))
+		uiVidOptions.Germanyship.enabled = 1;
+	if (!CVAR_GET_FLOAT("cl_m98_weaponsway"))
+		uiVidOptions.Weaponsway.enabled = 1;
+
 	uiVidOptions.outlineWidth = 2;
 	UI_ScaleCoords( NULL, NULL, &uiVidOptions.outlineWidth, NULL );
 }
@@ -81,6 +96,10 @@ static void UI_VidOptions_UpdateConfig( void )
 	CVAR_SET_FLOAT( "brightness", RemapVal( uiVidOptions.glareReduction.curValue, 0.0f, 1.0f, 0.0f, 3.0f ));
 	CVAR_SET_FLOAT( "gamma", RemapVal( uiVidOptions.gammaIntensity.curValue, 0.0f, 1.0f, 1.8f, 3.0f ));
 	PIC_SetGamma( uiVidOptions.hTestImage, 1.0f );
+
+	CVAR_SET_FLOAT("cl_m98_sparks", uiVidOptions.Sparks.enabled);
+	CVAR_SET_FLOAT("cl_m98_germanycensorship", uiVidOptions.Germanyship.enabled);
+	CVAR_SET_FLOAT("cl_m98_weaponsway", uiVidOptions.Weaponsway.enabled);
 }
 
 static void UI_VidOptions_SetConfig( void )
@@ -88,6 +107,11 @@ static void UI_VidOptions_SetConfig( void )
 	CVAR_SET_FLOAT( "viewsize", RemapVal( uiVidOptions.screenSize.curValue, 0.0f, 1.0f, 30.0f, 120.0f ));
 	CVAR_SET_FLOAT( "brightness", RemapVal( uiVidOptions.glareReduction.curValue, 0.0f, 1.0f, 0.0f, 3.0f ));
 	CVAR_SET_FLOAT( "gamma", RemapVal( uiVidOptions.gammaIntensity.curValue, 0.0f, 1.0f, 1.8f, 3.0f ));
+
+	//p1llowguy - new
+	CVAR_SET_FLOAT("cl_m98_sparks", uiVidOptions.Sparks.enabled);
+	CVAR_SET_FLOAT("cl_m98_germanycensorship", uiVidOptions.Germanyship.enabled);
+	CVAR_SET_FLOAT("cl_m98_weaponsway", uiVidOptions.Weaponsway.enabled);
 }
 
 /*
@@ -198,11 +222,38 @@ static void UI_VidOptions_Init( void )
 	uiVidOptions.testImage.pic = ART_GAMMA;
 	uiVidOptions.testImage.generic.ownerdraw = UI_VidOptions_Ownerdraw;
 
+	uiVidOptions.Sparks.generic.id = ID_SPARKS;
+	uiVidOptions.Sparks.generic.type = QMTYPE_CHECKBOX;
+	uiVidOptions.Sparks.generic.flags = QMF_HIGHLIGHTIFFOCUS | QMF_ACT_ONRELEASE | QMF_MOUSEONLY | QMF_DROPSHADOW;
+	uiVidOptions.Sparks.generic.x = UI_SELECTION_POSX;
+	uiVidOptions.Sparks.generic.y = 460;
+	uiVidOptions.Sparks.generic.name = "Toggle E3 sparks";
+	uiVidOptions.Sparks.generic.statusText = "Switches between alpha & e3 sparks";
+	uiVidOptions.Sparks.generic.callback = UI_VidOptions_Callback;
+
+	uiVidOptions.Germanyship.generic.id = ID_GERMANYSHIP;
+	uiVidOptions.Germanyship.generic.type = QMTYPE_CHECKBOX;
+	uiVidOptions.Germanyship.generic.flags = QMF_HIGHLIGHTIFFOCUS | QMF_ACT_ONRELEASE | QMF_MOUSEONLY | QMF_DROPSHADOW;
+	uiVidOptions.Germanyship.generic.x = UI_SELECTION_POSX;
+	uiVidOptions.Germanyship.generic.y = 520;
+	uiVidOptions.Germanyship.generic.name = "Toggle germany censorship";
+	uiVidOptions.Germanyship.generic.statusText = "Disable violence and swap humans to robots";
+	uiVidOptions.Germanyship.generic.callback = UI_VidOptions_Callback;
+
+	uiVidOptions.Weaponsway.generic.id = ID_WEAPONSWAY;
+	uiVidOptions.Weaponsway.generic.type = QMTYPE_CHECKBOX;
+	uiVidOptions.Weaponsway.generic.flags = QMF_HIGHLIGHTIFFOCUS | QMF_ACT_ONRELEASE | QMF_MOUSEONLY | QMF_DROPSHADOW;
+	uiVidOptions.Weaponsway.generic.x = UI_SELECTION_POSX;
+	uiVidOptions.Weaponsway.generic.y = 580;
+	uiVidOptions.Weaponsway.generic.name = "Toggle weapon sway";
+	uiVidOptions.Weaponsway.generic.statusText = "Toggle weapon sway just like hl2 did";
+	uiVidOptions.Weaponsway.generic.callback = UI_VidOptions_Callback;
+
 	uiVidOptions.done.generic.id = ID_DONE;
 	uiVidOptions.done.generic.type = QMTYPE_BM_BUTTON;
 	uiVidOptions.done.generic.flags = QMF_HIGHLIGHTIFFOCUS|QMF_DROPSHADOW;
 	uiVidOptions.done.generic.x = UI_SELECTION_POSX;
-	uiVidOptions.done.generic.y = 435;
+	uiVidOptions.done.generic.y = 615;
 	uiVidOptions.done.generic.name = "Done";
 	uiVidOptions.done.generic.statusText = "Go back to the Video Menu";
 	uiVidOptions.done.generic.callback = UI_VidOptions_Callback;
@@ -254,6 +305,10 @@ static void UI_VidOptions_Init( void )
 	UI_AddItem( &uiVidOptions.menu, (void *)&uiVidOptions.gammaIntensity );
 	UI_AddItem( &uiVidOptions.menu, (void *)&uiVidOptions.glareReduction );
 	UI_AddItem( &uiVidOptions.menu, (void *)&uiVidOptions.testImage );
+
+	UI_AddItem(&uiVidOptions.menu, (void*)&uiVidOptions.Sparks);
+	UI_AddItem(&uiVidOptions.menu, (void*)&uiVidOptions.Germanyship);
+	UI_AddItem(&uiVidOptions.menu, (void*)&uiVidOptions.Weaponsway);
 }
 
 /*
